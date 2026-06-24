@@ -1,0 +1,42 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const lugares = [
+  { n: 'Bermeo', d: 'Puerto viejo, Museo del Pescador y pintxos.', t: "3'" },
+  { n: 'Mundaka', d: 'La ola izquierda más famosa del mundo.', t: "5'" },
+  { n: 'Gaztelugatxe', d: 'El islote y su ermita, 241 escalones.', t: "15'" },
+  { n: 'Bakio', d: 'Playa y txakoli (bodega Doniene).', t: "15'" },
+  { n: 'San Pedro de Atxarre', d: 'Mirador sobre toda la ría.', t: "20'" },
+  { n: 'Bosque de Oma', d: 'El bosque pintado de Ibarrola.', t: "20'" },
+  { n: 'Gernika', d: 'Casa de Juntas y Museo de la Paz.', t: "20'" },
+  { n: 'Laga y Laida', d: 'Playas al pie del monte Ogoño.', t: "20'" },
+  { n: 'Elantxobe', d: 'Pueblo colgado de la ladera.', t: "25'" },
+  { n: 'Castillo de Butrón', d: 'Un castillo de cuento entre bosque.', t: "30'" },
+  { n: 'Lekeitio', d: 'Pasarela a la isla de San Nicolás.', t: "35'" },
+  { n: 'Bilbao', d: 'Guggenheim, Casco Viejo y la ría.', t: "35'" },
+  { n: 'Barrika y Sopela', d: 'Flysch y acantilados al atardecer.', t: "40'" },
+  { n: 'Zumaia', d: 'Flysch y ermita de San Telmo.', t: '1h' },
+];
+---
+
+<section id="entorno" class="mx-auto max-w-6xl px-5 py-20">
+  <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'El entorno')}</p>
+  <h2 class="mt-4 font-serif text-4xl text-pine md:text-5xl">{tn(lang, 'el corazón de Urdaibai.')}</h2>
+  <p class="mt-4 max-w-3xl text-lg text-mist">
+    {tn(lang, 'Acantilados, playas vírgenes, marismas y bosques en su estado más puro, a un paso de la casa.')}
+  </p>
+
+  <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {lugares.map((l) => (
+      <li class="flex items-start justify-between gap-3 rounded-xl border border-paper-2 bg-paper p-4">
+        <div>
+          <p class="font-serif text-lg text-pine">{l.n}</p>
+          <p class="text-sm text-mist">{tn(lang, l.d)}</p>
+        </div>
+        <span class="shrink-0 rounded-full bg-paper-2 px-2 py-1 text-xs text-mist">{l.t}</span>
+      </li>
+    ))}
+  </ul>
+</section>

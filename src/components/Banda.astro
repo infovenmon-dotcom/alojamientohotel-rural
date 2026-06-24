@@ -1,0 +1,16 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+
+<section class="bg-paper-2/60">
+  <div class="mx-auto max-w-4xl px-5 py-20 text-center">
+    <p class="font-serif text-2xl leading-relaxed text-pine md:text-3xl">
+      {tn(lang, 'aquí no hay prisa: solo el bosque, el mar y el tiempo justo para volver a respirar.')}
+    </p>
+    <p class="mt-4 text-sm uppercase tracking-[0.3em] text-oak">
+      {tn(lang, 'Reserva de la Biosfera de Urdaibai')}
+    </p>
+  </div>
+</section>

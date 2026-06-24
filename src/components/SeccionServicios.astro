@@ -1,0 +1,53 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const servicios = [
+  { h: 'Desayuno incluido', p: 'Casero y sin prisa: café, té, zumo natural, panes y bollería caseros, mermeladas, fruta, queso y embutido local.' },
+  { h: 'Media pensión', p: 'Cena disponible además del desayuno · régimen y precio, a consultar.' },
+  { h: 'Limpieza diaria incluida', p: 'Y cambio de toallas durante la estancia.' },
+  { h: 'Accesible', p: 'Adaptado para silla de ruedas y movilidad reducida · recepción 24 h.' },
+  { h: 'Aparcamiento y exteriores', p: 'Plaza de parking, urbanización privada, jardín y porche compartidos.' },
+  { h: 'Equipamiento', p: 'WiFi de banda ancha, A/C y calefacción, TV, secador, sillas de playa, extintor. Pago con tarjeta.' },
+];
+
+const normas = [
+  { k: 'Entrada (check-in)', v: 'desde las 14:00' },
+  { k: 'Salida (check-out)', v: 'hasta las 12:00' },
+  { k: 'Solo adultos', v: 'espacio tranquilo' },
+  { k: 'No fumar en el interior', v: '' },
+  { k: 'Accesible', v: 'silla de ruedas · movilidad reducida' },
+  { k: 'Pago con tarjeta', v: 'aceptado' },
+  { k: 'Pago', v: '50% al confirmar la reserva y el 50% restante 14 días antes de la llegada.' },
+  { k: 'Cancelación', v: 'Gratuita hasta 14 días antes de la llegada (100% reembolsable). Después, no reembolsable.' },
+  { k: 'Fianza', v: 'No se requiere fianza.' },
+];
+---
+
+<section id="servicios" class="mx-auto max-w-6xl px-5 py-20">
+  <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'Servicios')}</p>
+  <h2 class="mt-4 font-serif text-4xl text-pine md:text-5xl">{tn(lang, 'todo listo para no pensar en nada.')}</h2>
+
+  <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {servicios.map((s) => (
+      <article class="rounded-2xl border border-paper-2 bg-paper p-6">
+        <h3 class="font-serif text-xl text-pine">{tn(lang, s.h)}</h3>
+        <p class="mt-2 text-sm text-mist">{tn(lang, s.p)}</p>
+      </article>
+    ))}
+  </div>
+
+  <div class="mt-12 rounded-2xl bg-paper-2/50 p-6 md:p-8">
+    <p class="text-sm uppercase tracking-[0.2em] text-oak">{tn(lang, 'La casa')}</p>
+    <h3 class="mt-2 font-serif text-2xl text-pine">{tn(lang, 'Horarios y normas')}</h3>
+    <dl class="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+      {normas.map((n) => (
+        <div class="border-b border-paper-2 pb-2">
+          <dt class="font-medium text-ink">{tn(lang, n.k)}</dt>
+          {n.v && <dd class="text-sm text-mist">{tn(lang, n.v)}</dd>}
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

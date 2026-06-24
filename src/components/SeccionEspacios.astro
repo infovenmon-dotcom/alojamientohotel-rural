@@ -1,0 +1,38 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const espacios = [
+  {
+    h: 'El comedor',
+    sub: 'Amplio y luminoso, con vistas al bosque.',
+    p: 'Uno de esos espacios que invitan a quedarse un rato más: grande, acogedor y lleno de luz natural. Los ventanales se abren al bosque y al jardín, y convierten cada desayuno en un momento de calma.',
+  },
+  {
+    h: 'Terraza y relax',
+    sub: 'Bajar el ritmo, al aire libre.',
+    p: 'Una terraza amplia rodeada de verde para desayunar, tomar un café o alargar la sobremesa sin mirar el reloj. Y zonas de relax para leer, escuchar los pájaros o, sencillamente, no hacer nada.',
+  },
+];
+---
+
+<section class="mx-auto max-w-6xl px-5 py-16">
+  <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'Los espacios')}</p>
+  <h2 class="mt-4 font-serif text-3xl text-pine md:text-4xl">{tn(lang, 'donde el día empieza sin prisas.')}</h2>
+
+  <div class="mt-10 grid gap-6 md:grid-cols-2">
+    {espacios.map((e) => (
+      <article class="overflow-hidden rounded-2xl border border-paper-2 bg-paper">
+        <div class="flex aspect-[16/10] items-center justify-center bg-paper-2 text-mist/40">
+          <span class="font-serif text-2xl">{tn(lang, e.h)}</span>
+        </div>
+        <div class="p-6">
+          <h3 class="font-serif text-2xl text-pine">{tn(lang, e.h)}</h3>
+          <p class="mt-1 text-oak">{tn(lang, e.sub)}</p>
+          <p class="mt-3 text-mist">{tn(lang, e.p)}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

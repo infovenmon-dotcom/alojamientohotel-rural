@@ -1,0 +1,16 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+
+<section id="casa" class="mx-auto max-w-4xl px-5 py-20 md:py-28">
+  <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'La casa')}</p>
+  <h2 class="mt-4 font-serif text-4xl text-pine md:text-5xl">
+    {tn(lang, 'el plan es simple: silencio, comodidad y aire puro.')}
+  </h2>
+  <div class="mt-6 space-y-4 text-lg text-mist">
+    <p>{tn(lang, 'Kirana combina la esencia de una casa en plena naturaleza con un interior moderno, luminoso y minimalista. Blanco, madera y detalles cuidados para descansar de verdad.')}</p>
+    <p>{tn(lang, 'Desayuna sin prisa en el comedor o en la terraza, comparte el salón de uso común y encuentra tu momento en las zonas de relax, dentro y fuera. Aquí el tiempo se mueve más despacio.')}</p>
+  </div>
+</section>

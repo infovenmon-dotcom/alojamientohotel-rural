@@ -1,0 +1,33 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const opiniones = [
+  { q: 'El desayuno, variado y con producto local de proximidad.', a: 'Marie L. · Booking · jun 2025' },
+  { q: 'Habitación impecable y cama muy cómoda.', a: 'Jon E. · Booking · ago 2025' },
+  { q: 'La ducha, a la temperatura perfecta.', a: 'Cristina R. · Booking · may 2025' },
+  { q: 'Anfitriones cercanos y atentos, que orientan sobre la zona.', a: 'Anke V. · Booking · sep 2025' },
+];
+---
+
+<section id="opiniones" class="bg-paper-2/40">
+  <div class="mx-auto max-w-6xl px-5 py-20">
+    <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'Opiniones')}</p>
+    <h2 class="mt-4 font-serif text-4xl text-pine md:text-5xl">{tn(lang, 'lo que más valoran quienes ya han venido.')}</h2>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      {opiniones.map((o) => (
+        <figure class="rounded-2xl border border-paper-2 bg-paper p-6">
+          <p class="text-oak" aria-hidden="true">★★★★★</p>
+          <blockquote class="mt-2 font-serif text-xl text-pine">{tn(lang, o.q)}</blockquote>
+          <figcaption class="mt-3 text-sm text-mist">{o.a}</figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <p class="mt-8 text-xs text-mist/70">
+      {tn(lang, 'Valoraciones reales de huéspedes en Booking. En la web definitiva se mostrarán verificadas y enlazadas a su origen.')}
+    </p>
+  </div>
+</section>

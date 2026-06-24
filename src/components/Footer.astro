@@ -1,40 +1,48 @@
 ---
-import { tn, type Lang } from '@/i18n/ui';
+import { tn, localizedPath, type Lang } from '@/i18n/ui';
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+const home = localizedPath(lang);
 const year = 2026; // TODO: actualizar dinámicamente en deploy
+
+const nav = [
+  { es: 'La casa', href: `${home}#casa` },
+  { es: 'Habitaciones', href: `${home}#habitaciones` },
+  { es: 'Entorno', href: `${home}#entorno` },
+  { es: 'Actividades', href: `${home}#actividades` },
+  { es: 'Reservar', href: `${home}#reserva` },
+  { es: 'Contacto', href: `${home}#reserva` },
+];
 ---
 
-<footer id="contacto" class="mt-24 border-t border-paper-2 bg-paper-2/40">
+<footer class="border-t border-paper-2 bg-paper-2/40">
   <div class="mx-auto grid max-w-6xl gap-8 px-5 py-14 md:grid-cols-3">
-    <div>
+    <div class="md:col-span-2">
       <p class="font-serif text-2xl text-pine">Kirana</p>
-      <p class="mt-2 text-sm text-mist">Silencio, naturaleza, Kirana.</p>
-    </div>
-
-    <div class="text-sm text-mist">
-      <p class="font-medium text-ink">{tn(lang, 'Contacto')}</p>
-      <p class="mt-2">Barrio San Miguel 27, Bermeo (Bizkaia) 48370</p>
-      <p class="mt-1">
+      <p class="mt-2 font-serif text-lg text-mist">{tn(lang, 'un refugio de paz, cerca de todo.')}</p>
+      <p class="mt-2 max-w-md text-sm text-mist">
+        {tn(lang, 'Alojamiento rural solo para adultos en Bermeo, Reserva de la Biosfera de Urdaibai.')}
+      </p>
+      <p class="mt-4 text-sm text-mist">
         <a class="hover:text-pine" href="https://wa.me/34689352391">WhatsApp · +34 689 352 391</a>
       </p>
-      <p class="mt-1">
-        <a class="hover:text-pine" href="tel:+34689352391">+34 689 352 391</a>
-      </p>
     </div>
 
-    <div class="text-sm text-mist">
-      <p>{tn(lang, 'Entrada 14:00')} · {tn(lang, 'Salida 12:00')}</p>
-      <p class="mt-1">{tn(lang, 'Solo adultos')}</p>
-      <p class="mt-1">{tn(lang, 'Desayuno y limpieza diaria incluidos')}</p>
-    </div>
+    <nav>
+      <p class="text-sm font-medium text-ink">{tn(lang, 'Navega')}</p>
+      <ul class="mt-3 space-y-1 text-sm text-mist">
+        {nav.map((n) => (
+          <li><a class="hover:text-pine" href={n.href}>{tn(lang, n.es)}</a></li>
+        ))}
+      </ul>
+    </nav>
   </div>
 
   <div class="border-t border-paper-2 px-5 py-5 text-center text-xs text-mist">
-    © {year} Kirana
+    © {year} Kirana · Silencio, naturaleza, Kirana.
   </div>
 </footer>

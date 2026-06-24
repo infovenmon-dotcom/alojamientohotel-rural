@@ -1,0 +1,71 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const categorias = [
+  {
+    h: 'Mar y costa',
+    sub: 'agua salada',
+    items: [
+      { t: 'Surf en Mundaka', d: 'La mejor izquierda de Europa. Clases para todos los niveles, también en Bakio.', c: "Surfin' Mundaka · 695 711 630 · Bakio Surf · 946 195 716" },
+      { t: 'Buceo en Bermeo', d: 'Bautismos e inmersiones a Gaztelugatxe, Izaro y el cabo Matxitxako, desde el puerto.', c: 'Txof! Buceo · 656 705 226 · también olatu.net' },
+      { t: 'Kayak y canoa por la ría', d: 'Recorrido tranquilo entre Arteaga y la playa de Laida (~2 h).', c: 'Laida Kanoak · 946 276 515' },
+      { t: 'Paseo en barco y cetáceos', d: 'Desde el puerto de Bermeo a Gaztelugatxe o Elantxobe, y avistamiento de cetáceos.', c: 'Hegaluze · 666 791 021 · hegaluze.com' },
+    ],
+  },
+  {
+    h: 'Naturaleza',
+    sub: 'aire libre',
+    items: [
+      { t: 'Senderismo y miradores', d: 'San Pedro de Atxarre, el cabo Ogoño y la costa salvaje de Urdaibai.', c: 'Rutas a pie desde la casa' },
+      { t: 'Observación de aves', d: 'Las marismas de Urdaibai, parada clave de aves migratorias.', c: 'Urdaibai Bird Center · 699 839 202 · birdcenter.org' },
+      { t: 'Multiaventura', d: 'Kayak, escalada, tiro con arco, senderismo… para grupos y parejas.', c: 'Urdaibai Kiroleroak (Mundaka) · 699 761 736' },
+      { t: 'Paseo a caballo', d: 'Rutas por el entorno de Elantxobe y el Ogoño.', c: 'Hípica local · 639 425 283' },
+    ],
+  },
+  {
+    h: 'Cultura y sabores',
+    sub: 'txakoli y arte',
+    items: [
+      { t: 'Txakoli y enología', d: 'Visita a viñedo, destilería y bodega con cata, en una bodega histórica de Bakio (caserío de 1852).', c: 'Doniene Gorrondona · 946 194 795 · donienegorrondona.com' },
+      { t: 'Pintxos y gastronomía', d: 'Pescado del día y conservas en Bermeo y Mundaka; sidra y producto local.', c: 'A 1 km, en Bermeo' },
+      { t: 'Arte y museos', d: 'El Guggenheim de Bilbao, el Museo del Pescador de Bermeo y el bosque pintado de Oma.', c: "Bilbao · 35' · Bermeo · 5'" },
+    ],
+  },
+];
+---
+
+<section id="actividades" class="bg-paper-2/40">
+  <div class="mx-auto max-w-6xl px-5 py-20">
+    <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'Actividades')}</p>
+    <h2 class="mt-4 font-serif text-4xl text-pine md:text-5xl">{tn(lang, 'para todos los públicos.')}</h2>
+    <p class="mt-4 max-w-3xl text-lg text-mist">
+      {tn(lang, 'Surf, buceo, txakoli, barco, senderismo, aves… busques adrenalina o calma, el plan está a un paso. Te ayudamos a organizarlo.')}
+    </p>
+
+    <div class="mt-10 space-y-10">
+      {categorias.map((cat) => (
+        <div>
+          <div class="flex items-baseline gap-3">
+            <h3 class="font-serif text-2xl text-pine">{tn(lang, cat.h)}</h3>
+            <span class="text-sm uppercase tracking-[0.2em] text-oak">{tn(lang, cat.sub)}</span>
+          </div>
+          <div class="mt-5 grid gap-5 sm:grid-cols-2">
+            {cat.items.map((it) => (
+              <article class="rounded-2xl border border-paper-2 bg-paper p-5">
+                <h4 class="font-medium text-ink">{tn(lang, it.t)}</h4>
+                <p class="mt-1 text-sm text-mist">{tn(lang, it.d)}</p>
+                <p class="mt-2 text-xs text-oak">{it.c}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <p class="mt-10 max-w-3xl text-xs text-mist/70">
+      {tn(lang, 'Los contactos son de operadores locales independientes; Kirana te orienta y te ayuda a reservar, pero la actividad la gestiona cada empresa. Tarifas y horarios, a consultar con cada una.')}
+    </p>
+  </div>
+</section>

@@ -1557,5 +1557,117 @@
     "de": "Erwachsene",
     "it": "adulti",
     "nl": "volwassenen"
+  },
+  "Servicios": {
+    "en": "Services",
+    "fr": "Services",
+    "de": "Leistungen",
+    "it": "Servizi",
+    "nl": "Voorzieningen"
+  },
+  "Opiniones": {
+    "en": "Reviews",
+    "fr": "Avis",
+    "de": "Bewertungen",
+    "it": "Recensioni",
+    "nl": "Beoordelingen"
+  },
+  "Ofertas": {
+    "en": "Offers",
+    "fr": "Offres",
+    "de": "Angebote",
+    "it": "Offerte",
+    "nl": "Aanbiedingen"
+  },
+  "Horarios y normas": {
+    "en": "Hours & rules",
+    "fr": "Horaires et règles",
+    "de": "Zeiten und Regeln",
+    "it": "Orari e regole",
+    "nl": "Tijden en regels"
+  },
+  "todo listo para no pensar en nada.": {
+    "en": "everything ready so you don't have to think about a thing.",
+    "fr": "tout est prêt pour ne penser à rien.",
+    "de": "alles bereit, damit Sie an nichts denken müssen.",
+    "it": "tutto pronto per non pensare a nulla.",
+    "nl": "alles klaar zodat je nergens aan hoeft te denken."
+  },
+  "lo que más valoran quienes ya han venido.": {
+    "en": "what past guests value most.",
+    "fr": "ce que nos hôtes apprécient le plus.",
+    "de": "was frühere Gäste am meisten schätzen.",
+    "it": "ciò che gli ospiti apprezzano di più.",
+    "nl": "wat eerdere gasten het meest waarderen."
+  },
+  "mejor precio, siempre en la web oficial.": {
+    "en": "best price, always on the official site.",
+    "fr": "meilleur prix, toujours sur le site officiel.",
+    "de": "bester Preis, immer auf der offiziellen Website.",
+    "it": "miglior prezzo, sempre sul sito ufficiale.",
+    "nl": "beste prijs, altijd op de officiële site."
+  },
+  "Tu estancia incluye:": {
+    "en": "Your stay includes:",
+    "fr": "Votre séjour comprend :",
+    "de": "Ihr Aufenthalt umfasst:",
+    "it": "Il tuo soggiorno include:",
+    "nl": "Je verblijf omvat:"
+  },
+  "Reserva directamente con nosotros: el mejor precio y sin intermediarios.": {
+    "en": "Book directly with us: the best price and no middlemen.",
+    "fr": "Réservez directement avec nous : le meilleur prix et sans intermédiaires.",
+    "de": "Buchen Sie direkt bei uns: der beste Preis und ohne Zwischenhändler.",
+    "it": "Prenota direttamente con noi: il miglior prezzo e senza intermediari.",
+    "nl": "Boek rechtstreeks bij ons: de beste prijs en zonder tussenpersonen."
+  },
+  "Registro de Turismo": {
+    "en": "Tourism Registry",
+    "fr": "Registre du Tourisme",
+    "de": "Tourismusregister",
+    "it": "Registro del Turismo",
+    "nl": "Toerismeregister"
+  },
+  "nº a confirmar": {
+    "en": "no. to confirm",
+    "fr": "n° à confirmer",
+    "de": "Nr. wird noch bestätigt",
+    "it": "n. da confermare",
+    "nl": "nr. nog te bevestigen"
+  },
+  "Alojamiento rural solo para adultos en Bermeo, Reserva de la Biosfera de Urdaibai.": {
+    "en": "Adults-only rural retreat in Bermeo, Urdaibai Biosphere Reserve.",
+    "fr": "Hébergement rural réservé aux adultes à Bermeo, Réserve de Biosphère d'Urdaibai.",
+    "de": "Adults-only Landhaus in Bermeo, Biosphärenreservat Urdaibai.",
+    "it": "Alloggio rurale solo per adulti a Bermeo, Riserva della Biosfera di Urdaibai.",
+    "nl": "Landelijk verblijf alleen voor volwassenen in Bermeo, Biosfeerreservaat Urdaibai."
+  },
+  "Se muestran las habitaciones abiertas ahora mismo. El catálogo se gestiona desde el panel: al activar una habitación aparece aquí; al bloquearla, desaparece.": {
+    "en": "These are the rooms currently open. The catalogue is managed from the panel: activating a room makes it appear here; blocking it makes it disappear.",
+    "fr": "Voici les chambres actuellement ouvertes. Le catalogue se gère depuis le panneau : activer une chambre la fait apparaître ici ; la bloquer la fait disparaître.",
+    "de": "Dies sind die derzeit geöffneten Zimmer. Der Katalog wird über das Panel verwaltet: Wird ein Zimmer aktiviert, erscheint es hier; wird es gesperrt, verschwindet es.",
+    "it": "Queste sono le camere attualmente aperte. Il catalogo si gestisce dal pannello: attivando una camera appare qui; bloccandola, scompare.",
+    "nl": "Dit zijn de op dit moment beschikbare kamers. De catalogus wordt beheerd vanuit het paneel: een kamer activeren laat hem hier verschijnen; blokkeren laat hem verdwijnen."
+  },
+  "Valoraciones reales de huéspedes en Booking. En la web definitiva se mostrarán verificadas y enlazadas a su origen.": {
+    "en": "Real guest reviews from Booking. On the final site they will be shown verified and linked to their source.",
+    "fr": "Avis réels de clients sur Booking. Sur le site définitif, ils seront affichés vérifiés et liés à leur source.",
+    "de": "Echte Gästebewertungen von Booking. Auf der endgültigen Website werden sie verifiziert und mit ihrer Quelle verlinkt angezeigt.",
+    "it": "Recensioni reali degli ospiti su Booking. Nel sito definitivo saranno mostrate verificate e collegate alla loro fonte.",
+    "nl": "Echte gastbeoordelingen van Booking. Op de definitieve site worden ze geverifieerd en gekoppeld aan hun bron getoond."
+  },
+  "Ofertas de ejemplo para la propuesta: los porcentajes y condiciones se ajustan con el cliente.": {
+    "en": "Sample offers for the proposal: percentages and conditions to be adjusted with the client.",
+    "fr": "Offres d'exemple pour la proposition : les pourcentages et conditions seront ajustés avec le client.",
+    "de": "Beispielangebote für den Vorschlag: Prozentsätze und Bedingungen werden mit dem Kunden abgestimmt.",
+    "it": "Offerte di esempio per la proposta: percentuali e condizioni da definire con il cliente.",
+    "nl": "Voorbeeldaanbiedingen voor het voorstel: percentages en voorwaarden worden met de klant afgestemd."
+  },
+  "Mejor precio garantizado en esta web. Reservando aquí evitas comisiones de intermediarios y tratas directamente con la casa. Cualquier duda, te respondemos por teléfono o WhatsApp.": {
+    "en": "Best price guaranteed on this site. By booking here you avoid intermediary commissions and deal directly with the house. Any questions, we reply by phone or WhatsApp.",
+    "fr": "Meilleur prix garanti sur ce site. En réservant ici, vous évitez les commissions d'intermédiaires et traitez directement avec la maison. Pour toute question, nous répondons par téléphone ou WhatsApp.",
+    "de": "Bestpreisgarantie auf dieser Website. Wenn Sie hier buchen, vermeiden Sie Vermittlungsgebühren und haben direkten Kontakt zum Haus. Bei Fragen antworten wir per Telefon oder WhatsApp.",
+    "it": "Miglior prezzo garantito su questo sito. Prenotando qui eviti le commissioni degli intermediari e tratti direttamente con la casa. Per qualsiasi domanda, rispondiamo per telefono o WhatsApp.",
+    "nl": "Beste prijs gegarandeerd op deze site. Door hier te boeken vermijd je bemiddelingskosten en heb je rechtstreeks contact met het huis. Vragen beantwoorden we per telefoon of WhatsApp."
   }
 }

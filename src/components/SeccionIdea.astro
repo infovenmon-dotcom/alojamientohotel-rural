@@ -1,0 +1,39 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const distancias = [
+  { d: '1 km', l: 'Bermeo' },
+  { d: "5'", l: 'Mundaka' },
+  { d: "15'", l: 'Gaztelugatxe' },
+  { d: "35'", l: 'Bilbao' },
+];
+---
+
+<section class="bg-pine text-paper">
+  <div class="mx-auto max-w-5xl px-5 py-20 md:py-28">
+    <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'La idea')}</p>
+    <h2 class="mt-4 font-serif text-4xl md:text-5xl">{tn(lang, 'un refugio de paz, cerca de todo.')}</h2>
+
+    <div class="mt-10 grid gap-8 md:grid-cols-2">
+      <div>
+        <h3 class="font-serif text-2xl text-oak">{tn(lang, 'paz.')}</h3>
+        <p class="mt-2 text-paper/80">{tn(lang, 'Silencio, naturaleza y descanso de verdad. Una casa solo para adultos, en plena Reserva de la Biosfera de Urdaibai, con el bosque y el jardín como única compañía.')}</p>
+      </div>
+      <div>
+        <h3 class="font-serif text-2xl text-oak">{tn(lang, 'cerca de todo.')}</h3>
+        <p class="mt-2 text-paper/80">{tn(lang, 'No renuncias a nada: el mar, los pueblos y la ciudad están a un paso.')}</p>
+      </div>
+    </div>
+
+    <ul class="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
+      {distancias.map((x) => (
+        <li class="text-center">
+          <p class="font-serif text-3xl text-paper">{x.d}</p>
+          <p class="mt-1 text-sm text-paper/70">{x.l}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

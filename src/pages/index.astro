@@ -1,7 +1,18 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
+import SeccionCasa from '@/components/SeccionCasa.astro';
+import SeccionEspacios from '@/components/SeccionEspacios.astro';
+import SeccionIdea from '@/components/SeccionIdea.astro';
 import RoomsSection from '@/components/RoomsSection.astro';
+import SeccionServicios from '@/components/SeccionServicios.astro';
+import Banda from '@/components/Banda.astro';
+import SeccionEntorno from '@/components/SeccionEntorno.astro';
+import SeccionActividades from '@/components/SeccionActividades.astro';
+import SeccionEstancia from '@/components/SeccionEstancia.astro';
+import SeccionOpiniones from '@/components/SeccionOpiniones.astro';
+import SeccionOfertas from '@/components/SeccionOfertas.astro';
+import SeccionReserva from '@/components/SeccionReserva.astro';
 import { defaultLang } from '@/i18n/ui';
 
 // ES vive en la raíz (prefixDefaultLocale: false).
@@ -10,5 +21,16 @@ const lang = defaultLang;
 
 <BaseLayout lang={lang}>
   <Hero lang={lang} />
+  <SeccionCasa lang={lang} />
+  <SeccionEspacios lang={lang} />
+  <SeccionIdea lang={lang} />
   <RoomsSection lang={lang} />
+  <SeccionServicios lang={lang} />
+  <Banda lang={lang} />
+  <SeccionEntorno lang={lang} />
+  <SeccionActividades lang={lang} />
+  <SeccionEstancia lang={lang} />
+  <SeccionOpiniones lang={lang} />
+  <SeccionOfertas lang={lang} />
+  <SeccionReserva lang={lang} />
 </BaseLayout>

@@ -8,22 +8,30 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<section class="relative isolate overflow-hidden">
-  <div class="mx-auto flex max-w-4xl flex-col items-center px-5 py-28 text-center md:py-36">
+<section id="top" class="relative isolate overflow-hidden">
+  <div class="mx-auto flex max-w-4xl flex-col items-center px-5 py-28 text-center md:py-40">
     <p class="text-sm uppercase tracking-[0.3em] text-oak">
       {tn(lang, 'Alojamiento rural · solo adultos · Urdaibai')}
     </p>
-    <h1 class="mt-6 font-serif text-5xl leading-tight text-pine md:text-7xl">
-      Silencio, naturaleza, Kirana.
+    <h1 class="mt-6 font-serif text-5xl leading-[1.05] text-pine md:text-7xl">
+      {tn(lang, 'un refugio de paz, cerca de todo')}
     </h1>
     <p class="mt-6 max-w-xl text-lg text-mist">
-      {tn(lang, 'A un paso de Bermeo, en la Reserva de la Biosfera de Urdaibai, el plan es simple: silencio, comodidad y aire puro.')}
+      {tn(lang, 'A un paso de Bermeo, en la Reserva de la Biosfera de Urdaibai. Una casa solo para adultos donde el plan es simple: silencio, comodidad y aire puro.')}
     </p>
-    <a
-      href="#habitaciones"
-      class="mt-10 rounded-full bg-pine px-7 py-3 text-paper transition-opacity hover:opacity-90"
-    >
-      {tn(lang, 'Habitaciones')}
-    </a>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="#reserva"
+        class="rounded-full bg-pine px-7 py-3 text-paper transition-opacity hover:opacity-90"
+      >
+        {tn(lang, 'Consultar disponibilidad')}
+      </a>
+      <a
+        href="#entorno"
+        class="rounded-full border border-pine px-7 py-3 text-pine transition-colors hover:bg-pine hover:text-paper"
+      >
+        {tn(lang, 'Qué hacer cerca')}
+      </a>
+    </div>
   </div>
 </section>

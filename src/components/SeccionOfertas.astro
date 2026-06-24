@@ -1,0 +1,46 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const wa = (msg: string) => `https://wa.me/34689352391?text=${encodeURIComponent(msg)}`;
+
+const ofertas = [
+  {
+    eyebrow: 'Reserva directa',
+    h: '−10% en 2 o más noches',
+    p: 'Reservando en esta web te llevas un 10% de descuento en estancias de dos noches o más. Sin intermediarios y con el mejor precio garantizado.',
+    cta: 'Reservar con descuento',
+    href: wa('Hola, quiero reservar 2 o más noches con el 10% de descuento.'),
+  },
+  {
+    eyebrow: 'Entre semana',
+    h: 'Escapada tranquila de domingo a jueves',
+    p: 'Las noches de domingo a jueves, tarifa especial para desconectar con más calma y menos gente. Ideal para una escapada de pareja.',
+    cta: 'Consultar fechas',
+    href: wa('Hola, me interesa la escapada de domingo a jueves.'),
+  },
+];
+---
+
+<section id="ofertas" class="mx-auto max-w-6xl px-5 py-20">
+  <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'Ofertas')}</p>
+  <h2 class="mt-4 font-serif text-4xl text-pine md:text-5xl">{tn(lang, 'mejor precio, siempre en la web oficial.')}</h2>
+
+  <div class="mt-10 grid gap-6 md:grid-cols-2">
+    {ofertas.map((o) => (
+      <article class="flex flex-col items-start gap-3 rounded-2xl bg-pine p-8 text-paper">
+        <span class="text-xs uppercase tracking-[0.2em] text-oak">{tn(lang, o.eyebrow)}</span>
+        <h3 class="font-serif text-2xl">{tn(lang, o.h)}</h3>
+        <p class="text-paper/80">{tn(lang, o.p)}</p>
+        <a href={o.href} class="mt-2 rounded-full bg-paper px-5 py-2 text-sm text-pine transition-opacity hover:opacity-90">
+          {tn(lang, o.cta)}
+        </a>
+      </article>
+    ))}
+  </div>
+
+  <p class="mt-8 text-xs text-mist/70">
+    {tn(lang, 'Ofertas de ejemplo para la propuesta: los porcentajes y condiciones se ajustan con el cliente.')}
+  </p>
+</section>

@@ -1,0 +1,43 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const items = [
+  { h: 'Solo adultos', p: 'Un espacio tranquilo, pensado para descansar de verdad.' },
+  { h: 'Desayuno sin prisa', p: 'En el comedor luminoso o en la terraza, con el verde de fondo.' },
+  { h: 'Salón y zonas de relax', p: 'Salón de uso común y rincones interiores y exteriores para leer o no hacer nada.' },
+  { h: 'WiFi y aire acondicionado', p: 'Conexión rápida y climatización en las habitaciones y el apartamento.' },
+  { h: 'Jardín y terraza', p: 'Bosque y jardín alrededor, dentro de la Biosfera de Urdaibai.' },
+  { h: 'Aparcamiento · a 1 km de Bermeo', p: 'Llegas en coche y aparcas sin complicaciones; pueblo a un paso.' },
+];
+
+const chips = [
+  'Mejor precio en la web oficial',
+  'Reserva de la Biosfera de Urdaibai',
+  'Solo adultos',
+  'Cancelación gratis hasta 14 días',
+  'Pago seguro',
+];
+---
+
+<section class="mx-auto max-w-6xl px-5 py-20">
+  <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'La estancia')}</p>
+  <h2 class="mt-4 font-serif text-4xl text-pine md:text-5xl">{tn(lang, 'lo que encuentras en Kirana.')}</h2>
+
+  <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {items.map((it) => (
+      <article class="rounded-2xl border border-paper-2 bg-paper p-6">
+        <h3 class="font-serif text-xl text-pine">{tn(lang, it.h)}</h3>
+        <p class="mt-2 text-sm text-mist">{tn(lang, it.p)}</p>
+      </article>
+    ))}
+  </div>
+
+  <p class="mt-8 font-medium text-ink">{tn(lang, 'Reserva directa, sin intermediarios')}</p>
+  <ul class="mt-3 flex flex-wrap gap-2">
+    {chips.map((c) => (
+      <li class="rounded-full bg-paper-2 px-3 py-1 text-xs text-mist">{tn(lang, c)}</li>
+    ))}
+  </ul>
+</section>

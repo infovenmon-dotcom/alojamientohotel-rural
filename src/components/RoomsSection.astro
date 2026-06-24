@@ -13,20 +13,27 @@ const rooms = getActiveRooms();
 ---
 
 <section id="habitaciones" class="mx-auto max-w-6xl px-5 py-20">
-  <header class="mx-auto max-w-2xl text-center">
-    <h2 class="font-serif text-4xl text-pine md:text-5xl">{tn(lang, '¿Dónde te quieres alojar?')}</h2>
-    <p class="mt-3 text-mist">{tn(lang, 'Cada habitación, un concepto. Elige tu calma.')}</p>
-  </header>
+  <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'Habitaciones')}</p>
+  <h2 class="mt-4 font-serif text-4xl text-pine md:text-5xl">{tn(lang, 'descanso de verdad, solo para adultos.')}</h2>
+  <p class="mt-4 max-w-3xl text-lg text-mist">
+    {tn(lang, 'Habitaciones amplias, modernas y silenciosas —blanco, madera y luz natural— con WiFi y aire acondicionado. Y un apartamento privado para 4 en la planta baja, con terraza y salida al jardín. El desayuno, sin prisa, está incluido.')}
+  </p>
+
+  <h3 class="mt-12 text-center font-serif text-3xl text-pine md:text-4xl">{tn(lang, '¿Dónde te quieres alojar?')}</h3>
 
   {
     rooms.length === 0 ? (
       <p class="mt-12 text-center text-mist">{tn(lang, 'No hay habitaciones disponibles en este momento.')}</p>
     ) : (
-      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {rooms.map((room) => (
           <RoomCard room={room} lang={lang} />
         ))}
       </div>
     )
   }
+
+  <p class="mt-8 text-center text-xs text-mist/70">
+    {tn(lang, 'Se muestran las habitaciones abiertas ahora mismo. El catálogo se gestiona desde el panel: al activar una habitación aparece aquí; al bloquearla, desaparece.')}
+  </p>
 </section>

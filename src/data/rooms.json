@@ -1,9 +1,10 @@
 {
   "_meta": {
     "descripcion": "Fuente ÚNICA de las 10 habitaciones de Kirana. Web pública y panel leen de aquí; cualquier cambio se propaga a ambos. La web pública SOLO muestra las que tienen activa:true.",
-    "aviso": "m², camas y precios son ORIENTATIVOS → confirmar con Fran. storytelling y concepto portados literalmente del array RM de kirana-web-paralela.html (fuente de verdad). Traducciones en src/i18n/i18n.json (EU/DA/NO de los storytelling pendientes de traducción profesional). fotos pendientes de fotos-kirana/.",
+    "aviso": "m², camas y precios ORIENTATIVOS → confirmar con Fran. lema y storytelling: Propuesta Premium del cliente (jun 2026). concepto portado de la maqueta. Traducciones de lema/storytelling pendientes (fallback a ES en todos los idiomas; concepto sí traduce vía i18n.json). fotos usan CDN Lodgify.",
     "moneda": "EUR",
-    "porDefecto": "6 activas (5 dobles + apartamento), 4 bloqueadas"
+    "porDefecto": "6 activas (5 dobles + apartamento), 4 bloqueadas",
+    "fotos_nota": "fotos[] usa el CDN de Lodgify (mismas imágenes que la maqueta). En producción migrar a imágenes locales (fotos-kirana/) — ver descargar-imagenes.sh."
   },
   "rooms": [
     {
@@ -18,8 +19,11 @@
       "cama": "150×200",
       "precio": 95,
       "activa": true,
-      "fotos": [],
-      "storytelling": "La más luminosa de la casa: luz natural de la mañana a la tarde. Para despertar despacio y empezar el día sin prisa."
+      "fotos": [
+        "https://l.icdbcdn.com/oh/001a1ad9-9e2a-471c-b10d-d680103ad7bb.jpg?w=900"
+      ],
+      "storytelling": "Argia es la habitación del amanecer. La claridad entra suavemente por la ventana mientras el entorno permanece en silencio. Un refugio para quienes buscan comenzar el día sin prisas, dejando que la naturaleza marque el ritmo.",
+      "lema": "Donde la primera luz acaricia cada despertar."
     },
     {
       "id": "itsaso",
@@ -33,8 +37,11 @@
       "cama": "2×90×200",
       "precio": 105,
       "activa": true,
-      "fotos": [],
-      "storytelling": "Tonos serenos y aire de mar. La del azul del Cantábrico, con las playas de Urdaibai a un paso."
+      "fotos": [
+        "https://l.icdbcdn.com/oh/ce42a17f-86f7-40e0-a4bc-39ec15fa49de.jpg?w=900"
+      ],
+      "storytelling": "Inspirada en el mar que define la identidad de Bermeo, Itsaso invita a respirar profundo y dejar que la serenidad fluya como las mareas.",
+      "lema": "La calma infinita del Cantábrico."
     },
     {
       "id": "basoa",
@@ -48,8 +55,11 @@
       "cama": "150×200",
       "precio": 95,
       "activa": true,
-      "fotos": [],
-      "storytelling": "La que mira al verde. Despiertas con el bosque de Urdaibai en la ventana y los pájaros como única alarma."
+      "fotos": [
+        "https://l.icdbcdn.com/oh/d937d9dc-d241-4ccf-a5e7-2bf43429e891.jpg?w=900"
+      ],
+      "storytelling": "Los tonos naturales y la sensación de recogimiento evocan los bosques que rodean Kirana. Un espacio para desconectar del ruido y reconectar con uno mismo.",
+      "lema": "Entre la quietud verde de Urdaibai."
     },
     {
       "id": "lasai",
@@ -63,8 +73,11 @@
       "cama": "140×200",
       "precio": 90,
       "activa": true,
-      "fotos": [],
-      "storytelling": "La más recogida y silenciosa. Para desconectar de verdad, leer y dormir profundo."
+      "fotos": [
+        "https://l.icdbcdn.com/oh/14287adc-191a-4017-aa71-694b1c4c1418.jpg?w=900"
+      ],
+      "storytelling": "Lasai representa la esencia más pura de Kirana: silencio, descanso y bienestar. Cada detalle está pensado para crear una sensación de serenidad absoluta.",
+      "lema": "Un refugio donde el tiempo se detiene."
     },
     {
       "id": "izar",
@@ -78,8 +91,11 @@
       "cama": "150×200",
       "precio": 95,
       "activa": true,
-      "fotos": [],
-      "storytelling": "Noches de cielo limpio, casi sin contaminación lumínica. Para mirar las estrellas y descansar de verdad."
+      "fotos": [
+        "https://l.icdbcdn.com/oh/ce42a17f-86f7-40e0-a4bc-39ec15fa49de.jpg?w=900"
+      ],
+      "storytelling": "Pensada para quienes disfrutan del silencio nocturno y de la belleza de un cielo limpio, Izar invita a contemplar y soñar.",
+      "lema": "Cuando la noche se convierte en inspiración."
     },
     {
       "id": "haize",
@@ -94,7 +110,8 @@
       "precio": 95,
       "activa": false,
       "fotos": [],
-      "storytelling": "Luminosa y aireada, con el frescor del Cantábrico de fondo."
+      "storytelling": "Ligera y luminosa, Haize transmite la sensación de una suave brisa recorriendo los paisajes costeros de Urdaibai.",
+      "lema": "El susurro constante de la naturaleza."
     },
     {
       "id": "ibai",
@@ -109,7 +126,8 @@
       "precio": 95,
       "activa": false,
       "fotos": [],
-      "storytelling": "La ría de Urdaibai hecha habitación: agua mansa, mareas y luz cambiante."
+      "storytelling": "Inspirada en la ría de Urdaibai, esta habitación refleja el equilibrio perfecto entre movimiento y serenidad.",
+      "lema": "Donde el agua une mar y tierra."
     },
     {
       "id": "aritz",
@@ -124,7 +142,8 @@
       "precio": 100,
       "activa": false,
       "fotos": [],
-      "storytelling": "Firme como un roble centenario. Madera noble y calidez, la más arraigada de la casa."
+      "storytelling": "Como los robles centenarios que forman parte del paisaje vasco, Aritz transmite estabilidad, refugio y conexión con la tierra.",
+      "lema": "La fuerza tranquila de la naturaleza."
     },
     {
       "id": "lorategia",
@@ -138,8 +157,11 @@
       "cama": "doble + sofá cama",
       "precio": 160,
       "activa": true,
-      "fotos": [],
-      "storytelling": "Apartamento privado en planta baja, con terraza y salida directa al jardín. El espacio más independiente, ideal para 4."
+      "fotos": [
+        "https://l.icdbcdn.com/oh/ff7853a0-0cf8-4048-a836-bf590108e189.jpg?w=900"
+      ],
+      "storytelling": "El apartamento más amplio de Kirana se inspira en la belleza sencilla de los jardines naturales, ofreciendo amplitud y comodidad para cuatro adultos.",
+      "lema": "Un espacio para florecer y descansar."
     },
     {
       "id": "lur",
@@ -154,7 +176,8 @@
       "precio": 95,
       "activa": false,
       "fotos": [],
-      "storytelling": "En planta baja y sin escalones. Habitación accesible y firme, pensada para movilidad reducida, con toda la calma de la casa."
+      "storytelling": "Diseñada para ser accesible y acogedora, Lur simboliza el vínculo profundo con la tierra que rodea Kirana.",
+      "lema": "Conectada con la esencia de Urdaibai."
     }
   ]
 }

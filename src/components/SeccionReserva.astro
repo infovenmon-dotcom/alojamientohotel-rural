@@ -1,0 +1,55 @@
+---
+import { tn, type Lang } from '@/i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const incluye = [
+  'Desayuno sin prisa',
+  'Salón común y zonas de relax',
+  'WiFi, A/C y aparcamiento gratuitos',
+  'Solo adultos, en plena naturaleza',
+];
+const wa = `https://wa.me/34689352391?text=${encodeURIComponent('Hola, me gustaría consultar disponibilidad en Kirana.')}`;
+---
+
+<section id="reserva" class="bg-pine text-paper">
+  <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+    <p class="text-sm uppercase tracking-[0.3em] text-oak">{tn(lang, 'Reserva')}</p>
+    <h2 class="mt-4 font-serif text-4xl md:text-6xl">{tn(lang, 'tu descanso empieza aquí.')}</h2>
+    <p class="mt-4 max-w-2xl text-lg text-paper/80">
+      {tn(lang, 'Reserva directamente con nosotros: el mejor precio y sin intermediarios.')}
+    </p>
+
+    <div class="mt-12 grid gap-10 md:grid-cols-2">
+      <div>
+        <p class="font-medium">{tn(lang, 'Tu estancia incluye:')}</p>
+        <ul class="mt-3 space-y-2 text-paper/80">
+          {incluye.map((i) => <li>· {tn(lang, i)}</li>)}
+        </ul>
+
+        <dl class="mt-8 space-y-3 text-sm">
+          <div><dt class="text-oak">{tn(lang, 'Teléfono')}</dt><dd><a class="hover:underline" href="tel:+34689352391">+34 689 352 391</a></dd></div>
+          <div><dt class="text-oak">{tn(lang, 'Dónde estamos')}</dt><dd>Barrio San Miguel 27, Bermeo (Bizkaia) 48370</dd></div>
+          <div><dt class="text-oak">{tn(lang, 'Email')}</dt><dd><a class="hover:underline" href="mailto:hola@kiranabermeo.es">hola@kiranabermeo.es</a></dd></div>
+          <div><dt class="text-oak">{tn(lang, 'Registro de Turismo')}</dt><dd>{tn(lang, 'nº a confirmar')}</dd></div>
+        </dl>
+      </div>
+
+      <div class="rounded-2xl bg-paper/10 p-8">
+        <h3 class="font-serif text-2xl text-paper">{tn(lang, 'Reserva directa')}</h3>
+        <p class="mt-3 text-paper/80">
+          {tn(lang, 'Mejor precio garantizado en esta web. Reservando aquí evitas comisiones de intermediarios y tratas directamente con la casa. Cualquier duda, te respondemos por teléfono o WhatsApp.')}
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href={wa} class="rounded-full bg-paper px-6 py-3 text-pine transition-opacity hover:opacity-90">
+            {tn(lang, 'Consultar disponibilidad')}
+          </a>
+          <a href={wa} class="rounded-full border border-paper/60 px-6 py-3 text-paper transition-colors hover:bg-paper hover:text-pine">
+            WhatsApp
+          </a>
+        </div>
+        <p class="mt-6 text-sm text-oak">{tn(lang, 'Una escapada para dos · sin niños, sin ruido.')}</p>
+      </div>
+    </div>
+  </div>
+</section>

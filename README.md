@@ -14,22 +14,27 @@ Astro + Tailwind CSS v4 · multi-idioma con routing por locale (hreflang
 pendiente, Fase 7) · PostgreSQL (Fase 3+) · Stripe (Fase 4) · channel manager
 (Fase 5) · TicketBAI/Batuz (Fase 6) · deploy Vercel/Netlify.
 
-## Estado: Fase 1 (scaffold) + Fase 2 parcial (i18n)
+## Estado: Fase 1 + Fase 2 (web pública completa)
 
 - [x] Scaffold Astro + Tailwind + tokens de marca
-- [x] `src/data/rooms.json` — fuente única de las 10 habitaciones (storytelling
-      y concepto portados literalmente del array `RM` de la maqueta)
-- [x] Routing i18n base (ES en raíz, resto bajo `/<lang>`)
-- [x] Web pública: Hero + módulo «¿Dónde te quieres alojar?» (solo activas),
-      con concepto y storytelling traducidos por idioma
+- [x] `src/data/rooms.json` — fuente única de las 10 habitaciones
+- [x] **Web pública completa**, portada de `kirana-web-paralela.html`:
+      Hero · La casa · Los espacios · La idea · Habitaciones («¿Dónde te
+      quieres alojar?», solo activas, con foto/specs/servicios) · Servicios +
+      Horarios y normas · Banda · El entorno (14 lugares) · Actividades (3
+      categorías + contactos) · La estancia · Opiniones · Ofertas · Reserva
+- [x] **Propuesta Premium** del cliente: cada habitación con `lema` + nuevo
+      `storytelling` (en `rooms.json`)
 - [x] Diccionario `I18N` portado a `src/i18n/i18n.json` (clave = texto ES),
-      con helper `tn(lang, 'texto ES')` y fallback a ES
+      helper `tn(lang, 'texto ES')` con fallback a ES. UI traducida en los 8
+      idiomas (ES/EU/FR/EN/NL/DE/DA/NO/IT)
 - [x] Maquetas de referencia en `referencia/` (solo lectura)
-- [ ] i18n completo: portar el resto de secciones de la maqueta (La casa,
-      Espacios, Servicios, Entorno, Actividades, Opiniones, Normas, Políticas).
-      Storytelling EU/DA/NO pendientes de traducción profesional
+- [ ] Pendiente i18n: traducir el `lema` y el `storytelling` Premium (ahora
+      caen a ES en todos los idiomas); EU/DA/NO requieren traducción profesional
+- [ ] Pendiente: galería de fotos completa (faltan `fotos-kirana/`; las
+      tarjetas usan el CDN de la maqueta), favicon/logos, formulario de fechas
 - [ ] Panel admin (Fase 3) · Reservas + Stripe (Fase 4) · Channel manager
-      (Fase 5) · TicketBAI (Fase 6) · SEO/RGPD/deploy (Fase 7)
+      (Fase 5) · TicketBAI (Fase 6) · SEO/hreflang/RGPD/deploy (Fase 7)
 
 ## Reglas clave
 
