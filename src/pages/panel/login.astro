@@ -1,0 +1,53 @@
+---
+import '@/styles/global.css';
+import { COOKIE, checkPassword, sessionToken } from '@/lib/auth';
+
+let error = '';
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const pass = String(form.get('password') ?? '');
+  if (checkPassword(pass)) {
+    Astro.cookies.set(COOKIE, sessionToken(), {
+      httpOnly: true,
+      sameSite: 'lax',
+      path: '/',
+      secure: import.meta.env.PROD,
+      maxAge: 60 * 60 * 8, // 8 h
+    });
+    return Astro.redirect('/panel/habitaciones');
+  }
+  error = 'Contraseña incorrecta.';
+}
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Panel · Kirana</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body class="flex min-h-screen items-center justify-center bg-paper px-5">
+    <form method="POST" class="w-full max-w-sm rounded-2xl border border-paper-2 bg-paper p-8">
+      <p class="font-serif text-3xl text-pine">Kirana</p>
+      <p class="mt-1 text-sm text-mist">Panel de gestión</p>
+
+      <label class="mt-6 block text-sm text-ink" for="password">Contraseña</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        required
+        autofocus
+        class="mt-2 w-full rounded-lg border border-paper-2 bg-paper px-3 py-2 outline-none focus:border-pine"
+      />
+
+      {error && <p class="mt-3 text-sm text-[#A6543E]">{error}</p>}
+
+      <button type="submit" class="mt-6 w-full rounded-full bg-pine px-5 py-2.5 text-paper transition-opacity hover:opacity-90">
+        Entrar
+      </button>
+    </form>
+  </body>
+</html>

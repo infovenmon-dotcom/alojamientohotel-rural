@@ -15,14 +15,12 @@ import SeccionOfertas from '@/components/SeccionOfertas.astro';
 import SeccionReserva from '@/components/SeccionReserva.astro';
 import { languages, defaultLang, type Lang } from '@/i18n/ui';
 
-export function getStaticPaths() {
-  // Una ruta por idioma salvo el default (ES), que vive en la raíz.
-  return Object.keys(languages)
-    .filter((lang) => lang !== defaultLang)
-    .map((lang) => ({ params: { lang } }));
+// SSR: validar el idioma en cada petición. ES vive en la raíz, no aquí.
+const param = Astro.params.lang;
+if (!param || !(param in languages) || param === defaultLang) {
+  return new Response('Not found', { status: 404 });
 }
-
-const lang = Astro.params.lang as Lang;
+const lang = param as Lang;
 ---
 
 <BaseLayout lang={lang}>
