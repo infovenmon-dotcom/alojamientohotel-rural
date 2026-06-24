@@ -1,0 +1,10 @@
+# Configuración de Cloudflare Pages.
+# Cloudflare lee esto al desplegar: carpeta de salida del build y los flags de
+# compatibilidad que necesita el adaptador @astrojs/cloudflare (Node integrado).
+name = "kirana"
+pages_build_output_dir = "./dist"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Recordatorio: define PANEL_PASSWORD en
+# Cloudflare Pages → Settings → Variables and Secrets (no se commitea, regla #5).
