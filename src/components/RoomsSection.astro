@@ -9,7 +9,7 @@ interface Props {
 
 const { lang } = Astro.props;
 // Web pública: SOLO habitaciones activas (regla #2).
-const rooms = getActiveRooms();
+const rooms = await getActiveRooms();
 ---
 
 <section id="habitaciones" class="mx-auto max-w-6xl px-5 py-20">

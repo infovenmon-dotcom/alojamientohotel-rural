@@ -15,13 +15,15 @@ import SeccionOfertas from '@/components/SeccionOfertas.astro';
 import SeccionReserva from '@/components/SeccionReserva.astro';
 import { languages, defaultLang, type Lang } from '@/i18n/ui';
 
-// SSR: validar el idioma en cada petición (ES vive en la raíz). Así la web
-// refleja en vivo el bloquear/activar del panel (regla #2).
-const param = Astro.params.lang;
-if (!param || !(param in languages) || param === defaultLang) {
-  return new Response('Not found', { status: 404 });
+// Una página por idioma (ES vive en la raíz). getStaticPaths permite servir la
+// web pública también como estática (GitHub Pages).
+export function getStaticPaths() {
+  return Object.keys(languages)
+    .filter((lang) => lang !== defaultLang)
+    .map((lang) => ({ params: { lang } }));
 }
-const lang = param as Lang;
+
+const lang = Astro.params.lang as Lang;
 ---
 
 <BaseLayout lang={lang}>

@@ -1,0 +1,11 @@
+# Configuración de despliegue en Netlify.
+# El adaptador @astrojs/netlify gestiona la carpeta de publicación y las
+# funciones SSR (el panel corre como función). Solo fijamos comando y Node.
+[build]
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Recordatorio: define PANEL_PASSWORD en
+# Site settings → Environment variables (no se commitea, regla #5).

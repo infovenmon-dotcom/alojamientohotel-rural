@@ -10,14 +10,14 @@ export const prerender = false;
  */
 export const POST: APIRoute = async ({ params, request, redirect }) => {
   const id = params.id!;
-  if (!getRoomById(id)) {
+  if (!(await getRoomById(id))) {
     return new Response('Habitación no encontrada', { status: 404 });
   }
   const form = await request.formData();
   const activa = String(form.get('activa')) === 'true';
   const accept = request.headers.get('accept') ?? '';
   try {
-    setRoomActive(id, activa);
+    await setRoomActive(id, activa);
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Error al guardar';
     if (accept.includes('text/html')) {

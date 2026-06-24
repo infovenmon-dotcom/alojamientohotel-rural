@@ -8,7 +8,7 @@ type Booking = (typeof sample.bookings)[number];
 const bookings = sample.bookings as Booking[];
 const channelColors = sample.channelColors as Record<string, string>;
 
-const rooms = getActiveRooms();
+const rooms = await getActiveRooms();
 const activeNames = new Set(rooms.map((r) => r.nombre));
 
 // Mes mostrado (?ym=YYYY-MM), por defecto el actual.

@@ -46,9 +46,11 @@ export function useT(lang: Lang) {
   return (es: string, vars: Record<string, string | number> = {}) => tn(lang, es, vars);
 }
 
-/** Construye una ruta con el prefijo de idioma correcto (ES sin prefijo). */
+/** Construye una ruta con el prefijo de idioma correcto (ES sin prefijo).
+ *  Respeta el `base` del sitio (p. ej. GitHub Pages /repo) vía BASE_URL. */
 export function localizedPath(lang: Lang, path = ''): string {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, ''); // '' o '/repo'
   const clean = path.replace(/^\//, '');
-  if (lang === defaultLang) return '/' + clean;
-  return `/${lang}/` + clean;
+  const p = lang === defaultLang ? '/' + clean : `/${lang}/` + clean;
+  return base + p;
 }

@@ -3,7 +3,7 @@ export const prerender = false;
 import PanelLayout from '@/layouts/PanelLayout.astro';
 import { getAllRooms, bathWord } from '@/lib/rooms';
 
-const rooms = getAllRooms();
+const rooms = await getAllRooms();
 const activas = rooms.filter((r) => r.activa).length;
 const total = rooms.length;
 
