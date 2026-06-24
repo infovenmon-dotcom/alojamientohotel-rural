@@ -2,7 +2,7 @@
 import '@/styles/global.css';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-import { useTranslations, type Lang } from '@/i18n/ui';
+import { tn, type Lang } from '@/i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -11,9 +11,9 @@ interface Props {
 }
 
 const { lang, title, description } = Astro.props;
-const t = useTranslations(lang);
-const pageTitle = title ?? t('meta.title');
-const pageDescription = description ?? t('meta.description');
+const pageTitle = title ?? `Kirana · ${tn(lang, 'Alojamiento rural · solo adultos · Urdaibai')}`;
+const pageDescription =
+  description ?? tn(lang, 'A un paso de Bermeo, en la Reserva de la Biosfera de Urdaibai, el plan es simple: silencio, comodidad y aire puro.');
 ---
 
 <!doctype html>

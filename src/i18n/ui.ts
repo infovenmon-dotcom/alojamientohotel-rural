@@ -1,16 +1,8 @@
-import es from './es.json';
-import eu from './eu.json';
-import fr from './fr.json';
-import en from './en.json';
-import nl from './nl.json';
-import de from './de.json';
-import da from './da.json';
-import no from './no.json';
-import it from './it.json';
+import dict from './i18n.json';
 
 export const defaultLang = 'es' as const;
 
-/** Etiqueta legible de cada idioma (para el selector). BE comparte NL. */
+/** 10 idiomas. BE comparte contenido con NL (alias vía hreflang en Fase 7). */
 export const languages = {
   es: 'Español',
   eu: 'Euskara',
@@ -25,7 +17,8 @@ export const languages = {
 
 export type Lang = keyof typeof languages;
 
-const dictionaries = { es, eu, fr, en, nl, de, da, no, it } as Record<Lang, Record<string, string>>;
+type Dict = Record<string, Partial<Record<Exclude<Lang, 'es'>, string>>>;
+const I18N = dict as Dict;
 
 /** Extrae el idioma de la URL (p.ej. /fr/... → 'fr'). ES vive en la raíz. */
 export function getLangFromUrl(url: URL): Lang {
@@ -35,14 +28,22 @@ export function getLangFromUrl(url: URL): Lang {
 }
 
 /**
- * Devuelve una función t(key) para el idioma dado, con fallback a ES si la
- * clave aún no está traducida (EU/DA/NO pendientes de traducción profesional).
+ * Traduce texto en español a `lang` usando el diccionario I18N portado de la
+ * maqueta (clave = texto ES). Si no hay traducción (o lang = es, o pendiente
+ * como EU/DA/NO en algunos storytelling), devuelve el español tal cual.
+ * Soporta interpolación {var}.
  */
-export function useTranslations(lang: Lang) {
-  return function t(key: string, vars: Record<string, string | number> = {}): string {
-    const raw = dictionaries[lang]?.[key] ?? dictionaries[defaultLang][key] ?? key;
-    return raw.replace(/\{(\w+)\}/g, (_, name) => String(vars[name] ?? `{${name}}`));
-  };
+export function tn(lang: Lang, es: string, vars: Record<string, string | number> = {}): string {
+  let out = es;
+  if (lang !== defaultLang) {
+    out = I18N[es]?.[lang] ?? es;
+  }
+  return out.replace(/\{(\w+)\}/g, (_, name) => String(vars[name] ?? `{${name}}`));
+}
+
+/** Helper enlazado a un idioma: const t = useT(lang); t('Habitaciones'). */
+export function useT(lang: Lang) {
+  return (es: string, vars: Record<string, string | number> = {}) => tn(lang, es, vars);
 }
 
 /** Construye una ruta con el prefijo de idioma correcto (ES sin prefijo). */

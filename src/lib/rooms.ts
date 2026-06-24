@@ -15,7 +15,8 @@ export interface Room {
   cama: string;
   precio: number;
   activa: boolean;
-  story: string;
+  fotos: string[];
+  storytelling: string;
 }
 
 /** Todas las habitaciones (incluye bloqueadas). Uso interno / panel. */

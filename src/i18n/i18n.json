@@ -1,0 +1,1561 @@
+{
+  "La casa": {
+    "eu": "Etxea",
+    "fr": "La maison",
+    "en": "The house",
+    "nl": "Het huis",
+    "de": "Das Haus",
+    "da": "Huset",
+    "no": "Huset",
+    "it": "La casa"
+  },
+  "Habitaciones": {
+    "eu": "Gelak",
+    "fr": "Chambres",
+    "en": "Rooms",
+    "nl": "Kamers",
+    "de": "Zimmer",
+    "da": "Værelser",
+    "no": "Rom",
+    "it": "Camere"
+  },
+  "Entorno": {
+    "eu": "Ingurua",
+    "fr": "Les environs",
+    "en": "The area",
+    "nl": "Omgeving",
+    "de": "Umgebung",
+    "da": "Omgivelser",
+    "no": "Området",
+    "it": "Dintorni"
+  },
+  "Actividades": {
+    "eu": "Jarduerak",
+    "fr": "Activités",
+    "en": "Activities",
+    "nl": "Activiteiten",
+    "de": "Aktivitäten",
+    "da": "Aktiviteter",
+    "no": "Aktiviteter",
+    "it": "Attività"
+  },
+  "Reservar": {
+    "eu": "Erreserbatu",
+    "fr": "Réserver",
+    "en": "Book",
+    "nl": "Reserveren",
+    "de": "Buchen",
+    "da": "Book",
+    "no": "Bestill",
+    "it": "Prenota"
+  },
+  "Consultar disponibilidad": {
+    "eu": "Eskuragarritasuna kontsultatu",
+    "fr": "Vérifier les disponibilités",
+    "en": "Check availability",
+    "nl": "Beschikbaarheid bekijken",
+    "de": "Verfügbarkeit prüfen",
+    "da": "Tjek ledighed",
+    "no": "Sjekk tilgjengelighet",
+    "it": "Verifica disponibilità"
+  },
+  "Qué hacer cerca": {
+    "eu": "Zer egin inguruan",
+    "fr": "Que faire à proximité",
+    "en": "What to do nearby",
+    "nl": "Wat te doen in de buurt",
+    "de": "Was kann man hier unternehmen",
+    "da": "Hvad man kan lave i nærheden",
+    "no": "Hva du kan gjøre i nærheten",
+    "it": "Cosa fare nei dintorni"
+  },
+  "Mejor precio garantizado": {
+    "eu": "Preziorik onena bermatuta",
+    "fr": "Meilleur prix garanti",
+    "en": "Best price guaranteed",
+    "nl": "Beste prijs gegarandeerd",
+    "de": "Bestpreisgarantie",
+    "da": "Bedste pris garanteret",
+    "no": "Beste pris garantert",
+    "it": "Miglior prezzo garantito"
+  },
+  "reservando en esta web": {
+    "eu": "web honetan erreserbatuz",
+    "fr": "en réservant sur ce site",
+    "en": "when you book on this site",
+    "nl": "als u op deze site boekt",
+    "de": "bei Buchung auf dieser Website",
+    "da": "når du booker på dette website",
+    "no": "når du bestiller på denne nettsiden",
+    "it": "prenotando su questo sito"
+  },
+  "Entrar": {
+    "eu": "Sartu",
+    "fr": "Entrer",
+    "en": "Enter",
+    "nl": "Binnenkomen",
+    "de": "Eintreten",
+    "da": "Gå ind",
+    "no": "Gå inn",
+    "it": "Entra"
+  },
+  "un refugio de paz,": {
+    "eu": "bakearen aterpe bat,",
+    "fr": "un refuge de paix,",
+    "en": "a refuge of peace,",
+    "nl": "een toevluchtsoord van rust,",
+    "de": "ein Zufluchtsort der Ruhe,",
+    "da": "et fristed af ro,",
+    "no": "et fristed av ro,",
+    "it": "un rifugio di pace,"
+  },
+  "cerca de todo.": {
+    "eu": "denetik gertu.",
+    "fr": "proche de tout.",
+    "en": "close to everything.",
+    "nl": "dichtbij alles.",
+    "de": "nah an allem.",
+    "da": "tæt på alt.",
+    "no": "nær alt.",
+    "it": "vicino a tutto."
+  },
+  "Alojamiento rural · solo adultos · Urdaibai": {
+    "eu": "Landa-ostatua · helduentzat soilik · Urdaibai",
+    "fr": "Hébergement rural · adultes uniquement · Urdaibai",
+    "en": "Rural retreat · adults only · Urdaibai",
+    "nl": "Landelijk verblijf · alleen volwassenen · Urdaibai",
+    "de": "Landhaus · nur für Erwachsene · Urdaibai",
+    "da": "Landophold · kun voksne · Urdaibai",
+    "no": "Landlig opphold · kun voksne · Urdaibai",
+    "it": "Alloggio rurale · solo adulti · Urdaibai"
+  },
+  "un refugio de paz, cerca de todo": {
+    "eu": "bakearen aterpe bat, denetik gertu",
+    "fr": "un refuge de paix, proche de tout",
+    "en": "a refuge of peace, close to everything",
+    "nl": "een toevluchtsoord van rust, dichtbij alles",
+    "de": "ein Zufluchtsort der Ruhe, nah an allem",
+    "da": "et fristed af ro, tæt på alt",
+    "no": "et fristed av ro, nær alt",
+    "it": "un rifugio di pace, vicino a tutto"
+  },
+  "A un paso de Bermeo, en la Reserva de la Biosfera de Urdaibai. Una casa solo para adultos donde el plan es simple: silencio, comodidad y aire puro.": {
+    "eu": "Bermeotik pausu batera, Urdaibaiko Biosferaren Erreserban. Helduentzako soilik den etxea, non plana erraza den: isiltasuna, erosotasuna eta aire garbia.",
+    "fr": "À deux pas de Bermeo, dans la Réserve de biosphère d'Urdaibai. Une maison réservée aux adultes où le programme est simple : silence, confort et air pur.",
+    "en": "A stone's throw from Bermeo, in the Urdaibai Biosphere Reserve. An adults-only house where the plan is simple: silence, comfort and fresh air.",
+    "nl": "Op een steenworp van Bermeo, in het Biosfeerreservaat Urdaibai. Een huis alleen voor volwassenen waar het plan eenvoudig is: stilte, comfort en frisse lucht.",
+    "de": "Nur einen Schritt von Bermeo entfernt, im Biosphärenreservat Urdaibai. Ein Haus nur für Erwachsene, in dem das Programm einfach ist: Stille, Komfort und frische Luft.",
+    "da": "Kun et stenkast fra Bermeo, i Urdaibai Biosfærereservat. Et hus kun for voksne, hvor planen er enkel: stilhed, komfort og frisk luft.",
+    "no": "Et steinkast fra Bermeo, i Urdaibai biosfærereservat. Et hus kun for voksne der planen er enkel: stillhet, komfort og frisk luft.",
+    "it": "A due passi da Bermeo, nella Riserva della Biosfera di Urdaibai. Una casa solo per adulti dove il programma è semplice: silenzio, comfort e aria pura."
+  },
+  "el plan es simple: silencio, comodidad y aire puro.": {
+    "eu": "plana erraza da: isiltasuna, erosotasuna eta aire garbia.",
+    "fr": "le programme est simple : silence, confort et air pur.",
+    "en": "the plan is simple: silence, comfort and fresh air.",
+    "nl": "het plan is eenvoudig: stilte, comfort en frisse lucht.",
+    "de": "das Programm ist einfach: Stille, Komfort und frische Luft.",
+    "da": "planen er enkel: stilhed, komfort og frisk luft.",
+    "no": "planen er enkel: stillhet, komfort og frisk luft.",
+    "it": "il programma è semplice: silenzio, comfort e aria pura."
+  },
+  "Kirana combina la esencia de una casa en plena naturaleza con un interior moderno, luminoso y minimalista. Blanco, madera y detalles cuidados para descansar de verdad.": {
+    "eu": "Kiranak naturaren erdian dagoen etxe baten esentzia barne moderno, argitsu eta minimalista batekin uztartzen du. Zuria, egurra eta zaindutako xehetasunak benetan atseden hartzeko.",
+    "fr": "Kirana allie l'essence d'une maison en pleine nature à un intérieur moderne, lumineux et minimaliste. Blanc, bois et détails soignés pour se reposer vraiment.",
+    "en": "Kirana blends the essence of a house deep in nature with a modern, bright and minimalist interior. White, wood and careful details for true rest.",
+    "nl": "Kirana combineert de essentie van een huis midden in de natuur met een modern, licht en minimalistisch interieur. Wit, hout en verzorgde details om echt tot rust te komen.",
+    "de": "Kirana verbindet das Wesen eines Hauses inmitten der Natur mit einem modernen, hellen und minimalistischen Interieur. Weiß, Holz und liebevolle Details für echte Erholung.",
+    "da": "Kirana forener essensen af et hus midt i naturen med et moderne, lyst og minimalistisk interiør. Hvidt, træ og omhyggelige detaljer for ægte hvile.",
+    "no": "Kirana forener essensen av et hus midt i naturen med et moderne, lyst og minimalistisk interiør. Hvitt, tre og gjennomtenkte detaljer for ekte hvile.",
+    "it": "Kirana unisce l'essenza di una casa immersa nella natura a un interno moderno, luminoso e minimalista. Bianco, legno e dettagli curati per riposare davvero."
+  },
+  "Desayuna sin prisa en el comedor o en la terraza, comparte el salón de uso común y encuentra tu momento en las zonas de relax, dentro y fuera. Aquí el tiempo se mueve más despacio.": {
+    "eu": "Gosaldu lasai jangelan edo terrazan, partekatu erabilera komuneko egongela eta aurkitu zure unea atseden-guneetan, barruan zein kanpoan. Hemen denbora astiroago doa.",
+    "fr": "Petit-déjeunez sans hâte dans la salle à manger ou sur la terrasse, partagez le salon commun et trouvez votre moment dans les espaces de détente, à l'intérieur comme à l'extérieur. Ici, le temps s'écoule plus lentement.",
+    "en": "Have a leisurely breakfast in the dining room or on the terrace, share the common lounge and find your moment in the relaxation areas, indoors and out. Here time moves more slowly.",
+    "nl": "Ontbijt op uw gemak in de eetkamer of op het terras, deel de gemeenschappelijke lounge en vind uw moment in de relaxruimtes, binnen en buiten. Hier gaat de tijd langzamer.",
+    "de": "Frühstücken Sie in Ruhe im Esszimmer oder auf der Terrasse, teilen Sie den Gemeinschaftsraum und finden Sie Ihren Moment in den Ruhezonen, drinnen und draußen. Hier vergeht die Zeit langsamer.",
+    "da": "Spis morgenmad i ro i spisestuen eller på terrassen, del fællesstuen og find dit øjeblik i afslapningsområderne, inde og ude. Her går tiden langsommere.",
+    "no": "Spis frokost i ro i spisestuen eller på terrassen, del fellesstuen og finn ditt øyeblikk i avslapningssonene, inne og ute. Her går tiden saktere.",
+    "it": "Fai colazione con calma in sala da pranzo o in terrazza, condividi il salotto comune e trova il tuo momento nelle zone relax, dentro e fuori. Qui il tempo scorre più lentamente."
+  },
+  "Los espacios": {
+    "eu": "Espazioak",
+    "fr": "Les espaces",
+    "en": "The spaces",
+    "nl": "De ruimtes",
+    "de": "Die Räume",
+    "da": "Rummene",
+    "no": "Rommene",
+    "it": "Gli spazi"
+  },
+  "donde el día empieza sin prisas.": {
+    "eu": "eguna presarik gabe hasten den lekua.",
+    "fr": "où la journée commence sans hâte.",
+    "en": "where the day begins unhurried.",
+    "nl": "waar de dag rustig begint.",
+    "de": "wo der Tag ohne Eile beginnt.",
+    "da": "hvor dagen begynder i ro.",
+    "no": "der dagen begynner i ro.",
+    "it": "dove la giornata inizia senza fretta."
+  },
+  "El comedor": {
+    "eu": "Jangela",
+    "fr": "La salle à manger",
+    "en": "The dining room",
+    "nl": "De eetkamer",
+    "de": "Das Esszimmer",
+    "da": "Spisestuen",
+    "no": "Spisestuen",
+    "it": "La sala da pranzo"
+  },
+  "Amplio y luminoso, con vistas al bosque.": {
+    "eu": "Zabala eta argitsua, basoari begira.",
+    "fr": "Spacieuse et lumineuse, avec vue sur la forêt.",
+    "en": "Spacious and bright, with forest views.",
+    "nl": "Ruim en licht, met uitzicht op het bos.",
+    "de": "Großzügig und hell, mit Blick auf den Wald.",
+    "da": "Rummelig og lys, med udsigt til skoven.",
+    "no": "Romslig og lys, med utsikt mot skogen.",
+    "it": "Ampia e luminosa, con vista sul bosco."
+  },
+  "Uno de esos espacios que invitan a quedarse un rato más: grande, acogedor y lleno de luz natural. Los ventanales se abren al bosque y al jardín, y convierten cada desayuno en un momento de calma.": {
+    "eu": "Pixka bat gehiago geratzera gonbidatzen duten espazioetako bat: handia, atsegina eta argi naturalez betea. Leiho handiak basora eta lorategira irekitzen dira, eta gosari bakoitza lasaitasun une bihurtzen dute.",
+    "fr": "Un de ces espaces qui invitent à rester un peu plus : grand, accueillant et baigné de lumière naturelle. Les baies vitrées s'ouvrent sur la forêt et le jardin et font de chaque petit-déjeuner un moment de calme.",
+    "en": "One of those spaces that invite you to linger: large, welcoming and full of natural light. The large windows open onto the forest and garden, turning every breakfast into a calm moment.",
+    "nl": "Een van die ruimtes die uitnodigen om nog even te blijven: groot, gezellig en vol natuurlijk licht. De grote ramen kijken uit op het bos en de tuin en maken van elk ontbijt een rustig moment.",
+    "de": "Einer dieser Räume, die zum Verweilen einladen: groß, gemütlich und voller natürlichem Licht. Die großen Fenster öffnen sich zum Wald und Garten und machen jedes Frühstück zu einem ruhigen Moment.",
+    "da": "Et af de rum, der inviterer til at blive lidt længere: stort, hyggeligt og fyldt med naturligt lys. De store vinduer åbner mod skoven og haven og gør hver morgenmad til et roligt øjeblik.",
+    "no": "Et av de rommene som inviterer til å bli litt lenger: stort, lunt og fullt av naturlig lys. De store vinduene åpner mot skogen og hagen og gjør hver frokost til et rolig øyeblikk.",
+    "it": "Uno di quegli spazi che invitano a fermarsi ancora un po': ampio, accogliente e pieno di luce naturale. Le ampie vetrate si aprono sul bosco e sul giardino e trasformano ogni colazione in un momento di calma."
+  },
+  "Terraza y relax": {
+    "eu": "Terraza eta atsedena",
+    "fr": "Terrasse et détente",
+    "en": "Terrace and relaxation",
+    "nl": "Terras en ontspanning",
+    "de": "Terrasse und Entspannung",
+    "da": "Terrasse og afslapning",
+    "no": "Terrasse og avslapning",
+    "it": "Terrazza e relax"
+  },
+  "Bajar el ritmo, al aire libre.": {
+    "eu": "Erritmoa jaitsi, aire zabalean.",
+    "fr": "Ralentir, en plein air.",
+    "en": "Slow down, outdoors.",
+    "nl": "Het ritme verlagen, in de buitenlucht.",
+    "de": "Das Tempo drosseln, im Freien.",
+    "da": "Sænk tempoet, udendørs.",
+    "no": "Senk tempoet, utendørs.",
+    "it": "Rallentare, all'aria aperta."
+  },
+  "Una terraza amplia rodeada de verde para desayunar, tomar un café o alargar la sobremesa sin mirar el reloj. Y zonas de relax para leer, escuchar los pájaros o, sencillamente, no hacer nada.": {
+    "eu": "Terraza zabal bat berdez inguratua gosaltzeko, kafe bat hartzeko edo mahai-ingurua erlojuari begiratu gabe luzatzeko. Eta atseden-guneak irakurtzeko, txoriak entzuteko edo, besterik gabe, ezer ez egiteko.",
+    "fr": "Une grande terrasse entourée de verdure pour petit-déjeuner, prendre un café ou prolonger le repas sans regarder l'heure. Et des espaces de détente pour lire, écouter les oiseaux ou, simplement, ne rien faire.",
+    "en": "A large terrace surrounded by greenery for breakfast, a coffee or lingering after a meal without watching the clock. And relaxation areas to read, listen to the birds or simply do nothing.",
+    "nl": "Een ruim terras omgeven door groen om te ontbijten, koffie te drinken of na te tafelen zonder op de klok te kijken. En relaxplekken om te lezen, naar de vogels te luisteren of gewoon niets te doen.",
+    "de": "Eine große, von Grün umgebene Terrasse zum Frühstücken, für einen Kaffee oder ein langes Beisammensein ohne auf die Uhr zu schauen. Und Ruhezonen zum Lesen, Vögel hören oder einfach nichts tun.",
+    "da": "En stor terrasse omgivet af grønt til morgenmad, en kaffe eller en lang snak uden at se på uret. Og afslapningsområder til at læse, lytte til fuglene eller blot ikke lave noget.",
+    "no": "En stor terrasse omgitt av grønt til frokost, en kaffe eller en lang prat uten å se på klokka. Og avslapningssoner til å lese, lytte til fuglene eller rett og slett ikke gjøre noe.",
+    "it": "Un'ampia terrazza circondata dal verde per fare colazione, prendere un caffè o prolungare la sosta a tavola senza guardare l'orologio. E zone relax per leggere, ascoltare gli uccelli o, semplicemente, non fare nulla."
+  },
+  "La idea": {
+    "eu": "Ideia",
+    "fr": "L'idée",
+    "en": "The idea",
+    "nl": "Het idee",
+    "de": "Die Idee",
+    "da": "Idéen",
+    "no": "Idéen",
+    "it": "L'idea"
+  },
+  "un refugio de paz, cerca de todo.": {
+    "eu": "bakearen aterpe bat, denetik gertu.",
+    "fr": "un refuge de paix, proche de tout.",
+    "en": "a refuge of peace, close to everything.",
+    "nl": "een toevluchtsoord van rust, dichtbij alles.",
+    "de": "ein Zufluchtsort der Ruhe, nah an allem.",
+    "da": "et fristed af ro, tæt på alt.",
+    "no": "et fristed av ro, nær alt.",
+    "it": "un rifugio di pace, vicino a tutto."
+  },
+  "paz.": {
+    "eu": "bakea.",
+    "fr": "paix.",
+    "en": "peace.",
+    "nl": "rust.",
+    "de": "Ruhe.",
+    "da": "ro.",
+    "no": "ro.",
+    "it": "pace."
+  },
+  "Silencio, naturaleza y descanso de verdad. Una casa solo para adultos, en plena Reserva de la Biosfera de Urdaibai, con el bosque y el jardín como única compañía.": {
+    "eu": "Isiltasuna, natura eta benetako atsedena. Helduentzako soilik den etxea, Urdaibaiko Biosferaren Erreservaren erdian, basoa eta lorategia konpainia bakar gisa.",
+    "fr": "Silence, nature et vrai repos. Une maison réservée aux adultes, en pleine Réserve de biosphère d'Urdaibai, avec la forêt et le jardin pour seule compagnie.",
+    "en": "Silence, nature and true rest. An adults-only house, in the heart of the Urdaibai Biosphere Reserve, with the forest and garden as your only company.",
+    "nl": "Stilte, natuur en echte rust. Een huis alleen voor volwassenen, midden in het Biosfeerreservaat Urdaibai, met het bos en de tuin als enige gezelschap.",
+    "de": "Stille, Natur und echte Erholung. Ein Haus nur für Erwachsene, mitten im Biosphärenreservat Urdaibai, mit Wald und Garten als einziger Gesellschaft.",
+    "da": "Stilhed, natur og ægte hvile. Et hus kun for voksne, midt i Urdaibai Biosfærereservat, med skoven og haven som eneste selskab.",
+    "no": "Stillhet, natur og ekte hvile. Et hus kun for voksne, midt i Urdaibai biosfærereservat, med skogen og hagen som eneste selskap.",
+    "it": "Silenzio, natura e vero riposo. Una casa solo per adulti, nel cuore della Riserva della Biosfera di Urdaibai, con il bosco e il giardino come unica compagnia."
+  },
+  "No renuncias a nada: el mar, los pueblos y la ciudad están a un paso.": {
+    "eu": "Ez duzu ezeri uko egiten: itsasoa, herriak eta hiria pausu batera daude.",
+    "fr": "Vous ne renoncez à rien : la mer, les villages et la ville sont à deux pas.",
+    "en": "You give up nothing: the sea, the villages and the city are a step away.",
+    "nl": "U hoeft niets op te geven: de zee, de dorpen en de stad zijn vlakbij.",
+    "de": "Sie verzichten auf nichts: Meer, Dörfer und Stadt sind nur einen Schritt entfernt.",
+    "da": "Du giver ikke afkald på noget: havet, landsbyerne og byen er kun et skridt væk.",
+    "no": "Du gir ikke avkall på noe: havet, landsbyene og byen er bare et steg unna.",
+    "it": "Non rinunci a nulla: il mare, i paesi e la città sono a un passo."
+  },
+  "descanso de verdad, solo para adultos.": {
+    "eu": "benetako atsedena, helduentzat soilik.",
+    "fr": "un vrai repos, pour adultes uniquement.",
+    "en": "true rest, adults only.",
+    "nl": "echte rust, alleen voor volwassenen.",
+    "de": "echte Erholung, nur für Erwachsene.",
+    "da": "ægte hvile, kun for voksne.",
+    "no": "ekte hvile, kun for voksne.",
+    "it": "vero riposo, solo per adulti."
+  },
+  "Habitaciones amplias, modernas y silenciosas —blanco, madera y luz natural— con WiFi y aire acondicionado. Y un apartamento privado para 4 en la planta baja, con terraza y salida al jardín. El desayuno, sin prisa, está incluido.": {
+    "eu": "Gela zabalak, modernoak eta isilak —zuria, egurra eta argi naturala— WiFi eta aire girotuarekin. Eta 4 lagunentzako apartamentu pribatu bat behe-solairuan, terraza eta lorategirako irteerarekin. Gosaria, lasai, barne dago.",
+    "fr": "Des chambres spacieuses, modernes et silencieuses —blanc, bois et lumière naturelle— avec WiFi et climatisation. Et un appartement privé pour 4 au rez-de-chaussée, avec terrasse et accès au jardin. Le petit-déjeuner, sans hâte, est inclus.",
+    "en": "Spacious, modern and quiet rooms —white, wood and natural light— with WiFi and air conditioning. And a private apartment for 4 on the ground floor, with a terrace and garden access. A leisurely breakfast is included.",
+    "nl": "Ruime, moderne en stille kamers —wit, hout en natuurlijk licht— met wifi en airco. En een privéappartement voor 4 op de begane grond, met terras en toegang tot de tuin. Een rustig ontbijt is inbegrepen.",
+    "de": "Geräumige, moderne und ruhige Zimmer —Weiß, Holz und natürliches Licht— mit WLAN und Klimaanlage. Und ein privates Apartment für 4 im Erdgeschoss, mit Terrasse und Gartenzugang. Ein gemütliches Frühstück ist inbegriffen.",
+    "da": "Rummelige, moderne og stille værelser —hvidt, træ og naturligt lys— med WiFi og aircondition. Og en privat lejlighed til 4 i stueetagen, med terrasse og adgang til haven. En rolig morgenmad er inkluderet.",
+    "no": "Romslige, moderne og stille rom —hvitt, tre og naturlig lys— med WiFi og klimaanlegg. Og en privat leilighet for 4 i første etasje, med terrasse og utgang til hagen. En rolig frokost er inkludert.",
+    "it": "Camere ampie, moderne e silenziose —bianco, legno e luce naturale— con WiFi e aria condizionata. E un appartamento privato per 4 al piano terra, con terrazza e uscita sul giardino. La colazione, con calma, è inclusa."
+  },
+  "La luz": {
+    "eu": "Argia",
+    "fr": "La lumière",
+    "en": "The light",
+    "nl": "Het licht",
+    "de": "Das Licht",
+    "da": "Lyset",
+    "no": "Lyset",
+    "it": "La luce"
+  },
+  "El bosque": {
+    "eu": "Basoa",
+    "fr": "La forêt",
+    "en": "The forest",
+    "nl": "Het bos",
+    "de": "Der Wald",
+    "da": "Skoven",
+    "no": "Skogen",
+    "it": "Il bosco"
+  },
+  "El mar": {
+    "eu": "Itsasoa",
+    "fr": "La mer",
+    "en": "The sea",
+    "nl": "De zee",
+    "de": "Das Meer",
+    "da": "Havet",
+    "no": "Havet",
+    "it": "Il mare"
+  },
+  "La calma": {
+    "eu": "Lasaitasuna",
+    "fr": "Le calme",
+    "en": "The calm",
+    "nl": "De rust",
+    "de": "Die Ruhe",
+    "da": "Roen",
+    "no": "Roen",
+    "it": "La calma"
+  },
+  "El jardín": {
+    "eu": "Lorategia",
+    "fr": "Le jardin",
+    "en": "The garden",
+    "nl": "De tuin",
+    "de": "Der Garten",
+    "da": "Haven",
+    "no": "Hagen",
+    "it": "Il giardino"
+  },
+  "La más luminosa: luz natural de la mañana a la tarde para empezar el día despacio.": {
+    "eu": "Argitsuena: argi naturala goizetik arratsaldera eguna astiro hasteko.",
+    "fr": "La plus lumineuse : lumière naturelle du matin au soir pour commencer la journée doucement.",
+    "en": "The brightest: natural light from morning to evening to start the day slowly.",
+    "nl": "De lichtste: natuurlijk licht van ochtend tot avond om de dag rustig te beginnen.",
+    "de": "Das hellste: natürliches Licht von morgens bis abends, um den Tag langsam zu beginnen.",
+    "da": "Det lyseste: naturligt lys fra morgen til aften for en rolig start på dagen.",
+    "no": "Det lyseste: naturlig lys fra morgen til kveld for en rolig start på dagen.",
+    "it": "La più luminosa: luce naturale dalla mattina alla sera per iniziare la giornata con calma."
+  },
+  "La que mira al verde. Despiertas con el bosque en la ventana y los pájaros como única alarma.": {
+    "eu": "Berdera begiratzen duena. Basoarekin esnatzen zara leihoan eta txoriak alarma bakar gisa.",
+    "fr": "Celle qui donne sur la verdure. Vous vous réveillez avec la forêt à la fenêtre et les oiseaux pour seul réveil.",
+    "en": "The one facing the green. You wake with the forest in the window and birds as your only alarm.",
+    "nl": "De kamer met uitzicht op het groen. U wordt wakker met het bos voor het raam en vogels als enige wekker.",
+    "de": "Das Zimmer mit Blick ins Grüne. Sie wachen mit dem Wald am Fenster und Vögeln als einzigem Wecker auf.",
+    "da": "Den med udsigt til det grønne. Du vågner med skoven i vinduet og fuglene som eneste vækkeur.",
+    "no": "Den med utsikt mot det grønne. Du våkner med skogen i vinduet og fuglene som eneste vekkerklokke.",
+    "it": "Quella che guarda al verde. Ti svegli con il bosco alla finestra e gli uccelli come unica sveglia."
+  },
+  "Tonos serenos y aire de mar. La de las escapadas a las playas de Urdaibai, a un paso.": {
+    "eu": "Tonu lasaiak eta itsas airea. Urdaibaiko hondartzetara ihes egiteko, pausu batera.",
+    "fr": "Tons sereins et air marin. Celle des escapades vers les plages d'Urdaibai, à deux pas.",
+    "en": "Serene tones and sea air. The one for getaways to Urdaibai's beaches, a step away.",
+    "nl": "Serene tinten en zeelucht. De kamer voor uitstapjes naar de stranden van Urdaibai, vlakbij.",
+    "de": "Ruhige Töne und Meeresluft. Das Zimmer für Ausflüge zu den Stränden von Urdaibai, ganz nah.",
+    "da": "Rolige toner og havluft. Den til ture til Urdaibais strande, kun et skridt væk.",
+    "no": "Rolige toner og havluft. Den for turer til strendene i Urdaibai, bare et steg unna.",
+    "it": "Tonalità serene e aria di mare. Quella per le fughe alle spiagge di Urdaibai, a un passo."
+  },
+  "La más recogida y silenciosa. Para desconectar de verdad, leer y dormir profundo.": {
+    "en": "The most secluded and quiet. To truly switch off, read and sleep deeply.",
+    "fr": "La plus intime et silencieuse. Pour vraiment déconnecter, lire et dormir profondément.",
+    "de": "Das zurückgezogenste und ruhigste Zimmer. Zum echten Abschalten, Lesen und tiefen Schlafen.",
+    "it": "La più raccolta e silenziosa. Per staccare davvero, leggere e dormire profondamente.",
+    "nl": "De meest besloten en stille kamer. Om echt te ontspannen, te lezen en diep te slapen."
+  },
+  "Apartamento · 4 personas": {
+    "eu": "Apartamentua · 4 lagun",
+    "fr": "Appartement · 4 personnes",
+    "en": "Apartment · 4 guests",
+    "nl": "Appartement · 4 personen",
+    "de": "Apartment · 4 Personen",
+    "da": "Lejlighed · 4 personer",
+    "no": "Leilighet · 4 personer",
+    "it": "Appartamento · 4 persone"
+  },
+  "aquí no hay prisa: solo el bosque, el mar y el tiempo justo para volver a respirar.": {
+    "eu": "hemen ez dago presarik: basoa, itsasoa eta berriz arnasa hartzeko behar den denbora besterik ez.",
+    "fr": "ici, pas de hâte : juste la forêt, la mer et le temps qu'il faut pour respirer à nouveau.",
+    "en": "no rush here: just the forest, the sea and just enough time to breathe again.",
+    "nl": "hier geen haast: alleen het bos, de zee en precies genoeg tijd om weer adem te halen.",
+    "de": "hier gibt es keine Eile: nur der Wald, das Meer und genug Zeit, um wieder durchzuatmen.",
+    "da": "her er der ingen hast: kun skoven, havet og lige tid nok til at trække vejret igen.",
+    "no": "her er det ingen hast: bare skogen, havet og akkurat nok tid til å puste igjen.",
+    "it": "qui non c'è fretta: solo il bosco, il mare e il tempo giusto per tornare a respirare."
+  },
+  "el corazón de Urdaibai.": {
+    "eu": "Urdaibaiko bihotza.",
+    "fr": "le cœur d'Urdaibai.",
+    "en": "the heart of Urdaibai.",
+    "nl": "het hart van Urdaibai.",
+    "de": "das Herz von Urdaibai.",
+    "da": "hjertet af Urdaibai.",
+    "no": "hjertet av Urdaibai.",
+    "it": "il cuore di Urdaibai."
+  },
+  "Acantilados, playas vírgenes, marismas y bosques en su estado más puro, a un paso de la casa.": {
+    "eu": "Itsaslabarrak, hondartza birjinak, padurak eta basoak beren egoera puruenean, etxetik pausu batera.",
+    "fr": "Falaises, plages sauvages, marais et forêts à l'état le plus pur, à deux pas de la maison.",
+    "en": "Cliffs, unspoiled beaches, marshes and forests at their purest, a step from the house.",
+    "nl": "Kliffen, ongerepte stranden, kwelders en bossen in hun puurste staat, vlakbij het huis.",
+    "de": "Klippen, unberührte Strände, Marschland und Wälder in ihrer reinsten Form, nur einen Schritt vom Haus entfernt.",
+    "da": "Klipper, uberørte strande, marsk og skove i deres reneste form, et skridt fra huset.",
+    "no": "Klipper, uberørte strender, våtmarker og skoger i sin reneste form, et steg fra huset.",
+    "it": "Scogliere, spiagge incontaminate, paludi e boschi allo stato più puro, a un passo dalla casa."
+  },
+  "para todos los públicos.": {
+    "eu": "denentzat.",
+    "fr": "pour tous les publics.",
+    "en": "for everyone.",
+    "nl": "voor iedereen.",
+    "de": "für jeden.",
+    "da": "for alle.",
+    "no": "for alle.",
+    "it": "per tutti."
+  },
+  "Surf, buceo, txakoli, barco, senderismo, aves… busques adrenalina o calma, el plan está a un paso. Te ayudamos a organizarlo.": {
+    "eu": "Surfa, urpekaritza, txakolina, itsasontzia, mendi-ibiliak, hegaztiak… adrenalina edo lasaitasuna bilatu, plana pausu batera dago. Antolatzen lagunduko dizugu.",
+    "fr": "Surf, plongée, txakoli, bateau, randonnée, oiseaux… que vous cherchiez l'adrénaline ou le calme, tout est à deux pas. Nous vous aidons à l'organiser.",
+    "en": "Surfing, diving, txakoli, boat trips, hiking, birdwatching… whether you want adrenaline or calm, it's all a step away. We'll help you organise it.",
+    "nl": "Surfen, duiken, txakoli, boottocht, wandelen, vogels… of u nu adrenaline of rust zoekt, alles is vlakbij. Wij helpen u het te regelen.",
+    "de": "Surfen, Tauchen, Txakoli, Bootsfahrt, Wandern, Vögel… ob Adrenalin oder Ruhe, alles ist nur einen Schritt entfernt. Wir helfen bei der Organisation.",
+    "da": "Surf, dykning, txakoli, bådtur, vandring, fugle… uanset om du søger adrenalin eller ro, er alt kun et skridt væk. Vi hjælper med at arrangere det.",
+    "no": "Surfing, dykking, txakoli, båttur, fotturer, fugler… enten du vil ha adrenalin eller ro, er alt et steg unna. Vi hjelper deg å organisere det.",
+    "it": "Surf, immersioni, txakoli, barca, escursioni, birdwatching… che cerchi adrenalina o calma, è tutto a un passo. Ti aiutiamo a organizzarlo."
+  },
+  "Mar y costa": {
+    "eu": "Itsasoa eta kostaldea",
+    "fr": "Mer et côte",
+    "en": "Sea and coast",
+    "nl": "Zee en kust",
+    "de": "Meer und Küste",
+    "da": "Hav og kyst",
+    "no": "Hav og kyst",
+    "it": "Mare e costa"
+  },
+  "agua salada": {
+    "eu": "ur gazia",
+    "fr": "eau salée",
+    "en": "salt water",
+    "nl": "zout water",
+    "de": "Salzwasser",
+    "da": "saltvand",
+    "no": "saltvann",
+    "it": "acqua salata"
+  },
+  "Naturaleza": {
+    "eu": "Natura",
+    "fr": "Nature",
+    "en": "Nature",
+    "nl": "Natuur",
+    "de": "Natur",
+    "da": "Natur",
+    "no": "Natur",
+    "it": "Natura"
+  },
+  "aire libre": {
+    "eu": "aire zabala",
+    "fr": "grand air",
+    "en": "the outdoors",
+    "nl": "buitenlucht",
+    "de": "frische Luft",
+    "da": "det fri",
+    "no": "friluft",
+    "it": "aria aperta"
+  },
+  "Cultura y sabores": {
+    "eu": "Kultura eta zaporeak",
+    "fr": "Culture et saveurs",
+    "en": "Culture and flavours",
+    "nl": "Cultuur en smaken",
+    "de": "Kultur und Genuss",
+    "da": "Kultur og smag",
+    "no": "Kultur og smaker",
+    "it": "Cultura e sapori"
+  },
+  "txakoli y arte": {
+    "eu": "txakolina eta artea",
+    "fr": "txakoli et art",
+    "en": "txakoli and art",
+    "nl": "txakoli en kunst",
+    "de": "Txakoli und Kunst",
+    "da": "txakoli og kunst",
+    "no": "txakoli og kunst",
+    "it": "txakoli e arte"
+  },
+  "Surf en Mundaka": {
+    "eu": "Surfa Mundakan",
+    "fr": "Surf à Mundaka",
+    "en": "Surfing in Mundaka",
+    "nl": "Surfen in Mundaka",
+    "de": "Surfen in Mundaka",
+    "da": "Surf i Mundaka",
+    "no": "Surf i Mundaka",
+    "it": "Surf a Mundaka"
+  },
+  "La mejor izquierda de Europa. Clases para todos los niveles, también en Bakio.": {
+    "eu": "Europako ezkerrik onena. Maila guztietarako eskolak, Bakion ere bai.",
+    "fr": "La meilleure gauche d'Europe. Cours pour tous niveaux, aussi à Bakio.",
+    "en": "Europe's best left-hand wave. Lessons for all levels, also in Bakio.",
+    "nl": "De beste linkergolf van Europa. Lessen voor alle niveaus, ook in Bakio.",
+    "de": "Die beste linke Welle Europas. Kurse für alle Niveaus, auch in Bakio.",
+    "da": "Europas bedste venstrebølge. Undervisning for alle niveauer, også i Bakio.",
+    "no": "Europas beste venstrebølge. Kurs for alle nivåer, også i Bakio.",
+    "it": "La migliore sinistra d'Europa. Lezioni per tutti i livelli, anche a Bakio."
+  },
+  "Buceo en Bermeo": {
+    "eu": "Urpekaritza Bermeon",
+    "fr": "Plongée à Bermeo",
+    "en": "Diving in Bermeo",
+    "nl": "Duiken in Bermeo",
+    "de": "Tauchen in Bermeo",
+    "da": "Dykning i Bermeo",
+    "no": "Dykking i Bermeo",
+    "it": "Immersioni a Bermeo"
+  },
+  "Bautismos e inmersiones a Gaztelugatxe, Izaro y el cabo Matxitxako, desde el puerto.": {
+    "eu": "Bataioak eta immersioak Gaztelugatxe, Izaro eta Matxitxako lurmuturrera, portutik.",
+    "fr": "Baptêmes et plongées vers Gaztelugatxe, Izaro et le cap Matxitxako, depuis le port.",
+    "en": "Try-dives and dives to Gaztelugatxe, Izaro and Cape Matxitxako, from the port.",
+    "nl": "Proefduiken en duiken naar Gaztelugatxe, Izaro en kaap Matxitxako, vanaf de haven.",
+    "de": "Schnuppertauchen und Tauchgänge nach Gaztelugatxe, Izaro und Kap Matxitxako, vom Hafen aus.",
+    "da": "Prøvedyk og dyk til Gaztelugatxe, Izaro og Kap Matxitxako, fra havnen.",
+    "no": "Prøvedykk og dykk til Gaztelugatxe, Izaro og Kapp Matxitxako, fra havnen.",
+    "it": "Battesimi e immersioni a Gaztelugatxe, Izaro e Capo Matxitxako, dal porto."
+  },
+  "Kayak y canoa por la ría": {
+    "eu": "Kayak eta kanoa itsasadarrean",
+    "fr": "Kayak et canoë sur la ria",
+    "en": "Kayak and canoe on the estuary",
+    "nl": "Kajak en kano op de ria",
+    "de": "Kajak und Kanu auf der Ria",
+    "da": "Kajak og kano på flodmundingen",
+    "no": "Kajakk og kano på elvemunningen",
+    "it": "Kayak e canoa nella ria"
+  },
+  "Recorrido tranquilo entre Arteaga y la playa de Laida (~2 h).": {
+    "eu": "Ibilbide lasaia Arteaga eta Laida hondartzaren artean (~2 h).",
+    "fr": "Parcours tranquille entre Arteaga et la plage de Laida (~2 h).",
+    "en": "A calm route between Arteaga and Laida beach (~2 h).",
+    "nl": "Een rustige tocht tussen Arteaga en het strand van Laida (~2 u).",
+    "de": "Eine ruhige Strecke zwischen Arteaga und dem Strand von Laida (~2 Std.).",
+    "da": "En rolig rute mellem Arteaga og Laida-stranden (~2 t).",
+    "no": "En rolig rute mellom Arteaga og Laida-stranden (~2 t).",
+    "it": "Un percorso tranquillo tra Arteaga e la spiaggia di Laida (~2 h)."
+  },
+  "Paseo en barco y cetáceos": {
+    "eu": "Itsasontzi-ibilaldia eta zetazeoak",
+    "fr": "Promenade en bateau et cétacés",
+    "en": "Boat trip and whale watching",
+    "nl": "Boottocht en walvissen spotten",
+    "de": "Bootsfahrt und Walbeobachtung",
+    "da": "Bådtur og hvalsafari",
+    "no": "Båttur og hvalsafari",
+    "it": "Gita in barca e cetacei"
+  },
+  "Desde el puerto de Bermeo a Gaztelugatxe o Elantxobe, y avistamiento de cetáceos.": {
+    "eu": "Bermeoko portutik Gaztelugatxe edo Elantxobera, eta zetazeoak ikustea.",
+    "fr": "Du port de Bermeo à Gaztelugatxe ou Elantxobe, et observation des cétacés.",
+    "en": "From Bermeo port to Gaztelugatxe or Elantxobe, plus whale and dolphin watching.",
+    "nl": "Vanaf de haven van Bermeo naar Gaztelugatxe of Elantxobe, en walvissen spotten.",
+    "de": "Vom Hafen Bermeo nach Gaztelugatxe oder Elantxobe, mit Walbeobachtung.",
+    "da": "Fra Bermeos havn til Gaztelugatxe eller Elantxobe, og hvalsafari.",
+    "no": "Fra Bermeo havn til Gaztelugatxe eller Elantxobe, og hvalsafari.",
+    "it": "Dal porto di Bermeo a Gaztelugatxe o Elantxobe, con avvistamento dei cetacei."
+  },
+  "Senderismo y miradores": {
+    "eu": "Mendi-ibiliak eta begiratokiak",
+    "fr": "Randonnée et points de vue",
+    "en": "Hiking and viewpoints",
+    "nl": "Wandelen en uitzichtpunten",
+    "de": "Wandern und Aussichtspunkte",
+    "da": "Vandring og udsigtspunkter",
+    "no": "Fotturer og utsiktspunkter",
+    "it": "Trekking e punti panoramici"
+  },
+  "San Pedro de Atxarre, el cabo Ogoño y la costa salvaje de Urdaibai.": {
+    "eu": "San Pedro de Atxarre, Ogoño lurmuturra eta Urdaibaiko kostalde basatia.",
+    "fr": "San Pedro de Atxarre, le cap Ogoño et la côte sauvage d'Urdaibai.",
+    "en": "San Pedro de Atxarre, Cape Ogoño and Urdaibai's wild coast.",
+    "nl": "San Pedro de Atxarre, kaap Ogoño en de wilde kust van Urdaibai.",
+    "de": "San Pedro de Atxarre, Kap Ogoño und die wilde Küste von Urdaibai.",
+    "da": "San Pedro de Atxarre, Kap Ogoño og Urdaibais vilde kyst.",
+    "no": "San Pedro de Atxarre, Kapp Ogoño og Urdaibais ville kyst.",
+    "it": "San Pedro de Atxarre, Capo Ogoño e la costa selvaggia di Urdaibai."
+  },
+  "Observación de aves": {
+    "eu": "Hegaztien behaketa",
+    "fr": "Observation des oiseaux",
+    "en": "Birdwatching",
+    "nl": "Vogels kijken",
+    "de": "Vogelbeobachtung",
+    "da": "Fuglekiggeri",
+    "no": "Fuglekikking",
+    "it": "Birdwatching"
+  },
+  "Las marismas de Urdaibai, parada clave de aves migratorias.": {
+    "eu": "Urdaibaiko padurak, hegazti migratzaileen gelditoki garrantzitsua.",
+    "fr": "Les marais d'Urdaibai, étape clé des oiseaux migrateurs.",
+    "en": "The Urdaibai marshes, a key stop for migratory birds.",
+    "nl": "De kwelders van Urdaibai, een belangrijke stop voor trekvogels.",
+    "de": "Die Marschen von Urdaibai, ein wichtiger Halt für Zugvögel.",
+    "da": "Urdaibais marsk, et vigtigt stop for trækfugle.",
+    "no": "Urdaibais våtmarker, et viktig stopp for trekkfugler.",
+    "it": "Le paludi di Urdaibai, tappa chiave per gli uccelli migratori."
+  },
+  "Multiaventura": {
+    "eu": "Abentura anitza",
+    "fr": "Multi-aventure",
+    "en": "Multi-adventure",
+    "nl": "Multi-avontuur",
+    "de": "Multi-Abenteuer",
+    "da": "Multi-eventyr",
+    "no": "Multi-eventyr",
+    "it": "Multiavventura"
+  },
+  "Kayak, escalada, tiro con arco, senderismo… para grupos y parejas.": {
+    "eu": "Kayak, eskalada, arku-tiroa, mendi-ibiliak… taldeentzat eta bikoteentzat.",
+    "fr": "Kayak, escalade, tir à l'arc, randonnée… pour groupes et couples.",
+    "en": "Kayak, climbing, archery, hiking… for groups and couples.",
+    "nl": "Kajak, klimmen, boogschieten, wandelen… voor groepen en koppels.",
+    "de": "Kajak, Klettern, Bogenschießen, Wandern… für Gruppen und Paare.",
+    "da": "Kajak, klatring, bueskydning, vandring… for grupper og par.",
+    "no": "Kajakk, klatring, bueskyting, fotturer… for grupper og par.",
+    "it": "Kayak, arrampicata, tiro con l'arco, escursioni… per gruppi e coppie."
+  },
+  "Paseo a caballo": {
+    "eu": "Zaldi-ibilaldia",
+    "fr": "Promenade à cheval",
+    "en": "Horse riding",
+    "nl": "Paardrijden",
+    "de": "Reiten",
+    "da": "Rideture",
+    "no": "Rideturer",
+    "it": "Passeggiata a cavallo"
+  },
+  "Rutas por el entorno de Elantxobe y el Ogoño.": {
+    "eu": "Ibilbideak Elantxobe eta Ogoño inguruan.",
+    "fr": "Itinéraires autour d'Elantxobe et de l'Ogoño.",
+    "en": "Routes around Elantxobe and Ogoño.",
+    "nl": "Routes rond Elantxobe en de Ogoño.",
+    "de": "Routen rund um Elantxobe und den Ogoño.",
+    "da": "Ruter omkring Elantxobe og Ogoño.",
+    "no": "Ruter rundt Elantxobe og Ogoño.",
+    "it": "Itinerari intorno a Elantxobe e all'Ogoño."
+  },
+  "Txakoli y enología": {
+    "eu": "Txakolina eta enologia",
+    "fr": "Txakoli et œnologie",
+    "en": "Txakoli and wine",
+    "nl": "Txakoli en wijn",
+    "de": "Txakoli und Weinkunde",
+    "da": "Txakoli og vin",
+    "no": "Txakoli og vin",
+    "it": "Txakoli ed enologia"
+  },
+  "Visita a viñedo, destilería y bodega con cata, en una bodega histórica de Bakio (caserío de 1852).": {
+    "eu": "Mahasti, destileria eta upategiaren bisita dastatzearekin, Bakioko upategi historiko batean (1852ko baserria).",
+    "fr": "Visite du vignoble, de la distillerie et de la cave avec dégustation, dans une cave historique de Bakio (ferme de 1852).",
+    "en": "Vineyard, distillery and cellar visit with tasting, at a historic winery in Bakio (1852 farmhouse).",
+    "nl": "Bezoek aan wijngaard, distilleerderij en kelder met proeverij, bij een historisch wijnhuis in Bakio (boerderij uit 1852).",
+    "de": "Besuch von Weinberg, Brennerei und Keller mit Verkostung, in einem historischen Weingut in Bakio (Bauernhaus von 1852).",
+    "da": "Besøg i vingård, destilleri og kælder med smagning, hos et historisk vineri i Bakio (gård fra 1852).",
+    "no": "Besøk i vingård, destilleri og kjeller med smaking, hos et historisk vinhus i Bakio (gård fra 1852).",
+    "it": "Visita a vigneto, distilleria e cantina con degustazione, in una cantina storica di Bakio (casale del 1852)."
+  },
+  "Pintxos y gastronomía": {
+    "eu": "Pintxoak eta gastronomia",
+    "fr": "Pintxos et gastronomie",
+    "en": "Pintxos and food",
+    "nl": "Pintxos en gastronomie",
+    "de": "Pintxos und Gastronomie",
+    "da": "Pintxos og gastronomi",
+    "no": "Pintxos og gastronomi",
+    "it": "Pintxos e gastronomia"
+  },
+  "Pescado del día y conservas en Bermeo y Mundaka; sidra y producto local.": {
+    "eu": "Eguneko arraina eta kontserbak Bermeon eta Mundakan; sagardoa eta bertako produktua.",
+    "fr": "Poisson du jour et conserves à Bermeo et Mundaka ; cidre et produits locaux.",
+    "en": "Fish of the day and tinned seafood in Bermeo and Mundaka; cider and local produce.",
+    "nl": "Verse vis en conserven in Bermeo en Mundaka; cider en lokale producten.",
+    "de": "Fisch des Tages und Konserven in Bermeo und Mundaka; Cidre und regionale Produkte.",
+    "da": "Dagens fisk og konserves i Bermeo og Mundaka; cider og lokale varer.",
+    "no": "Dagens fisk og hermetikk i Bermeo og Mundaka; sider og lokale varer.",
+    "it": "Pesce del giorno e conserve a Bermeo e Mundaka; sidro e prodotti locali."
+  },
+  "Arte y museos": {
+    "eu": "Artea eta museoak",
+    "fr": "Art et musées",
+    "en": "Art and museums",
+    "nl": "Kunst en musea",
+    "de": "Kunst und Museen",
+    "da": "Kunst og museer",
+    "no": "Kunst og museer",
+    "it": "Arte e musei"
+  },
+  "El Guggenheim de Bilbao, el Museo del Pescador de Bermeo y el bosque pintado de Oma.": {
+    "eu": "Bilboko Guggenheim, Bermeoko Arrantzalearen Museoa eta Omako baso margotua.",
+    "fr": "Le Guggenheim de Bilbao, le Musée du Pêcheur de Bermeo et la forêt peinte d'Oma.",
+    "en": "Bilbao's Guggenheim, Bermeo's Fishermen's Museum and the painted forest of Oma.",
+    "nl": "Het Guggenheim in Bilbao, het Vissersmuseum van Bermeo en het beschilderde bos van Oma.",
+    "de": "Das Guggenheim in Bilbao, das Fischermuseum von Bermeo und der bemalte Wald von Oma.",
+    "da": "Guggenheim i Bilbao, Fiskermuseet i Bermeo og den malede skov i Oma.",
+    "no": "Guggenheim i Bilbao, Fiskermuseet i Bermeo og den malte skogen i Oma.",
+    "it": "Il Guggenheim di Bilbao, il Museo del Pescatore di Bermeo e il bosco dipinto di Oma."
+  },
+  "Los contactos son de operadores locales independientes; Kirana te orienta y te ayuda a reservar, pero la actividad la gestiona cada empresa. Tarifas y horarios, a consultar con cada una.": {
+    "eu": "Kontaktuak tokiko operadore independenteenak dira; Kiranak orientatu eta erreserbatzen laguntzen dizu, baina jarduera enpresa bakoitzak kudeatzen du. Tarifak eta ordutegiak, bakoitzarekin kontsultatzeko.",
+    "fr": "Les contacts sont des prestataires locaux indépendants ; Kirana vous oriente et vous aide à réserver, mais chaque entreprise gère son activité. Tarifs et horaires à vérifier auprès de chacune.",
+    "en": "The contacts are independent local operators; Kirana guides you and helps you book, but each company runs its own activity. Prices and times to be confirmed with each one.",
+    "nl": "De contacten zijn onafhankelijke lokale aanbieders; Kirana wijst u de weg en helpt boeken, maar elk bedrijf regelt zijn eigen activiteit. Prijzen en tijden bij elk navragen.",
+    "de": "Die Kontakte sind unabhängige lokale Anbieter; Kirana berät Sie und hilft bei der Buchung, aber jedes Unternehmen führt seine Aktivität selbst durch. Preise und Zeiten bei jedem erfragen.",
+    "da": "Kontakterne er uafhængige lokale udbydere; Kirana vejleder og hjælper med booking, men hver virksomhed står selv for aktiviteten. Priser og tider aftales med hver enkelt.",
+    "no": "Kontaktene er uavhengige lokale aktører; Kirana veileder og hjelper med booking, men hvert selskap står selv for aktiviteten. Priser og tider avtales med hver enkelt.",
+    "it": "I contatti sono operatori locali indipendenti; Kirana ti orienta e ti aiuta a prenotare, ma ogni azienda gestisce la propria attività. Tariffe e orari da verificare con ciascuna."
+  },
+  "La estancia": {
+    "eu": "Egonaldia",
+    "fr": "Le séjour",
+    "en": "Your stay",
+    "nl": "Het verblijf",
+    "de": "Der Aufenthalt",
+    "da": "Opholdet",
+    "no": "Oppholdet",
+    "it": "Il soggiorno"
+  },
+  "lo que encuentras en Kirana.": {
+    "eu": "Kiranan aurkitzen duzuna.",
+    "fr": "ce que vous trouvez à Kirana.",
+    "en": "what you'll find at Kirana.",
+    "nl": "wat u bij Kirana vindt.",
+    "de": "was Sie bei Kirana finden.",
+    "da": "hvad du finder hos Kirana.",
+    "no": "hva du finner hos Kirana.",
+    "it": "cosa trovi a Kirana."
+  },
+  "Solo adultos": {
+    "eu": "Helduentzat soilik",
+    "fr": "Adultes uniquement",
+    "en": "Adults only",
+    "nl": "Alleen volwassenen",
+    "de": "Nur für Erwachsene",
+    "da": "Kun voksne",
+    "no": "Kun voksne",
+    "it": "Solo adulti"
+  },
+  "Un espacio tranquilo, pensado para descansar de verdad.": {
+    "eu": "Espazio lasaia, benetan atseden hartzeko pentsatua.",
+    "fr": "Un espace tranquille, pensé pour se reposer vraiment.",
+    "en": "A quiet space, designed for true rest.",
+    "nl": "Een rustige plek, gemaakt om echt uit te rusten.",
+    "de": "Ein ruhiger Ort, gemacht für echte Erholung.",
+    "da": "Et roligt sted, skabt til ægte hvile.",
+    "no": "Et rolig sted, laget for ekte hvile.",
+    "it": "Uno spazio tranquillo, pensato per riposare davvero."
+  },
+  "Desayuno sin prisa": {
+    "eu": "Gosaria lasai",
+    "fr": "Petit-déjeuner sans hâte",
+    "en": "Leisurely breakfast",
+    "nl": "Ontbijt op uw gemak",
+    "de": "Frühstück ohne Eile",
+    "da": "Morgenmad i ro",
+    "no": "Frokost i ro",
+    "it": "Colazione con calma"
+  },
+  "En el comedor luminoso o en la terraza, con el verde de fondo.": {
+    "eu": "Jangela argitsuan edo terrazan, berdea atzealdean.",
+    "fr": "Dans la salle à manger lumineuse ou sur la terrasse, avec la verdure en fond.",
+    "en": "In the bright dining room or on the terrace, with greenery all around.",
+    "nl": "In de lichte eetkamer of op het terras, met het groen op de achtergrond.",
+    "de": "Im hellen Esszimmer oder auf der Terrasse, mit Grün im Hintergrund.",
+    "da": "I den lyse spisestue eller på terrassen, med det grønne som baggrund.",
+    "no": "I den lyse spisestuen eller på terrassen, med det grønne i bakgrunnen.",
+    "it": "Nella luminosa sala da pranzo o in terrazza, con il verde sullo sfondo."
+  },
+  "Salón y zonas de relax": {
+    "eu": "Egongela eta atseden-guneak",
+    "fr": "Salon et espaces détente",
+    "en": "Lounge and relaxation areas",
+    "nl": "Lounge en relaxruimtes",
+    "de": "Lounge und Ruhebereiche",
+    "da": "Stue og afslapningsområder",
+    "no": "Stue og avslapningssoner",
+    "it": "Salotto e zone relax"
+  },
+  "Salón de uso común y rincones interiores y exteriores para leer o no hacer nada.": {
+    "eu": "Erabilera komuneko egongela eta barruko zein kanpoko txokoak irakurtzeko edo ezer ez egiteko.",
+    "fr": "Salon commun et coins intérieurs et extérieurs pour lire ou ne rien faire.",
+    "en": "Common lounge and indoor and outdoor corners to read or do nothing.",
+    "nl": "Gemeenschappelijke lounge en hoekjes binnen en buiten om te lezen of niets te doen.",
+    "de": "Gemeinschaftsraum und Ecken drinnen und draußen zum Lesen oder Nichtstun.",
+    "da": "Fællesstue og kroge inde og ude til at læse eller lave ingenting.",
+    "no": "Fellesstue og kroker inne og ute til å lese eller gjøre ingenting.",
+    "it": "Salotto comune e angoli interni ed esterni per leggere o non fare nulla."
+  },
+  "WiFi y aire acondicionado": {
+    "eu": "WiFi eta aire girotua",
+    "fr": "WiFi et climatisation",
+    "en": "WiFi and air conditioning",
+    "nl": "Wifi en airco",
+    "de": "WLAN und Klimaanlage",
+    "da": "WiFi og aircondition",
+    "no": "WiFi og klimaanlegg",
+    "it": "WiFi e aria condizionata"
+  },
+  "Conexión rápida y climatización en las habitaciones y el apartamento.": {
+    "eu": "Konexio azkarra eta klimatizazioa geletan eta apartamentuan.",
+    "fr": "Connexion rapide et climatisation dans les chambres et l'appartement.",
+    "en": "Fast connection and climate control in the rooms and apartment.",
+    "nl": "Snelle verbinding en klimaatregeling in de kamers en het appartement.",
+    "de": "Schnelle Verbindung und Klimatisierung in den Zimmern und im Apartment.",
+    "da": "Hurtig forbindelse og klima i værelser og lejlighed.",
+    "no": "Rask tilkobling og klima i rom og leilighet.",
+    "it": "Connessione veloce e climatizzazione nelle camere e nell'appartamento."
+  },
+  "Jardín y terraza": {
+    "eu": "Lorategia eta terraza",
+    "fr": "Jardin et terrasse",
+    "en": "Garden and terrace",
+    "nl": "Tuin en terras",
+    "de": "Garten und Terrasse",
+    "da": "Have og terrasse",
+    "no": "Hage og terrasse",
+    "it": "Giardino e terrazza"
+  },
+  "Bosque y jardín alrededor, dentro de la Biosfera de Urdaibai.": {
+    "eu": "Basoa eta lorategia inguruan, Urdaibaiko Biosferaren barruan.",
+    "fr": "Forêt et jardin tout autour, au sein de la Biosphère d'Urdaibai.",
+    "en": "Forest and garden all around, within the Urdaibai Biosphere.",
+    "nl": "Bos en tuin rondom, in het Biosfeergebied Urdaibai.",
+    "de": "Wald und Garten ringsum, im Biosphärenreservat Urdaibai.",
+    "da": "Skov og have hele vejen rundt, i Urdaibai-biosfæren.",
+    "no": "Skog og hage rundt omkring, i Urdaibai-biosfæren.",
+    "it": "Bosco e giardino tutt'intorno, nella Biosfera di Urdaibai."
+  },
+  "Aparcamiento · a 1 km de Bermeo": {
+    "eu": "Aparkalekua · Bermeotik 1 km-ra",
+    "fr": "Parking · à 1 km de Bermeo",
+    "en": "Parking · 1 km from Bermeo",
+    "nl": "Parkeren · op 1 km van Bermeo",
+    "de": "Parkplatz · 1 km von Bermeo",
+    "da": "Parkering · 1 km fra Bermeo",
+    "no": "Parkering · 1 km fra Bermeo",
+    "it": "Parcheggio · a 1 km da Bermeo"
+  },
+  "Llegas en coche y aparcas sin complicaciones; pueblo a un paso.": {
+    "eu": "Kotxez iristen zara eta arazorik gabe aparkatzen duzu; herria pausu batera.",
+    "fr": "Vous arrivez en voiture et vous garez sans souci ; village à deux pas.",
+    "en": "Arrive by car and park easily; the town is a step away.",
+    "nl": "U komt met de auto en parkeert zonder gedoe; het dorp is vlakbij.",
+    "de": "Sie kommen mit dem Auto und parken problemlos; der Ort ist nur einen Schritt entfernt.",
+    "da": "Du ankommer i bil og parkerer uden besvær; byen er kun et skridt væk.",
+    "no": "Du kommer med bil og parkerer uten problemer; landsbyen er et steg unna.",
+    "it": "Arrivi in auto e parcheggi senza problemi; il paese è a un passo."
+  },
+  "Reserva directa, sin intermediarios": {
+    "eu": "Erreserba zuzena, bitartekaririk gabe",
+    "fr": "Réservation directe, sans intermédiaire",
+    "en": "Direct booking, no middlemen",
+    "nl": "Direct boeken, geen tussenpersonen",
+    "de": "Direktbuchung, ohne Vermittler",
+    "da": "Direkte booking, uden mellemled",
+    "no": "Direkte booking, uten mellomledd",
+    "it": "Prenotazione diretta, senza intermediari"
+  },
+  "Mejor precio en la web oficial": {
+    "eu": "Preziorik onena web ofizialean",
+    "fr": "Meilleur prix sur le site officiel",
+    "en": "Best price on the official site",
+    "nl": "Beste prijs op de officiële site",
+    "de": "Bestpreis auf der offiziellen Website",
+    "da": "Bedste pris på den officielle side",
+    "no": "Beste pris på den offisielle siden",
+    "it": "Miglior prezzo sul sito ufficiale"
+  },
+  "Reserva de la Biosfera de Urdaibai": {
+    "eu": "Urdaibaiko Biosfera Erreserba",
+    "fr": "Réserve de biosphère d'Urdaibai",
+    "en": "Urdaibai Biosphere Reserve",
+    "nl": "Biosfeerreservaat Urdaibai",
+    "de": "Biosphärenreservat Urdaibai",
+    "da": "Urdaibai Biosfærereservat",
+    "no": "Urdaibai biosfærereservat",
+    "it": "Riserva della Biosfera di Urdaibai"
+  },
+  "tu descanso empieza aquí.": {
+    "eu": "zure atsedena hemen hasten da.",
+    "fr": "votre repos commence ici.",
+    "en": "your rest begins here.",
+    "nl": "uw rust begint hier.",
+    "de": "Ihre Erholung beginnt hier.",
+    "da": "din hvile begynder her.",
+    "no": "hvilen din begynner her.",
+    "it": "il tuo riposo inizia qui."
+  },
+  "Reserva directamente con nosotros: el mejor precio y sin intermediarios. Tu estancia incluye:": {
+    "eu": "Erreserbatu zuzenean gurekin: preziorik onena eta bitartekaririk gabe. Zure egonaldiak barne hartzen ditu:",
+    "fr": "Réservez directement avec nous : le meilleur prix et sans intermédiaire. Votre séjour comprend :",
+    "en": "Book directly with us: the best price and no middlemen. Your stay includes:",
+    "nl": "Boek rechtstreeks bij ons: de beste prijs en geen tussenpersonen. Uw verblijf omvat:",
+    "de": "Buchen Sie direkt bei uns: bester Preis und keine Vermittler. Ihr Aufenthalt beinhaltet:",
+    "da": "Book direkte hos os: bedste pris og uden mellemled. Dit ophold inkluderer:",
+    "no": "Bestill direkte hos oss: beste pris og uten mellomledd. Oppholdet ditt inkluderer:",
+    "it": "Prenota direttamente con noi: il miglior prezzo e senza intermediari. Il tuo soggiorno include:"
+  },
+  "Salón común y zonas de relax": {
+    "eu": "Egongela komuna eta atseden-guneak",
+    "fr": "Salon commun et espaces détente",
+    "en": "Common lounge and relaxation areas",
+    "nl": "Gemeenschappelijke lounge en relaxruimtes",
+    "de": "Gemeinschaftsraum und Ruhebereiche",
+    "da": "Fællesstue og afslapningsområder",
+    "no": "Fellesstue og avslapningssoner",
+    "it": "Salotto comune e zone relax"
+  },
+  "WiFi, A/C y aparcamiento gratuitos": {
+    "eu": "WiFi, A/C eta aparkaleku doakoak",
+    "fr": "WiFi, clim. et parking gratuits",
+    "en": "Free WiFi, A/C and parking",
+    "nl": "Gratis wifi, airco en parkeren",
+    "de": "Kostenloses WLAN, Klima und Parkplatz",
+    "da": "Gratis WiFi, A/C og parkering",
+    "no": "Gratis WiFi, A/C og parkering",
+    "it": "WiFi, A/C e parcheggio gratuiti"
+  },
+  "Solo adultos, en plena naturaleza": {
+    "eu": "Helduentzat soilik, naturaren erdian",
+    "fr": "Adultes uniquement, en pleine nature",
+    "en": "Adults only, surrounded by nature",
+    "nl": "Alleen volwassenen, midden in de natuur",
+    "de": "Nur für Erwachsene, mitten in der Natur",
+    "da": "Kun voksne, midt i naturen",
+    "no": "Kun voksne, midt i naturen",
+    "it": "Solo adulti, immersi nella natura"
+  },
+  "Teléfono": {
+    "eu": "Telefonoa",
+    "fr": "Téléphone",
+    "en": "Phone",
+    "nl": "Telefoon",
+    "de": "Telefon",
+    "da": "Telefon",
+    "no": "Telefon",
+    "it": "Telefono"
+  },
+  "Dónde estamos": {
+    "eu": "Non gauden",
+    "fr": "Où nous trouver",
+    "en": "Where we are",
+    "nl": "Waar we zijn",
+    "de": "Wo wir sind",
+    "da": "Hvor vi er",
+    "no": "Hvor vi er",
+    "it": "Dove siamo"
+  },
+  "Email": {
+    "eu": "Posta elektronikoa",
+    "fr": "E-mail",
+    "en": "Email",
+    "nl": "E-mail",
+    "de": "E-Mail",
+    "da": "E-mail",
+    "no": "E-post",
+    "it": "Email"
+  },
+  "Reserva directa": {
+    "eu": "Erreserba zuzena",
+    "fr": "Réservation directe",
+    "en": "Direct booking",
+    "nl": "Direct boeken",
+    "de": "Direktbuchung",
+    "da": "Direkte booking",
+    "no": "Direkte booking",
+    "it": "Prenotazione diretta"
+  },
+  "Mejor precio garantizado en esta web.": {
+    "eu": "Preziorik onena bermatuta web honetan.",
+    "fr": "Meilleur prix garanti sur ce site.",
+    "en": "Best price guaranteed on this site.",
+    "nl": "Beste prijs gegarandeerd op deze site.",
+    "de": "Bestpreisgarantie auf dieser Website.",
+    "da": "Bedste pris garanteret på dette website.",
+    "no": "Beste pris garantert på denne nettsiden.",
+    "it": "Miglior prezzo garantito su questo sito."
+  },
+  "Reservando aquí evitas comisiones de intermediarios y tratas directamente con la casa. Cualquier duda, te respondemos por teléfono o WhatsApp.": {
+    "eu": "Hemen erreserbatuz bitartekarien komisioak saihesten dituzu eta zuzenean etxearekin tratatzen duzu. Edozein zalantza, telefonoz edo WhatsAppez erantzungo dizugu.",
+    "fr": "En réservant ici, vous évitez les commissions d'intermédiaires et traitez directement avec la maison. Toute question, nous répondons par téléphone ou WhatsApp.",
+    "en": "By booking here you avoid middlemen's commissions and deal directly with the house. Any questions, we'll reply by phone or WhatsApp.",
+    "nl": "Door hier te boeken vermijdt u commissies van tussenpersonen en heeft u direct contact met het huis. Vragen? We antwoorden per telefoon of WhatsApp.",
+    "de": "Wenn Sie hier buchen, vermeiden Sie Vermittlungsprovisionen und haben direkten Kontakt zum Haus. Bei Fragen antworten wir per Telefon oder WhatsApp.",
+    "da": "Ved at booke her undgår du mellemmænds kommissioner og handler direkte med huset. Spørgsmål? Vi svarer via telefon eller WhatsApp.",
+    "no": "Ved å bestille her unngår du mellomleddenes provisjoner og handler direkte med huset. Spørsmål? Vi svarer på telefon eller WhatsApp.",
+    "it": "Prenotando qui eviti le commissioni degli intermediari e tratti direttamente con la casa. Per qualsiasi dubbio, rispondiamo per telefono o WhatsApp."
+  },
+  "Una escapada para dos · sin niños, sin ruido.": {
+    "eu": "Bietarako ihesaldia · haurrik gabe, zaratarik gabe.",
+    "fr": "Une escapade à deux · sans enfants, sans bruit.",
+    "en": "A getaway for two · no children, no noise.",
+    "nl": "Een uitje voor twee · geen kinderen, geen lawaai.",
+    "de": "Eine Auszeit zu zweit · keine Kinder, kein Lärm.",
+    "da": "En flugt for to · ingen børn, ingen støj.",
+    "no": "En tur for to · ingen barn, ingen støy.",
+    "it": "Una fuga per due · niente bambini, niente rumore."
+  },
+  "Un refugio de paz, cerca de todo. Alojamiento rural solo para adultos en Bermeo, Reserva de la Biosfera de Urdaibai.": {
+    "eu": "Bakearen aterpe bat, denetik gertu. Helduentzako soilik den landa-ostatua Bermeon, Urdaibaiko Biosfera Erreservan.",
+    "fr": "Un refuge de paix, proche de tout. Hébergement rural pour adultes à Bermeo, Réserve de biosphère d'Urdaibai.",
+    "en": "A refuge of peace, close to everything. Adults-only rural retreat in Bermeo, Urdaibai Biosphere Reserve.",
+    "nl": "Een toevluchtsoord van rust, dichtbij alles. Landelijk verblijf alleen voor volwassenen in Bermeo, Biosfeerreservaat Urdaibai.",
+    "de": "Ein Zufluchtsort der Ruhe, nah an allem. Landhaus nur für Erwachsene in Bermeo, Biosphärenreservat Urdaibai.",
+    "da": "Et fristed af ro, tæt på alt. Landophold kun for voksne i Bermeo, Urdaibai Biosfærereservat.",
+    "no": "Et fristed av ro, nær alt. Landlig opphold kun for voksne i Bermeo, Urdaibai biosfærereservat.",
+    "it": "Un rifugio di pace, vicino a tutto. Alloggio rurale solo per adulti a Bermeo, Riserva della Biosfera di Urdaibai."
+  },
+  "Navega": {
+    "eu": "Nabigatu",
+    "fr": "Navigation",
+    "en": "Explore",
+    "nl": "Navigatie",
+    "de": "Navigation",
+    "da": "Navigation",
+    "no": "Navigasjon",
+    "it": "Naviga"
+  },
+  "Contacto": {
+    "eu": "Kontaktua",
+    "fr": "Contact",
+    "en": "Contact",
+    "nl": "Contact",
+    "de": "Kontakt",
+    "da": "Kontakt",
+    "no": "Kontakt",
+    "it": "Contatto"
+  },
+  "Idiomas": {
+    "eu": "Hizkuntzak",
+    "fr": "Langues",
+    "en": "Languages",
+    "nl": "Talen",
+    "de": "Sprachen",
+    "da": "Sprog",
+    "no": "Språk",
+    "it": "Lingue"
+  },
+  "El entorno": {
+    "eu": "Ingurua",
+    "fr": "Les environs",
+    "en": "The area",
+    "nl": "Omgeving",
+    "de": "Die Umgebung",
+    "da": "Omgivelserne",
+    "no": "Området",
+    "it": "I dintorni"
+  },
+  "Reserva": {
+    "eu": "Erreserba",
+    "fr": "Réservation",
+    "en": "Booking",
+    "nl": "Reserveren",
+    "de": "Buchung",
+    "da": "Booking",
+    "no": "Booking",
+    "it": "Prenotazione"
+  },
+  "¿Dónde te quieres alojar?": {
+    "eu": "Non hartu nahi duzu ostatu?",
+    "fr": "Où souhaitez-vous séjourner ?",
+    "en": "Where would you like to stay?",
+    "nl": "Waar wilt u verblijven?",
+    "de": "Wo möchten Sie wohnen?",
+    "da": "Hvor vil du bo?",
+    "no": "Hvor vil du bo?",
+    "it": "Dove vuoi alloggiare?"
+  },
+  "desde": {
+    "eu": "gutxienez",
+    "fr": "à partir de",
+    "en": "from",
+    "nl": "vanaf",
+    "de": "ab",
+    "da": "fra",
+    "no": "fra",
+    "it": "da"
+  },
+  "pers": {
+    "eu": "pertsona",
+    "fr": "pers",
+    "en": "guests",
+    "nl": "pers",
+    "de": "Pers.",
+    "da": "pers",
+    "no": "pers",
+    "it": "pers"
+  },
+  "Desayuno incluido": {
+    "eu": "Gosaria barne",
+    "fr": "Petit-déjeuner inclus",
+    "en": "Breakfast included",
+    "nl": "Ontbijt inbegrepen",
+    "de": "Frühstück inklusive",
+    "da": "Morgenmad inkluderet",
+    "no": "Frokost inkludert",
+    "it": "Colazione inclusa"
+  },
+  "Reservar →": {
+    "eu": "Erreserbatu →",
+    "fr": "Réserver →",
+    "en": "Book →",
+    "nl": "Reserveren →",
+    "de": "Buchen →",
+    "da": "Book →",
+    "no": "Bestill →",
+    "it": "Prenota →"
+  },
+  "Accesible · movilidad reducida": {
+    "eu": "Irisgarria · mugikortasun urria",
+    "fr": "Accessible · mobilité réduite",
+    "en": "Accessible · reduced mobility",
+    "nl": "Toegankelijk · beperkte mobiliteit",
+    "de": "Barrierefrei · eingeschränkte Mobilität",
+    "da": "Tilgængelig · nedsat mobilitet",
+    "no": "Tilgjengelig · nedsatt mobilitet",
+    "it": "Accessibile · mobilità ridotta"
+  },
+  "En la luz": {
+    "eu": "Argitan",
+    "fr": "Dans la lumière",
+    "en": "In the light",
+    "nl": "In het licht",
+    "de": "Im Licht",
+    "da": "I lyset",
+    "no": "I lyset",
+    "it": "Nella luce"
+  },
+  "En el mar": {
+    "eu": "Itsasoan",
+    "fr": "Face à la mer",
+    "en": "By the sea",
+    "nl": "Aan zee",
+    "de": "Am Meer",
+    "da": "Ved havet",
+    "no": "Ved havet",
+    "it": "Sul mare"
+  },
+  "En el bosque": {
+    "eu": "Basoan",
+    "fr": "Dans la forêt",
+    "en": "In the forest",
+    "nl": "In het bos",
+    "de": "Im Wald",
+    "da": "I skoven",
+    "no": "I skogen",
+    "it": "Nel bosco"
+  },
+  "En calma": {
+    "eu": "Lasai",
+    "fr": "Au calme",
+    "en": "In calm",
+    "nl": "In alle rust",
+    "de": "In Ruhe",
+    "da": "I ro",
+    "no": "I ro",
+    "it": "In calma"
+  },
+  "Bajo las estrellas": {
+    "eu": "Izarren azpian",
+    "fr": "Sous les étoiles",
+    "en": "Under the stars",
+    "nl": "Onder de sterren",
+    "de": "Unter den Sternen",
+    "da": "Under stjernerne",
+    "no": "Under stjernene",
+    "it": "Sotto le stelle"
+  },
+  "Con la brisa": {
+    "eu": "Haizearekin",
+    "fr": "Avec la brise",
+    "en": "With the breeze",
+    "nl": "Met de bries",
+    "de": "Mit der Brise",
+    "da": "Med brisen",
+    "no": "Med brisen",
+    "it": "Con la brezza"
+  },
+  "En la ría": {
+    "eu": "Itsasadarrean",
+    "fr": "Sur la ria",
+    "en": "On the estuary",
+    "nl": "Aan de ria",
+    "de": "An der Ria",
+    "da": "Ved flodmundingen",
+    "no": "Ved elvemunningen",
+    "it": "Sulla ria"
+  },
+  "Bajo el roble": {
+    "eu": "Haritzaren pean",
+    "fr": "Sous le chêne",
+    "en": "Under the oak",
+    "nl": "Onder de eik",
+    "de": "Unter der Eiche",
+    "da": "Under egen",
+    "no": "Under eika",
+    "it": "Sotto la quercia"
+  },
+  "En el jardín": {
+    "eu": "Lorategian",
+    "fr": "Au jardin",
+    "en": "In the garden",
+    "nl": "In de tuin",
+    "de": "Im Garten",
+    "da": "I haven",
+    "no": "I hagen",
+    "it": "In giardino"
+  },
+  "En la tierra": {
+    "eu": "Lurrean",
+    "fr": "De plain-pied",
+    "en": "On the ground floor",
+    "nl": "Op de begane grond",
+    "de": "Ebenerdig",
+    "da": "I stueplan",
+    "no": "På bakkeplan",
+    "it": "Al piano terra"
+  },
+  "Baño privado": {
+    "eu": "Komun pribatua",
+    "fr": "Salle de bain privée",
+    "en": "Private bathroom",
+    "nl": "Eigen badkamer",
+    "de": "Eigenes Bad",
+    "da": "Eget badeværelse",
+    "no": "Eget bad",
+    "it": "Bagno privato"
+  },
+  "Baño propio": {
+    "eu": "Komun propioa",
+    "fr": "Salle de bain privative",
+    "en": "Private bathroom",
+    "nl": "Eigen badkamer",
+    "de": "Eigenes Bad",
+    "da": "Eget badeværelse",
+    "no": "Eget bad",
+    "it": "Bagno privato"
+  },
+  "Baño adaptado": {
+    "eu": "Komun egokitua",
+    "fr": "Salle de bain adaptée",
+    "en": "Adapted bathroom",
+    "nl": "Aangepaste badkamer",
+    "de": "Barrierefreies Bad",
+    "da": "Tilpasset badeværelse",
+    "no": "Tilpasset bad",
+    "it": "Bagno attrezzato"
+  },
+  "A/C y calefacción": {
+    "eu": "AA eta berogailua",
+    "fr": "Clim. et chauffage",
+    "en": "A/C and heating",
+    "nl": "Airco en verwarming",
+    "de": "Klima und Heizung",
+    "da": "Aircon og varme",
+    "no": "Aircon og varme",
+    "it": "A/C e riscaldamento"
+  },
+  "Secador": {
+    "eu": "Ile-lehorgailua",
+    "fr": "Sèche-cheveux",
+    "en": "Hair dryer",
+    "nl": "Föhn",
+    "de": "Föhn",
+    "da": "Hårtørrer",
+    "no": "Hårføner",
+    "it": "Asciugacapelli"
+  },
+  "Cocina": {
+    "eu": "Sukaldea",
+    "fr": "Cuisine",
+    "en": "Kitchen",
+    "nl": "Keuken",
+    "de": "Küche",
+    "da": "Køkken",
+    "no": "Kjøkken",
+    "it": "Cucina"
+  },
+  "Terraza": {
+    "eu": "Terraza",
+    "fr": "Terrasse",
+    "en": "Terrace",
+    "nl": "Terras",
+    "de": "Terrasse",
+    "da": "Terrasse",
+    "no": "Terrasse",
+    "it": "Terrazza"
+  },
+  "Jardín": {
+    "eu": "Lorategia",
+    "fr": "Jardin",
+    "en": "Garden",
+    "nl": "Tuin",
+    "de": "Garten",
+    "da": "Have",
+    "no": "Hage",
+    "it": "Giardino"
+  },
+  "Sin escalones": {
+    "eu": "Eskailerarik gabe",
+    "fr": "Sans marches",
+    "en": "Step-free",
+    "nl": "Zonder trappen",
+    "de": "Stufenlos",
+    "da": "Uden trin",
+    "no": "Uten trinn",
+    "it": "Senza gradini"
+  },
+  "baño privado": {
+    "eu": "komun pribatua",
+    "fr": "salle de bain privée",
+    "en": "private bathroom",
+    "nl": "eigen badkamer",
+    "de": "eigenes Bad",
+    "da": "eget badeværelse",
+    "no": "eget bad",
+    "it": "bagno privato"
+  },
+  "baño propio": {
+    "eu": "komun propioa",
+    "fr": "salle de bain privative",
+    "en": "own bathroom",
+    "nl": "eigen badkamer",
+    "de": "eigenes Bad",
+    "da": "eget badeværelse",
+    "no": "eget bad",
+    "it": "bagno proprio"
+  },
+  "baño adaptado": {
+    "eu": "komun egokitua",
+    "fr": "salle de bain adaptée",
+    "en": "adapted bathroom",
+    "nl": "aangepaste badkamer",
+    "de": "barrierefreies Bad",
+    "da": "tilpasset badeværelse",
+    "no": "tilpasset bad",
+    "it": "bagno attrezzato"
+  },
+  "cama 150×200": {
+    "eu": "150×200 ohea",
+    "fr": "lit 150×200",
+    "en": "150×200 bed",
+    "nl": "bed 150×200",
+    "de": "Bett 150×200",
+    "da": "seng 150×200",
+    "no": "seng 150×200",
+    "it": "letto 150×200"
+  },
+  "cama 140×200": {
+    "eu": "140×200 ohea",
+    "fr": "lit 140×200",
+    "en": "140×200 bed",
+    "nl": "bed 140×200",
+    "de": "Bett 140×200",
+    "da": "seng 140×200",
+    "no": "seng 140×200",
+    "it": "letto 140×200"
+  },
+  "2 camas 90×200": {
+    "eu": "2 ohe 90×200",
+    "fr": "2 lits 90×200",
+    "en": "2 beds 90×200",
+    "nl": "2 bedden 90×200",
+    "de": "2 Betten 90×200",
+    "da": "2 senge 90×200",
+    "no": "2 senger 90×200",
+    "it": "2 letti 90×200"
+  },
+  "doble + sofá cama": {
+    "eu": "bikoitza + ohe-sofa",
+    "fr": "lit double + canapé-lit",
+    "en": "double + sofa bed",
+    "nl": "tweepersoons + slaapbank",
+    "de": "Doppelbett + Schlafsofa",
+    "da": "dobbelt + sovesofa",
+    "no": "dobbelt + sovesofa",
+    "it": "matrimoniale + divano letto"
+  },
+  "cama doble adaptada": {
+    "eu": "ohe bikoitz egokitua",
+    "fr": "lit double adapté",
+    "en": "adapted double bed",
+    "nl": "aangepast tweepersoonsbed",
+    "de": "barrierefreies Doppelbett",
+    "da": "tilpasset dobbeltseng",
+    "no": "tilpasset dobbeltseng",
+    "it": "letto matrimoniale attrezzato"
+  },
+  "La más luminosa de la casa: luz natural de la mañana a la tarde. Para despertar despacio y empezar el día sin prisa.": {
+    "en": "The brightest in the house: natural light from morning to evening. To wake slowly and start the day unhurried.",
+    "fr": "La plus lumineuse de la maison : lumière naturelle du matin au soir. Pour se réveiller doucement et commencer la journée sans hâte.",
+    "de": "Das hellste Zimmer im Haus: natürliches Licht von morgens bis abends. Zum langsamen Aufwachen und gemächlichen Start in den Tag.",
+    "it": "La più luminosa della casa: luce naturale dalla mattina alla sera. Per svegliarsi lentamente e iniziare la giornata senza fretta.",
+    "nl": "De lichtste van het huis: natuurlijk licht van ochtend tot avond. Om langzaam wakker te worden en de dag rustig te beginnen."
+  },
+  "Tonos serenos y aire de mar. La del azul del Cantábrico, con las playas de Urdaibai a un paso.": {
+    "en": "Serene tones and sea air. The one in Cantabrian blue, Urdaibai's beaches a step away.",
+    "fr": "Tons sereins et air marin. Celle au bleu de la mer Cantabrique, les plages d'Urdaibai à deux pas.",
+    "de": "Ruhige Töne und Meeresluft. Das Zimmer im Blau des Kantabrischen Meeres, die Strände von Urdaibai ganz nah.",
+    "it": "Tonalità serene e aria di mare. Quella nell'azzurro del Cantabrico, le spiagge di Urdaibai a un passo.",
+    "nl": "Serene tinten en zeelucht. De kamer in het blauw van de Cantabrische Zee, de stranden van Urdaibai vlakbij."
+  },
+  "La que mira al verde. Despiertas con el bosque de Urdaibai en la ventana y los pájaros como única alarma.": {
+    "en": "The one facing the green. You wake with the Urdaibai forest in the window and birds as your only alarm.",
+    "fr": "Celle qui donne sur la verdure. Vous vous réveillez avec la forêt d'Urdaibai à la fenêtre et les oiseaux pour seul réveil.",
+    "de": "Das Zimmer ins Grüne. Sie wachen mit dem Wald von Urdaibai am Fenster und Vögeln als einzigem Wecker auf.",
+    "it": "Quella che guarda al verde. Ti svegli con il bosco di Urdaibai alla finestra e gli uccelli come unica sveglia.",
+    "nl": "De kamer met uitzicht op het groen. U wordt wakker met het bos van Urdaibai voor het raam en vogels als enige wekker."
+  },
+  "Noches de cielo limpio, casi sin contaminación lumínica. Para mirar las estrellas y descansar de verdad.": {
+    "en": "Clear-sky nights, almost no light pollution. To gaze at the stars and truly rest.",
+    "fr": "Des nuits au ciel clair, presque sans pollution lumineuse. Pour regarder les étoiles et se reposer vraiment.",
+    "de": "Nächte mit klarem Himmel, fast ohne Lichtverschmutzung. Zum Sternegucken und echten Ausruhen.",
+    "it": "Notti di cielo limpido, quasi senza inquinamento luminoso. Per guardare le stelle e riposare davvero.",
+    "nl": "Nachten met een heldere hemel, bijna geen lichtvervuiling. Om naar de sterren te kijken en echt uit te rusten."
+  },
+  "Luminosa y aireada, con el frescor del Cantábrico de fondo.": {
+    "en": "Bright and airy, with the freshness of the Cantabrian in the background.",
+    "fr": "Lumineuse et aérée, avec la fraîcheur de la mer Cantabrique en fond.",
+    "de": "Hell und luftig, mit der Frische des Kantabrischen Meeres im Hintergrund.",
+    "it": "Luminosa e ariosa, con la freschezza del Cantabrico sullo sfondo.",
+    "nl": "Licht en luchtig, met de frisheid van de Cantabrische Zee op de achtergrond."
+  },
+  "La ría de Urdaibai hecha habitación: agua mansa, mareas y luz cambiante.": {
+    "en": "The Urdaibai estuary as a room: still water, tides and shifting light.",
+    "fr": "La ria d'Urdaibai faite chambre : eau calme, marées et lumière changeante.",
+    "de": "Die Ria von Urdaibai als Zimmer: stilles Wasser, Gezeiten und wechselndes Licht.",
+    "it": "La ria di Urdaibai fatta camera: acqua calma, maree e luce mutevole.",
+    "nl": "De ria van Urdaibai als kamer: kalm water, getijden en veranderend licht."
+  },
+  "Firme como un roble centenario. Madera noble y calidez, la más arraigada de la casa.": {
+    "en": "Firm as a centuries-old oak. Noble wood and warmth, the most grounded room in the house.",
+    "fr": "Solide comme un chêne centenaire. Bois noble et chaleur, la chambre la plus enracinée de la maison.",
+    "de": "Fest wie eine hundertjährige Eiche. Edles Holz und Wärme, das verwurzeltste Zimmer des Hauses.",
+    "it": "Saldo come una quercia centenaria. Legno nobile e calore, la camera più radicata della casa.",
+    "nl": "Stevig als een eeuwenoude eik. Edel hout en warmte, de meest gewortelde kamer van het huis."
+  },
+  "Apartamento privado en planta baja, con terraza y salida directa al jardín. El espacio más independiente, ideal para 4.": {
+    "en": "Private ground-floor apartment with a terrace and direct garden access. The most independent space, ideal for 4.",
+    "fr": "Appartement privé au rez-de-chaussée, avec terrasse et accès direct au jardin. L'espace le plus indépendant, idéal pour 4.",
+    "de": "Private Wohnung im Erdgeschoss mit Terrasse und direktem Gartenzugang. Der unabhängigste Raum, ideal für 4.",
+    "it": "Appartamento privato al piano terra, con terrazza e accesso diretto al giardino. Lo spazio più indipendente, ideale per 4.",
+    "nl": "Privéappartement op de begane grond, met terras en directe toegang tot de tuin. De meest onafhankelijke ruimte, ideaal voor 4."
+  },
+  "En planta baja y sin escalones. Habitación accesible y firme, pensada para movilidad reducida, con toda la calma de la casa.": {
+    "en": "Ground floor and step-free. An accessible, sturdy room designed for reduced mobility, with all the calm of the house.",
+    "fr": "Au rez-de-chaussée et sans marches. Une chambre accessible et robuste, pensée pour la mobilité réduite, avec tout le calme de la maison.",
+    "de": "Im Erdgeschoss und stufenlos. Ein barrierefreies, solides Zimmer für eingeschränkte Mobilität, mit aller Ruhe des Hauses.",
+    "it": "Al piano terra e senza gradini. Una camera accessibile e solida, pensata per la mobilità ridotta, con tutta la calma della casa.",
+    "nl": "Op de begane grond en zonder trappen. Een toegankelijke, stevige kamer voor beperkte mobiliteit, met alle rust van het huis."
+  },
+  "noche": {
+    "en": "night",
+    "fr": "nuit",
+    "de": "Nacht",
+    "it": "notte",
+    "nl": "nacht"
+  },
+  "Cada habitación, un concepto. Elige tu calma.": {
+    "en": "Each room, a concept. Choose your calm.",
+    "fr": "Chaque chambre, un concept. Choisissez votre calme.",
+    "de": "Jedes Zimmer, ein Konzept. Wählen Sie Ihre Ruhe.",
+    "it": "Ogni camera, un concetto. Scegli la tua calma.",
+    "nl": "Elke kamer, een concept. Kies je rust."
+  },
+  "No hay habitaciones disponibles en este momento.": {
+    "en": "No rooms available at the moment.",
+    "fr": "Aucune chambre disponible pour le moment.",
+    "de": "Derzeit sind keine Zimmer verfügbar.",
+    "it": "Nessuna camera disponibile al momento.",
+    "nl": "Op dit moment zijn er geen kamers beschikbaar."
+  },
+  "Entrada 14:00": {
+    "en": "Check-in 2:00 pm",
+    "fr": "Arrivée 14h00",
+    "de": "Check-in 14:00 Uhr",
+    "it": "Check-in ore 14:00",
+    "nl": "Check-in 14:00"
+  },
+  "Salida 12:00": {
+    "en": "Check-out 12:00 pm",
+    "fr": "Départ 12h00",
+    "de": "Check-out 12:00 Uhr",
+    "it": "Check-out ore 12:00",
+    "nl": "Check-out 12:00"
+  },
+  "Desayuno y limpieza diaria incluidos": {
+    "en": "Breakfast and daily cleaning included",
+    "fr": "Petit-déjeuner et ménage quotidien inclus",
+    "de": "Frühstück und tägliche Reinigung inklusive",
+    "it": "Colazione e pulizia giornaliera incluse",
+    "nl": "Ontbijt en dagelijkse schoonmaak inbegrepen"
+  },
+  "adultos": {
+    "en": "adults",
+    "fr": "adultes",
+    "de": "Erwachsene",
+    "it": "adulti",
+    "nl": "volwassenen"
+  }
+}

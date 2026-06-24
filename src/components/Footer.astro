@@ -1,12 +1,11 @@
 ---
-import { useTranslations, type Lang } from '@/i18n/ui';
+import { tn, type Lang } from '@/i18n/ui';
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
-const t = useTranslations(lang);
 const year = 2026; // TODO: actualizar dinámicamente en deploy
 ---
 
@@ -14,12 +13,12 @@ const year = 2026; // TODO: actualizar dinámicamente en deploy
   <div class="mx-auto grid max-w-6xl gap-8 px-5 py-14 md:grid-cols-3">
     <div>
       <p class="font-serif text-2xl text-pine">Kirana</p>
-      <p class="mt-2 text-sm text-mist">{t('footer.tagline')}</p>
+      <p class="mt-2 text-sm text-mist">Silencio, naturaleza, Kirana.</p>
     </div>
 
     <div class="text-sm text-mist">
-      <p class="font-medium text-ink">{t('contact.title')}</p>
-      <p class="mt-2">{t('contact.address')}</p>
+      <p class="font-medium text-ink">{tn(lang, 'Contacto')}</p>
+      <p class="mt-2">Barrio San Miguel 27, Bermeo (Bizkaia) 48370</p>
       <p class="mt-1">
         <a class="hover:text-pine" href="https://wa.me/34689352391">WhatsApp · +34 689 352 391</a>
       </p>
@@ -29,13 +28,13 @@ const year = 2026; // TODO: actualizar dinámicamente en deploy
     </div>
 
     <div class="text-sm text-mist">
-      <p>{t('info.checkin')} · {t('info.checkout')}</p>
-      <p class="mt-1">{t('info.adultsOnly')}</p>
-      <p class="mt-1">{t('info.included')}</p>
+      <p>{tn(lang, 'Entrada 14:00')} · {tn(lang, 'Salida 12:00')}</p>
+      <p class="mt-1">{tn(lang, 'Solo adultos')}</p>
+      <p class="mt-1">{tn(lang, 'Desayuno y limpieza diaria incluidos')}</p>
     </div>
   </div>
 
   <div class="border-t border-paper-2 px-5 py-5 text-center text-xs text-mist">
-    © {year} Kirana · {t('footer.rights')}
+    © {year} Kirana
   </div>
 </footer>

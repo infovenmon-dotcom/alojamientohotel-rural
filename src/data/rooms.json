@@ -1,7 +1,7 @@
 {
   "_meta": {
     "descripcion": "Fuente ÚNICA de las 10 habitaciones de Kirana. Web pública y panel leen de aquí; cualquier cambio se propaga a ambos. La web pública SOLO muestra las que tienen activa:true.",
-    "aviso": "m², camas y precios son ORIENTATIVOS → confirmar con Fran. Los textos 'story' son BORRADOR provisional (las maquetas de referencia con el storytelling definitivo no estaban disponibles).",
+    "aviso": "m², camas y precios son ORIENTATIVOS → confirmar con Fran. storytelling y concepto portados literalmente del array RM de kirana-web-paralela.html (fuente de verdad). Traducciones en src/i18n/i18n.json (EU/DA/NO de los storytelling pendientes de traducción profesional). fotos pendientes de fotos-kirana/.",
     "moneda": "EUR",
     "porDefecto": "6 activas (5 dobles + apartamento), 4 bloqueadas"
   },
@@ -18,7 +18,8 @@
       "cama": "150×200",
       "precio": 95,
       "activa": true,
-      "story": "La primera luz de Urdaibai entra despacio. Una habitación luminosa para empezar el día sin prisa."
+      "fotos": [],
+      "storytelling": "La más luminosa de la casa: luz natural de la mañana a la tarde. Para despertar despacio y empezar el día sin prisa."
     },
     {
       "id": "itsaso",
@@ -32,7 +33,8 @@
       "cama": "2×90×200",
       "precio": 105,
       "activa": true,
-      "story": "El mar de Bermeo a un paso. Dos camas, horizonte abierto y el sonido lejano de la costa."
+      "fotos": [],
+      "storytelling": "Tonos serenos y aire de mar. La del azul del Cantábrico, con las playas de Urdaibai a un paso."
     },
     {
       "id": "basoa",
@@ -46,7 +48,8 @@
       "cama": "150×200",
       "precio": 95,
       "activa": true,
-      "story": "El verde de la Reserva de la Biosfera entra por la ventana. Calma de bosque, en silencio."
+      "fotos": [],
+      "storytelling": "La que mira al verde. Despiertas con el bosque de Urdaibai en la ventana y los pájaros como única alarma."
     },
     {
       "id": "lasai",
@@ -60,7 +63,8 @@
       "cama": "140×200",
       "precio": 90,
       "activa": true,
-      "story": "Una habitación recogida para descansar de verdad. Silencio, naturaleza, Kirana."
+      "fotos": [],
+      "storytelling": "La más recogida y silenciosa. Para desconectar de verdad, leer y dormir profundo."
     },
     {
       "id": "izar",
@@ -74,7 +78,8 @@
       "cama": "150×200",
       "precio": 95,
       "activa": true,
-      "story": "El cielo limpio de Urdaibai al caer la noche. Para dormir bajo las estrellas, lejos del ruido."
+      "fotos": [],
+      "storytelling": "Noches de cielo limpio, casi sin contaminación lumínica. Para mirar las estrellas y descansar de verdad."
     },
     {
       "id": "haize",
@@ -88,7 +93,8 @@
       "cama": "150×200",
       "precio": 95,
       "activa": false,
-      "story": "La brisa del Cantábrico, suave y constante. Una pausa ligera frente al paisaje."
+      "fotos": [],
+      "storytelling": "Luminosa y aireada, con el frescor del Cantábrico de fondo."
     },
     {
       "id": "ibai",
@@ -102,7 +108,8 @@
       "cama": "150×200",
       "precio": 95,
       "activa": false,
-      "story": "La ría de Urdaibai serpentea entre marismas. Un refugio sereno junto al agua."
+      "fotos": [],
+      "storytelling": "La ría de Urdaibai hecha habitación: agua mansa, mareas y luz cambiante."
     },
     {
       "id": "aritz",
@@ -116,7 +123,8 @@
       "cama": "150×200",
       "precio": 100,
       "activa": false,
-      "story": "El roble, árbol símbolo de Bizkaia. La habitación más amplia de la planta superior, firme y acogedora."
+      "fotos": [],
+      "storytelling": "Firme como un roble centenario. Madera noble y calidez, la más arraigada de la casa."
     },
     {
       "id": "lorategia",
@@ -130,7 +138,8 @@
       "cama": "doble + sofá cama",
       "precio": 160,
       "activa": true,
-      "story": "Apartamento en planta baja abierto al jardín. Espacio para cuatro adultos, con su propio ritmo."
+      "fotos": [],
+      "storytelling": "Apartamento privado en planta baja, con terraza y salida directa al jardín. El espacio más independiente, ideal para 4."
     },
     {
       "id": "lur",
@@ -144,7 +153,8 @@
       "cama": "doble adaptada",
       "precio": 95,
       "activa": false,
-      "story": "Habitación accesible en planta baja, adaptada y cómoda. Con los pies en la tierra de Urdaibai."
+      "fotos": [],
+      "storytelling": "En planta baja y sin escalones. Habitación accesible y firme, pensada para movilidad reducida, con toda la calma de la casa."
     }
   ]
 }

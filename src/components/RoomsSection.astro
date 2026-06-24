@@ -1,27 +1,26 @@
 ---
 import RoomCard from '@/components/RoomCard.astro';
 import { getActiveRooms } from '@/lib/rooms';
-import { useTranslations, type Lang } from '@/i18n/ui';
+import { tn, type Lang } from '@/i18n/ui';
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
-const t = useTranslations(lang);
 // Web pública: SOLO habitaciones activas (regla #2).
 const rooms = getActiveRooms();
 ---
 
 <section id="habitaciones" class="mx-auto max-w-6xl px-5 py-20">
   <header class="mx-auto max-w-2xl text-center">
-    <h2 class="font-serif text-4xl text-pine md:text-5xl">{t('rooms.title')}</h2>
-    <p class="mt-3 text-mist">{t('rooms.subtitle')}</p>
+    <h2 class="font-serif text-4xl text-pine md:text-5xl">{tn(lang, '¿Dónde te quieres alojar?')}</h2>
+    <p class="mt-3 text-mist">{tn(lang, 'Cada habitación, un concepto. Elige tu calma.')}</p>
   </header>
 
   {
     rooms.length === 0 ? (
-      <p class="mt-12 text-center text-mist">{t('rooms.empty')}</p>
+      <p class="mt-12 text-center text-mist">{tn(lang, 'No hay habitaciones disponibles en este momento.')}</p>
     ) : (
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {rooms.map((room) => (
