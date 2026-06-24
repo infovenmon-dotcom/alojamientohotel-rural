@@ -13,10 +13,21 @@ export const POST: APIRoute = async ({ params, request, redirect }) => {
   }
   const form = await request.formData();
   const activa = String(form.get('activa')) === 'true';
-  setRoomActive(id, activa);
+  const accept = request.headers.get('accept') ?? '';
+  try {
+    setRoomActive(id, activa);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Error al guardar';
+    if (accept.includes('text/html')) {
+      return redirect('/panel/habitaciones?error=' + encodeURIComponent(msg));
+    }
+    return new Response(JSON.stringify({ error: msg }), {
+      status: 503,
+      headers: { 'content-type': 'application/json' },
+    });
+  }
 
   // Si viene de un formulario del panel, volver a Habitaciones.
-  const accept = request.headers.get('accept') ?? '';
   if (accept.includes('text/html')) return redirect('/panel/habitaciones');
   return new Response(JSON.stringify({ id, activa }), {
     status: 200,

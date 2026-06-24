@@ -1,6 +1,9 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { Room } from './rooms';
+// Copia incluida en el bundle: respaldo de LECTURA cuando no hay acceso a disco
+// (p. ej. serverless en Vercel). La escritura sí requiere disco/BD.
+import seed from '../data/rooms.json';
 
 /**
  * Persistencia de las habitaciones — STAND-IN de fichero.
@@ -19,11 +22,24 @@ interface RoomsFile {
 }
 
 function read(): RoomsFile {
-  return JSON.parse(readFileSync(ROOMS_PATH, 'utf8')) as RoomsFile;
+  try {
+    return JSON.parse(readFileSync(ROOMS_PATH, 'utf8')) as RoomsFile;
+  } catch {
+    // Sin disco (serverless): servir la copia del bundle. La web se ve, pero
+    // refleja el estado del último despliegue hasta que haya BD.
+    return seed as RoomsFile;
+  }
 }
 
 function write(data: RoomsFile): void {
-  writeFileSync(ROOMS_PATH, JSON.stringify(data, null, 2) + '\n', 'utf8');
+  try {
+    writeFileSync(ROOMS_PATH, JSON.stringify(data, null, 2) + '\n', 'utf8');
+  } catch {
+    throw new Error(
+      'Persistencia no disponible: este hosting es de solo lectura (serverless). ' +
+        'Configura DATABASE_URL para guardar cambios en la BD.'
+    );
+  }
 }
 
 /** Todas las habitaciones (incluye bloqueadas). Lectura fresca de disco. */
