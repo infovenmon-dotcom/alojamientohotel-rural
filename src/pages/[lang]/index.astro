@@ -1,0 +1,20 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import RoomsSection from '@/components/RoomsSection.astro';
+import { languages, defaultLang, type Lang } from '@/i18n/ui';
+
+export function getStaticPaths() {
+  // Una ruta por idioma salvo el default (ES), que vive en la raíz.
+  return Object.keys(languages)
+    .filter((lang) => lang !== defaultLang)
+    .map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+---
+
+<BaseLayout lang={lang}>
+  <Hero lang={lang} />
+  <RoomsSection lang={lang} />
+</BaseLayout>

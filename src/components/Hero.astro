@@ -1,0 +1,26 @@
+---
+import { useTranslations, type Lang } from '@/i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="relative isolate overflow-hidden">
+  <div class="mx-auto flex max-w-4xl flex-col items-center px-5 py-28 text-center md:py-36">
+    <p class="text-sm uppercase tracking-[0.3em] text-oak">Urdaibai · Bermeo · Bizkaia</p>
+    <h1 class="mt-6 font-serif text-5xl leading-tight text-pine md:text-7xl">
+      {t('hero.tagline')}
+    </h1>
+    <p class="mt-6 max-w-xl text-lg text-mist">{t('hero.subtitle')}</p>
+    <a
+      href="#habitaciones"
+      class="mt-10 rounded-full bg-pine px-7 py-3 text-paper transition-opacity hover:opacity-90"
+    >
+      {t('hero.cta')}
+    </a>
+  </div>
+</section>

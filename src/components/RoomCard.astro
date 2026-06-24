@@ -1,0 +1,52 @@
+---
+import type { Room } from '@/lib/rooms';
+import { useTranslations, type Lang } from '@/i18n/ui';
+
+interface Props {
+  room: Room;
+  lang: Lang;
+}
+
+const { room, lang } = Astro.props;
+const t = useTranslations(lang);
+// Reserva provisional vía WhatsApp hasta el motor de reservas (Fase 4).
+const bookHref = `https://wa.me/34689352391?text=${encodeURIComponent(
+  `Hola, me interesa la habitación ${room.nombre} (${room.concepto}).`
+)}`;
+---
+
+<article class="group flex flex-col overflow-hidden rounded-2xl border border-paper-2 bg-paper transition-shadow hover:shadow-lg">
+  <!-- Placeholder de imagen hasta tener las fotos reales -->
+  <div class="flex aspect-[4/3] items-center justify-center bg-paper-2 text-mist/50">
+    <span class="font-serif text-4xl">{room.nombre}</span>
+  </div>
+
+  <div class="flex flex-1 flex-col p-5">
+    <div class="flex items-baseline justify-between gap-3">
+      <h3 class="font-serif text-2xl text-pine">{room.nombre}</h3>
+      <span class="text-sm text-mist">{room.concepto}</span>
+    </div>
+
+    <p class="mt-2 flex-1 text-sm leading-relaxed text-mist">{room.story}</p>
+
+    <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-mist">
+      <li>{t('rooms.area', { n: room.m2 })}</li>
+      <li>{t('rooms.capacity', { n: room.capacidad })}</li>
+      <li>{room.cama}</li>
+    </ul>
+
+    <div class="mt-5 flex items-center justify-between">
+      <p class="text-ink">
+        <span class="text-xs text-mist">{t('rooms.from')} </span>
+        <span class="font-serif text-2xl">{room.precio} €</span>
+        <span class="text-xs text-mist">{t('rooms.night')}</span>
+      </p>
+      <a
+        href={bookHref}
+        class="rounded-full border border-pine px-4 py-2 text-sm text-pine transition-colors hover:bg-pine hover:text-paper"
+      >
+        {t('rooms.book')}
+      </a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,36 @@
+{
+  "meta.title": "Kirana · Hébergement rural réservé aux adultes à Urdaibai",
+  "meta.description": "Hébergement rural réservé aux adultes à 1 km de Bermeo, dans la Réserve de Biosphère d'Urdaibai (Biscaye). Silence, nature, Kirana.",
+
+  "nav.rooms": "Chambres",
+  "nav.location": "Où nous sommes",
+  "nav.contact": "Contact",
+  "nav.book": "Réserver",
+
+  "hero.tagline": "Silence, nature, Kirana.",
+  "hero.subtitle": "Hébergement rural réservé aux adultes à 1 km de Bermeo, dans la Réserve de Biosphère d'Urdaibai.",
+  "hero.cta": "Voir les chambres",
+
+  "rooms.title": "Où souhaitez-vous séjourner ?",
+  "rooms.subtitle": "Chaque chambre, un concept. Choisissez votre calme.",
+  "rooms.from": "à partir de",
+  "rooms.night": "/ nuit",
+  "rooms.capacity": "{n} adultes",
+  "rooms.area": "{n} m²",
+  "rooms.book": "Réserver",
+  "rooms.empty": "Aucune chambre disponible pour le moment.",
+
+  "info.checkin": "Arrivée 14h00",
+  "info.checkout": "Départ 12h00",
+  "info.adultsOnly": "Réservé aux adultes",
+  "info.included": "Petit-déjeuner et ménage quotidien inclus",
+  "info.accessible": "Accessible",
+
+  "contact.title": "Contact",
+  "contact.address": "Barrio San Miguel 27, Bermeo (Biscaye) 48370",
+  "contact.whatsapp": "WhatsApp",
+  "contact.phone": "Téléphone",
+
+  "footer.rights": "Tous droits réservés.",
+  "footer.tagline": "Silence, nature, Kirana."
+}

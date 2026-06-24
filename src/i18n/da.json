@@ -1,0 +1,5 @@
+{
+  "_status": "Pendiente de traducción profesional. Mientras tanto se usa fallback a ES (ver src/i18n/ui.ts). Fase 2: portar diccionario I18N completo.",
+  "footer.tagline": "Silencio, naturaleza, Kirana.",
+  "hero.tagline": "Silencio, naturaleza, Kirana."
+}

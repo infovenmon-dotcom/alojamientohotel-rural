@@ -1,0 +1,41 @@
+---
+import { useTranslations, type Lang } from '@/i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = 2026; // TODO: actualizar dinámicamente en deploy
+---
+
+<footer id="contacto" class="mt-24 border-t border-paper-2 bg-paper-2/40">
+  <div class="mx-auto grid max-w-6xl gap-8 px-5 py-14 md:grid-cols-3">
+    <div>
+      <p class="font-serif text-2xl text-pine">Kirana</p>
+      <p class="mt-2 text-sm text-mist">{t('footer.tagline')}</p>
+    </div>
+
+    <div class="text-sm text-mist">
+      <p class="font-medium text-ink">{t('contact.title')}</p>
+      <p class="mt-2">{t('contact.address')}</p>
+      <p class="mt-1">
+        <a class="hover:text-pine" href="https://wa.me/34689352391">WhatsApp · +34 689 352 391</a>
+      </p>
+      <p class="mt-1">
+        <a class="hover:text-pine" href="tel:+34689352391">+34 689 352 391</a>
+      </p>
+    </div>
+
+    <div class="text-sm text-mist">
+      <p>{t('info.checkin')} · {t('info.checkout')}</p>
+      <p class="mt-1">{t('info.adultsOnly')}</p>
+      <p class="mt-1">{t('info.included')}</p>
+    </div>
+  </div>
+
+  <div class="border-t border-paper-2 px-5 py-5 text-center text-xs text-mist">
+    © {year} Kirana · {t('footer.rights')}
+  </div>
+</footer>

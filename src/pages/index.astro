@@ -1,0 +1,14 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import RoomsSection from '@/components/RoomsSection.astro';
+import { defaultLang } from '@/i18n/ui';
+
+// ES vive en la raíz (prefixDefaultLocale: false).
+const lang = defaultLang;
+---
+
+<BaseLayout lang={lang}>
+  <Hero lang={lang} />
+  <RoomsSection lang={lang} />
+</BaseLayout>
