@@ -1,4 +1,5 @@
 ---
+export const prerender = false;
 import { COOKIE } from '@/lib/auth';
 Astro.cookies.delete(COOKIE, { path: '/' });
 return Astro.redirect('/panel/login');

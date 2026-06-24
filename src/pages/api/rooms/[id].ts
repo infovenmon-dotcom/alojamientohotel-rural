@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { setRoomActive, getRoomById } from '@/lib/roomsStore';
 
+export const prerender = false;
+
 /**
  * POST /api/rooms/:id  (form: activa=true|false)
  * Bloquea/activa una habitación y persiste. La web pública (SSR) lo refleja
