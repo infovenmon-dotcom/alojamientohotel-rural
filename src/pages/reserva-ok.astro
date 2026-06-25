@@ -1,21 +1,37 @@
 ---
 export const prerender = false;
 import Stripe from 'stripe';
+import { listInvoices, type Invoice } from '@/lib/invoices';
 
-const id = Astro.url.searchParams.get('session_id');
-let room = '', inS = '', outS = '', ok = false;
-const key = process.env.STRIPE_SECRET_KEY;
-if (id && key) {
+const params = Astro.url.searchParams;
+const demo = params.get('demo') === '1';
+const ref = params.get('ref');
+const sessionId = params.get('session_id');
+
+let inv: Invoice | undefined;
+let ok = false;
+let room = '', inS = '', outS = '';
+
+if (ref) {
+  inv = (await listInvoices()).find((i) => i.ref === ref);
+  if (inv) { ok = true; room = inv.room; inS = inv.in; outS = inv.out; }
+} else if (sessionId && process.env.STRIPE_SECRET_KEY) {
   try {
-    const s = await new Stripe(key).checkout.sessions.retrieve(id);
+    const s = await new Stripe(process.env.STRIPE_SECRET_KEY).checkout.sessions.retrieve(sessionId);
     ok = s.payment_status === 'paid';
-    room = s.metadata?.room || '';
-    inS = s.metadata?.in || '';
-    outS = s.metadata?.out || '';
-  } catch {
-    /* sesión no válida */
-  }
+    room = s.metadata?.room || ''; inS = s.metadata?.in || ''; outS = s.metadata?.out || '';
+    // En real, la factura la crea el webhook; la mostramos si ya está.
+    inv = (await listInvoices()).find((i) => i.bookingId && i.room === room && i.in === inS);
+  } catch { /* sesión no válida */ }
 }
+
+const euro = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+const qrData = inv?.tbai?.identificador
+  ? `TicketBAI ${inv.tbai.identificador} | ${inv.ref} | ${euro(inv.total)}`
+  : '';
+const qrSrc = qrData
+  ? `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`
+  : '';
 ---
 <!doctype html>
 <html lang="es">
@@ -26,33 +42,61 @@ if (id && key) {
     <meta name="robots" content="noindex" />
     <style>
       body{margin:0;font-family:system-ui,sans-serif;background:#F4F5F0;color:#1E211B;display:flex;min-height:100vh;align-items:center;justify-content:center;padding:24px}
-      .card{background:#fff;border:1px solid #E2E5DA;border-radius:16px;max-width:480px;width:100%;padding:40px;text-align:center;box-shadow:0 20px 50px rgba(30,33,27,.1)}
-      h1{font-family:Georgia,serif;font-weight:400;color:#2B3A2E;font-size:1.9rem;margin:.2em 0 .4em}
-      .tick{width:64px;height:64px;border-radius:50%;background:#5F6E52;color:#fff;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 18px}
+      .card{background:#fff;border:1px solid #E2E5DA;border-radius:16px;max-width:520px;width:100%;padding:36px;box-shadow:0 20px 50px rgba(30,33,27,.1)}
+      .demo{background:#FBEFE6;color:#A6543E;border-radius:8px;padding:8px 12px;font-size:.8rem;text-align:center;margin:-8px 0 18px}
+      h1{font-family:Georgia,serif;font-weight:400;color:#2B3A2E;font-size:1.8rem;margin:.2em 0 .4em;text-align:center}
+      .tick{width:60px;height:60px;border-radius:50%;background:#5F6E52;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin:0 auto 16px}
       p{color:#5b5f54;line-height:1.6}
-      .det{background:#F4F5F0;border-radius:10px;padding:16px;margin:18px 0;font-size:.95rem}
-      a{display:inline-block;margin-top:10px;background:#2B3A2E;color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600}
+      .fac{border:1px solid #E2E5DA;border-radius:10px;margin:18px 0;overflow:hidden}
+      .fac .h{background:#2B3A2E;color:#F4F5F0;padding:10px 16px;font-size:.85rem;display:flex;justify-content:space-between}
+      .fac .b{padding:14px 16px;font-size:.92rem}
+      .fac .row{display:flex;justify-content:space-between;padding:3px 0;color:#5b5f54}
+      .fac .row.tot{border-top:1px solid #E2E5DA;margin-top:6px;padding-top:8px;color:#1E211B;font-weight:600}
+      .tbai{display:flex;gap:14px;align-items:center;background:#F4F5F0;border-radius:8px;padding:12px;margin-top:12px}
+      .tbai img{border-radius:6px;background:#fff}
+      .tbai .t{font-size:.74rem;color:#5b5f54;line-height:1.4}
+      .tbai .t b{color:#2B3A2E}
+      a.btn{display:block;text-align:center;margin-top:18px;background:#2B3A2E;color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600}
     </style>
   </head>
   <body>
     <div class="card">
+      {demo && <div class="demo">DEMOSTRACIÓN · no se ha cobrado nada real</div>}
       {ok ? (
         <>
           <div class="tick">✓</div>
           <h1>¡Reserva confirmada!</h1>
-          <p>Gracias por reservar en Kirana. Te hemos enviado el comprobante por email.</p>
-          {room && (
-            <div class="det"><b>{room}</b><br />{inS} → {outS}</div>
+          <p style="text-align:center">Gracias por reservar en Kirana{room ? ' · ' + room : ''}.</p>
+          {inv && (
+            <div class="fac">
+              <div class="h"><span>Factura {inv.ref}</span><span>{new Date(inv.fecha).toLocaleDateString('es-ES')}</span></div>
+              <div class="b">
+                <div class="row"><span>{inv.room} · {inv.in} → {inv.out}{inv.pax ? ` · ${inv.pax} pers.` : ''}</span></div>
+                <div class="row"><span>Base imponible</span><span>{euro(inv.base)}</span></div>
+                <div class="row"><span>IVA {inv.ivaPct}%</span><span>{euro(inv.iva)}</span></div>
+                <div class="row tot"><span>Total</span><span>{euro(inv.total)}</span></div>
+                {inv.tbai && (
+                  <div class="tbai">
+                    {qrSrc && <img src={qrSrc} width="84" height="84" alt="QR TicketBAI" />}
+                    <div class="t">
+                      <b>TicketBAI</b> · {inv.tbai.estado}<br />
+                      {inv.tbai.identificador}<br />
+                      <span style="color:#A6543E">{inv.tbai.mensaje}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           )}
-          <p>Si necesitas cualquier cosa, escríbenos a <a href="mailto:hola@kiranabermeo.es" style="background:none;color:#5F6E52;padding:0;font-weight:600">hola@kiranabermeo.es</a>.</p>
+          <p style="text-align:center;font-size:.85rem">Te enviaríamos el comprobante a tu email. ¿Dudas? <a href="mailto:hola@kiranabermeo.es" style="color:#5F6E52">hola@kiranabermeo.es</a></p>
         </>
       ) : (
         <>
-          <h1>Estamos confirmando tu pago…</h1>
-          <p>Si has completado el pago, recibirás la confirmación en breve. Si no, vuelve a intentarlo o escríbenos.</p>
+          <h1>Estamos confirmando tu reserva…</h1>
+          <p style="text-align:center">Si has completado el proceso, recibirás la confirmación en breve.</p>
         </>
       )}
-      <a href="/">Volver a Kirana</a>
+      <a class="btn" href="/">Volver a Kirana</a>
     </div>
   </body>
 </html>

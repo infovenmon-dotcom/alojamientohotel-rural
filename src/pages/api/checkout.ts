@@ -1,16 +1,16 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
-import { isFree } from '@/lib/bookings';
-import { amountCents, nights, PRICE_PER_NIGHT } from '@/lib/pricing';
+import { isFree, addBooking } from '@/lib/bookings';
+import { createInvoice, setTbaiResult } from '@/lib/invoices';
+import { amountCents, invoiceAmounts, nights, PRICE_PER_NIGHT } from '@/lib/pricing';
 
 export const prerender = false;
 
-// Crea una sesión de Stripe Checkout para una habitación y fechas concretas.
-// Body JSON: { room, in, out, pax }. Devuelve { url } para redirigir al pago.
+// Crea el cobro de una reserva. Body JSON: { room, in, out, pax }.
+// - Con STRIPE_SECRET_KEY: sesión real de Stripe Checkout.
+// - Sin clave (modo DEMOSTRACIÓN): simula reserva + factura correlativa +
+//   TicketBAI, para poder enseñar el flujo completo sin cobrar de verdad.
 export const POST: APIRoute = async ({ request }) => {
-  const key = process.env.STRIPE_SECRET_KEY;
-  if (!key) return json({ error: 'pago no configurado' }, 503);
-
   let body: any;
   try {
     body = await request.json();
@@ -22,6 +22,29 @@ export const POST: APIRoute = async ({ request }) => {
   if (!PRICE_PER_NIGHT[room]) return json({ error: 'habitación desconocida' }, 400);
   if (!(await isFree(room, inS, outS))) return json({ error: 'esas fechas ya no están disponibles' }, 409);
 
+  const key = process.env.STRIPE_SECRET_KEY;
+
+  // ---- Modo DEMOSTRACIÓN (sin Stripe configurado) ----
+  if (!key) {
+    const now = new Date().toISOString();
+    const booking = await addBooking(
+      { room, in: inS, out: outS, pax: pax ? Number(pax) : undefined, name: 'Reserva demo', source: 'web', ref: 'demo' },
+      now
+    );
+    const { base, iva, ivaPct, total } = invoiceAmounts(room, inS, outS);
+    const inv = await createInvoice({
+      fecha: now, room, in: inS, out: outS, pax: pax ? Number(pax) : undefined,
+      cliente: 'Cliente de prueba', base, ivaPct, iva, total, bookingId: booking.id,
+    });
+    // TicketBAI SIMULADO (en real lo declara el garante).
+    await setTbaiResult(inv.ref, {
+      identificador: 'TBAI-DEMO-' + inv.serie + inv.numero,
+      qr: 'demo', estado: 'declarada', mensaje: 'Simulación: no se ha enviado a Hacienda.',
+    });
+    return json({ url: `/reserva-ok?ref=${encodeURIComponent(inv.ref)}&demo=1` });
+  }
+
+  // ---- Pago real con Stripe ----
   const stripe = new Stripe(key);
   const origin = new URL(request.url).origin;
   const n = nights(inS, outS);

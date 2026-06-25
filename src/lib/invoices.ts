@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import seed from '../data/invoices.json';
 
 /**
@@ -36,7 +37,8 @@ const STORE = 'kirana';
 const KEY = 'invoices';
 
 function filePath(): string {
-  return new URL('../data/invoices.json', import.meta.url).pathname;
+  // Solo se usa en local/Node (en Netlify se usa Blobs).
+  return resolve(process.cwd(), 'src/data/invoices.json');
 }
 async function read(): Promise<InvoicesFile> {
   if (ON_NETLIFY) {

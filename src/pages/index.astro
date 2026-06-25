@@ -12,7 +12,8 @@ try {
   const activeNames = (await getActiveRooms()).map((r) => r.nombre);
   const booked = await getBookedMap();
   const stripe = !!process.env.STRIPE_SECRET_KEY;
-  const json = JSON.stringify({ activeNames, booked, stripe }).replace(/</g, '\\u003c');
+  const demo = !stripe; // sin Stripe: modo demostración (simula reserva+factura)
+  const json = JSON.stringify({ activeNames, booked, stripe, demo }).replace(/</g, '\\u003c');
   out = html.replace('<!--KIRANA_AVAIL-->', `<script>window.KIRANA_AVAIL=${json}</script>`);
 } catch {
   // Si falla, se sirve la maqueta tal cual (usa su disponibilidad de respaldo).

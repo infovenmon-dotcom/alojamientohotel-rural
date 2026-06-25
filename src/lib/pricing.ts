@@ -17,3 +17,13 @@ export function amountCents(room: string, inS: string, outS: string): number {
   const pct = Math.min(100, Math.max(1, Number(process.env.DEPOSIT_PCT) || 100));
   return Math.round(base * pct) ; // base(€)*100(céntimos)*pct/100 = base*pct
 }
+
+/** Desglose para la factura. El precio mostrado es IVA incluido (alojamiento
+ *  turístico: 10%); de ahí sacamos base imponible y cuota. */
+export function invoiceAmounts(room: string, inS: string, outS: string) {
+  const total = (PRICE_PER_NIGHT[room] || 0) * Math.max(1, nights(inS, outS));
+  const ivaPct = 10;
+  const base = Math.round((total / (1 + ivaPct / 100)) * 100) / 100;
+  const iva = Math.round((total - base) * 100) / 100;
+  return { total, base, iva, ivaPct };
+}

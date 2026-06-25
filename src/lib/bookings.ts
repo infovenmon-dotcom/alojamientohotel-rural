@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import seed from '../data/bookings.json';
 
 /**
@@ -29,8 +30,8 @@ const STORE = 'kirana';
 const KEY = 'bookings';
 
 function filePath(): string {
-  // Perezoso: process.cwd() no existe en Cloudflare Workers.
-  return new URL('../data/bookings.json', import.meta.url).pathname;
+  // Solo se usa en local/Node (en Netlify se usa Blobs).
+  return resolve(process.cwd(), 'src/data/bookings.json');
 }
 
 async function read(): Promise<BookingsFile> {
