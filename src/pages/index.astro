@@ -1,12 +1,26 @@
 ---
-// Web pública: servimos la maqueta definitiva de Kirana (src/home.html) tal cual
-// — es autocontenida (CSS/JS/i18n en línea, imágenes en CDN). El panel sigue en
-// /panel (SSR). Las habitaciones de esta home son su propio contenido; conectar
-// el bloqueo del panel a esta web (regla #2) es el siguiente paso.
+// Web pública: servimos la maqueta de Kirana (src/home.html) e inyectamos la
+// disponibilidad real para el calendario de reservas: habitaciones activas
+// (del panel) + fechas ya reservadas. El panel sigue en /panel (SSR).
 export const prerender = false;
 import html from '../home.html?raw';
+import { getActiveRooms } from '@/lib/rooms';
+import sample from '@/data/panel-sample.json';
 
-return new Response(html, {
+let out = html;
+try {
+  const activeNames = (await getActiveRooms()).map((r) => r.nombre);
+  const booked: Record<string, [string, string][]> = {};
+  for (const b of sample.bookings as { room: string; in: string; out: string }[]) {
+    (booked[b.room] ??= []).push([b.in, b.out]);
+  }
+  const json = JSON.stringify({ activeNames, booked }).replace(/</g, '\\u003c');
+  out = html.replace('<!--KIRANA_AVAIL-->', `<script>window.KIRANA_AVAIL=${json}</script>`);
+} catch {
+  // Si falla, se sirve la maqueta tal cual (usa su disponibilidad de respaldo).
+}
+
+return new Response(out, {
   headers: { 'content-type': 'text/html; charset=utf-8' },
 });
 ---

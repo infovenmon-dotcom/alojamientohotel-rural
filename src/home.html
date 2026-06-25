@@ -498,7 +498,7 @@
       <div class="bf"><label for="bk-in">Entrada</label><input type="date" id="bk-in"></div>
       <div class="bf"><label for="bk-out">Salida</label><input type="date" id="bk-out"></div>
       <div class="bf"><label for="bk-pax">Personas</label><select id="bk-pax"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></div>
-      <div class="bf bk-btn"><a class="btn" href="#reserva">Ver disponibilidad</a></div>
+      <div class="bf bk-btn"><a class="btn" id="kb-open" href="#reserva">Ver disponibilidad</a></div>
     </div>
     <p class="ask reveal">¿Dónde te quieres alojar?</p>
     <div class="rooms-grid" id="roomsGrid"></div>
@@ -913,7 +913,7 @@
       +'<p>'+t(r.story,lc)+'</p>'
       +'<div class="rspecs"><b>'+t('desde',lc)+' '+r.price+'€</b><span>'+r.cap+' '+t('pers',lc)+' · ≈'+r.m2+' m² · '+t(r.bed,lc)+' · '+t(bathWord(r),lc)+'</span></div>'
       +'<ul class="amen">'+amen+'</ul>'
-      +'<div class="meta"><span>'+t('Desayuno incluido',lc)+'</span><a href="#reserva">'+t('Reservar →',lc)+'</a></div>'
+      +'<div class="meta"><span>'+t('Desayuno incluido',lc)+'</span><a href="#reserva" class="kb-book" data-room="'+r.id+'">'+t('Reservar →',lc)+'</a></div>'
       +'</div></article>';
   }
   function renderRooms(lc){var g=document.getElementById('roomsGrid');if(!g)return;
@@ -928,5 +928,205 @@
   if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
 })();
 </script>
+<!--KIRANA_AVAIL-->
+<style>
+/* ===== Reserva: calendario por habitación (kb-*) ===== */
+.kb-ov{position:fixed;inset:0;z-index:9999;display:none;align-items:flex-start;justify-content:center;background:rgba(20,24,18,.55);overflow:auto;padding:24px 14px}
+.kb-ov.open{display:flex}
+.kb-modal{background:var(--paper,#fff);max-width:560px;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.32);font-family:var(--sans,system-ui)}
+.kb-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:18px 20px;background:var(--pine,#2B3A2E);color:#F4F5F0}
+.kb-head h3{margin:0;font-family:var(--serif,serif);font-weight:400;font-size:1.5rem;text-transform:lowercase}
+.kb-head .kb-sub{font-size:.8rem;color:#BFC7B4;margin-top:3px}
+.kb-x{background:none;border:0;color:#F4F5F0;font-size:1.6rem;cursor:pointer;line-height:1;padding:0 2px}
+.kb-watch{display:flex;align-items:center;gap:9px;margin:0;padding:11px 20px;background:#FBEFE6;color:#A6543E;font-size:.84rem}
+.kb-watch .dot{width:8px;height:8px;border-radius:50%;background:#C7603F;flex:0 0 auto;animation:kbpulse 1.6s infinite}
+@keyframes kbpulse{0%,100%{opacity:.35}50%{opacity:1}}
+.kb-body{padding:18px 20px}
+.kb-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.kb-nav button{background:var(--paper-2,#eee);border:1px solid var(--line,#ddd);border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:1.05rem;color:var(--ink,#222)}
+.kb-nav button:disabled{opacity:.3;cursor:default}
+.kb-mtitle{font-weight:600;text-transform:capitalize}
+.kb-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.kb-dow{text-align:center;font-size:.64rem;text-transform:uppercase;letter-spacing:.05em;color:var(--moss,#5F6E52);padding:3px 0}
+.kb-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:8px;font-size:.85rem;cursor:pointer;color:var(--ink,#222);user-select:none}
+.kb-day.empty{cursor:default}
+.kb-day.off{color:#c9c9c9;text-decoration:line-through;cursor:not-allowed}
+.kb-day.sel{background:var(--pine,#2B3A2E);color:#fff}
+.kb-day.inrange{background:#D9E0CE}
+.kb-day:not(.off):not(.empty):hover{border-color:var(--moss,#5F6E52)}
+.kb-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:13px;font-size:.73rem;color:var(--mist,#777)}
+.kb-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:middle;margin-right:5px}
+.kb-foot{padding:16px 20px;border-top:1px solid var(--line,#e5e5e5)}
+.kb-summary{font-size:.95rem;margin:0 0 12px;color:var(--ink,#222)}
+.kb-summary b{color:var(--pine,#2B3A2E)}
+.kb-hint{color:var(--mist,#777);font-size:.9rem;margin:0}
+.kb-cta{display:inline-flex;gap:8px;align-items:center;justify-content:center;width:100%;padding:13px;border-radius:8px;background:#2B3A2E;color:#fff;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-size:.92rem}
+.kb-rooms{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.kb-rooms li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 13px;border:1px solid var(--line,#e5e5e5);border-radius:9px}
+.kb-rooms .nm{font-family:var(--serif,serif);font-size:1.15rem}
+.kb-rooms .pr{font-size:.78rem;color:var(--mist,#777)}
+.kb-rooms button{background:var(--oak,#B07B4F);color:#fff;border:0;border-radius:7px;padding:8px 14px;cursor:pointer;font-size:.82rem;font-weight:600}
+.kb-none{color:var(--mist,#777);font-size:.92rem;margin:0}
+</style>
+
+<div class="kb-ov" id="kbOv" role="dialog" aria-modal="true" aria-labelledby="kbTitle">
+  <div class="kb-modal">
+    <div class="kb-head">
+      <div><h3 id="kbTitle">reservar</h3><div class="kb-sub" id="kbSub"></div></div>
+      <button class="kb-x" id="kbX" aria-label="Cerrar">&times;</button>
+    </div>
+    <p class="kb-watch" id="kbWatch"><span class="dot"></span><span id="kbWatchTxt"></span></p>
+    <div class="kb-body" id="kbBody"></div>
+    <div class="kb-foot" id="kbFoot"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var WA='34689352391';
+
+  // Disponibilidad: la inyecta el servidor (window.KIRANA_AVAIL) a partir del
+  // panel (habitaciones activas) + reservas. Si no, sample de respaldo para que
+  // la maqueta funcione abierta como archivo suelto.
+  var FB={activeNames:['Argia','Itsaso','Basoa','Lasai','Izar','Lorategia'],
+    booked:{Argia:[['2026-06-20','2026-06-25']],Basoa:[['2026-07-03','2026-07-07']],
+      Itsaso:[['2026-07-10','2026-07-14']],Lorategia:[['2026-07-18','2026-07-25']],
+      Lasai:[['2026-08-01','2026-08-05']]}};
+  var AV=window.KIRANA_AVAIL||FB;
+  var active=AV.activeNames||[];
+  var booked=AV.booked||{};
+  // Precio/aforo (espejo de RM). Solo para el resumen; el cobro va por WhatsApp.
+  var PRICE={Argia:95,Itsaso:105,Basoa:95,Lasai:90,Izar:95,Haize:95,Ibai:95,Aritz:100,Lorategia:160,Lur:95};
+  var ORDER=['Argia','Itsaso','Basoa','Lasai','Izar','Lorategia','Haize','Ibai','Aritz','Lur'];
+
+  var MES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var DOW=['lun','mar','mié','jue','vie','sáb','dom'];
+  function pad(n){return n<10?'0'+n:''+n;}
+  function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+  function parse(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}
+  function fmt(s){var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+  var today=new Date();today.setHours(0,0,0,0);
+
+  // Noches ocupadas [in,out) de una habitación.
+  function bookedSet(room){var set={};(booked[room]||[]).forEach(function(r){
+    var a=parse(r[0]),b=parse(r[1]);for(var d=new Date(a);d<b;d.setDate(d.getDate()+1))set[ymd(d)]=1;});return set;}
+  function roomFree(room,inS,outS){if(active.indexOf(room)<0)return false;
+    var bs=bookedSet(room),a=parse(inS),b=parse(outS);
+    for(var d=new Date(a);d<b;d.setDate(d.getDate()+1)){if(bs[ymd(d)])return false;}return true;}
+  function nights(inS,outS){return Math.round((parse(outS)-parse(inS))/86400000);}
+
+  // --- Estado ---
+  var MODE='room',ROOM=null,selIn=null,selOut=null,view=new Date(today.getFullYear(),today.getMonth(),1);
+  var ov=document.getElementById('kbOv');
+
+  // --- Mensaje "X personas mirando" (varía cada vez, sin repetir el anterior) ---
+  function watchers(){var last=+localStorage.getItem('kr_watch')||0,n,g=0;
+    do{n=2+Math.floor(Math.random()*5);}while(n===last&&g++<10); // 2..6, distinto al último
+    localStorage.setItem('kr_watch',n);return n;}
+  function showWatch(ctx){document.getElementById('kbWatchTxt').textContent=
+    'Ahora mismo hay '+watchers()+' personas mirando '+ctx+'.';}
+
+  // --- Render calendario ---
+  function drawCal(){
+    var off=(MODE==='room'&&ROOM)?bookedSet(ROOM):{};
+    var y=view.getFullYear(),m=view.getMonth();
+    var first=new Date(y,m,1),start=(first.getDay()+6)%7,dim=new Date(y,m+1,0).getDate();
+    var prevDisabled=(y<today.getFullYear()||(y===today.getFullYear()&&m<=today.getMonth()));
+    var h='<div class="kb-nav"><button id="kbPrev"'+(prevDisabled?' disabled':'')+'>&lsaquo;</button>'
+      +'<span class="kb-mtitle">'+MES[m]+' '+y+'</span><button id="kbNext">&rsaquo;</button></div>';
+    h+='<div class="kb-grid">'+DOW.map(function(d){return '<div class="kb-dow">'+d+'</div>';}).join('');
+    for(var i=0;i<start;i++)h+='<div class="kb-day empty"></div>';
+    for(var dd=1;dd<=dim;dd++){
+      var ds=y+'-'+pad(m+1)+'-'+pad(dd),dt=new Date(y,m,dd);
+      var cls='kb-day',dis=false;
+      if(dt<today||off[ds]){cls+=' off';dis=true;}
+      if(ds===selIn||ds===selOut)cls+=' sel';
+      else if(selIn&&selOut&&ds>selIn&&ds<selOut)cls+=' inrange';
+      h+='<div class="'+cls+'"'+(dis?'':' data-d="'+ds+'"')+'>'+dd+'</div>';
+    }
+    h+='</div><div class="kb-legend"><span><i style="background:#2B3A2E"></i>tu selección</span>'
+      +'<span><i style="background:#D9E0CE"></i>noches</span>'
+      +'<span><i style="background:#eee;border:1px solid #ccc"></i>no disponible</span></div>';
+    document.getElementById('kbBody').innerHTML=h;
+    document.getElementById('kbNext').onclick=function(){view=new Date(y,m+1,1);drawCal();};
+    var pv=document.getElementById('kbPrev');if(pv&&!prevDisabled)pv.onclick=function(){view=new Date(y,m-1,1);drawCal();};
+    Array.prototype.forEach.call(document.querySelectorAll('#kbBody .kb-day[data-d]'),function(el){
+      el.onclick=function(){pick(el.getAttribute('data-d'));};});
+  }
+
+  function pick(ds){
+    if(!selIn||(selIn&&selOut)){selIn=ds;selOut=null;}
+    else if(ds<=selIn){selIn=ds;selOut=null;}
+    else{ // intentar rango selIn..ds; en modo habitación validar que no pise noches ocupadas
+      if(MODE==='room'&&ROOM){var bs=bookedSet(ROOM),a=parse(selIn),b=parse(ds),ok=true;
+        for(var d=new Date(a);d<b;d.setDate(d.getDate()+1)){if(bs[ymd(d)]){ok=false;break;}}
+        if(!ok){selIn=ds;selOut=null;drawCal();drawFoot();return;}}
+      selOut=ds;}
+    drawCal();drawFoot();
+  }
+
+  function waLink(room,pax){var msg='Hola, me gustaría reservar '+room+' del '+fmt(selIn)+' al '+fmt(selOut)
+      +(pax?(' para '+pax+' personas'):'')+'. ¿Está disponible?';
+    return 'https://wa.me/'+WA+'?text='+encodeURIComponent(msg);}
+  function pax(){var s=document.getElementById('bk-pax');return s?s.value:'';}
+
+  function drawFoot(){
+    var f=document.getElementById('kbFoot');
+    if(MODE==='room'){
+      if(ROOM&&active.indexOf(ROOM)<0){f.innerHTML='<p class="kb-none">Esta habitación no está disponible para reservar ahora mismo.</p>';return;}
+      if(selIn&&selOut){var n=nights(selIn,selOut),tot=(PRICE[ROOM]||0)*n;
+        f.innerHTML='<p class="kb-summary"><b>'+ROOM+'</b> · '+fmt(selIn)+' &rarr; '+fmt(selOut)+' · '+n+' noche'+(n>1?'s':'')+' · desde <b>'+tot+'&euro;</b></p>'
+          +'<a class="kb-cta" href="'+waLink(ROOM,pax())+'" target="_blank" rel="noopener">Reservar por WhatsApp</a>';
+      }else f.innerHTML='<p class="kb-hint">Elige la fecha de entrada y la de salida en el calendario.</p>';
+    }else{ // modo fecha → habitaciones libres
+      if(selIn&&selOut){var libres=ORDER.filter(function(r){return roomFree(r,selIn,selOut);});
+        var n2=nights(selIn,selOut);
+        if(!libres.length){f.innerHTML='<p class="kb-none">No quedan habitaciones libres para esas fechas. Prueba otras fechas.</p>';return;}
+        f.innerHTML='<p class="kb-summary">Para <b>'+fmt(selIn)+' &rarr; '+fmt(selOut)+'</b> ('+n2+' noche'+(n2>1?'s':'')+') tienes disponibles:</p>'
+          +'<ul class="kb-rooms">'+libres.map(function(r){return '<li><span><span class="nm">'+r+'</span> <span class="pr">desde '+(PRICE[r]||'')+'&euro;/noche</span></span><button data-pick="'+r+'">Reservar</button></li>';}).join('')+'</ul>';
+        Array.prototype.forEach.call(f.querySelectorAll('button[data-pick]'),function(b){
+          b.onclick=function(){MODE='room';ROOM=b.getAttribute('data-pick');
+            document.getElementById('kbTitle').textContent=ROOM;
+            document.getElementById('kbSub').textContent='Confirma tus fechas';
+            drawCal();drawFoot();};});
+      }else f.innerHTML='<p class="kb-hint">Elige entrada y salida y te digo qué habitaciones quedan libres.</p>';
+    }
+  }
+
+  function openModal(mode,room){
+    MODE=mode;ROOM=room||null;selIn=selOut=null;view=new Date(today.getFullYear(),today.getMonth(),1);
+    // Prefill desde la barra de búsqueda si hay fechas válidas
+    var bi=document.getElementById('bk-in'),bo=document.getElementById('bk-out');
+    if(bi&&bo&&bi.value&&bo.value&&bi.value<bo.value){selIn=bi.value;selOut=bo.value;
+      if(mode==='room'&&room&&!roomFree(room,selIn,selOut)){selIn=selOut=null;}}
+    if(mode==='room'){document.getElementById('kbTitle').textContent=room||'reservar';
+      document.getElementById('kbSub').textContent='Disponibilidad de esta habitación';
+      showWatch(room?('la habitación '+room):'esta habitación');}
+    else{document.getElementById('kbTitle').textContent='disponibilidad';
+      document.getElementById('kbSub').textContent='Elige fechas y mira qué hay libre';
+      showWatch('estas fechas');}
+    drawCal();drawFoot();
+    ov.classList.add('open');document.body.style.overflow='hidden';
+  }
+  function close(){ov.classList.remove('open');document.body.style.overflow='';}
+
+  function wire(){
+    document.getElementById('kbX').onclick=close;
+    ov.addEventListener('click',function(e){if(e.target===ov)close();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ov.classList.contains('open'))close();});
+    // "Reservar →" de cada habitación
+    document.addEventListener('click',function(e){
+      var b=e.target.closest&&e.target.closest('.kb-book');
+      if(b){e.preventDefault();openModal('room',b.getAttribute('data-room'));}});
+    // Barra "Ver disponibilidad"
+    var go=document.getElementById('kb-open');if(go)go.addEventListener('click',function(e){e.preventDefault();openModal('date');});
+    // min=hoy en los inputs de fecha
+    var bi=document.getElementById('bk-in'),bo=document.getElementById('bk-out');
+    if(bi)bi.min=ymd(today);if(bo)bo.min=ymd(today);
+  }
+  if(document.readyState!=='loading')wire();else document.addEventListener('DOMContentLoaded',wire);
+})();
+</script>
 </body>
+
 </html>
