@@ -1,36 +1,12 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import Hero from '@/components/Hero.astro';
-import SeccionCasa from '@/components/SeccionCasa.astro';
-import SeccionEspacios from '@/components/SeccionEspacios.astro';
-import SeccionIdea from '@/components/SeccionIdea.astro';
-import RoomsSection from '@/components/RoomsSection.astro';
-import SeccionServicios from '@/components/SeccionServicios.astro';
-import Banda from '@/components/Banda.astro';
-import SeccionEntorno from '@/components/SeccionEntorno.astro';
-import SeccionActividades from '@/components/SeccionActividades.astro';
-import SeccionEstancia from '@/components/SeccionEstancia.astro';
-import SeccionOpiniones from '@/components/SeccionOpiniones.astro';
-import SeccionOfertas from '@/components/SeccionOfertas.astro';
-import SeccionReserva from '@/components/SeccionReserva.astro';
-import { defaultLang } from '@/i18n/ui';
+// Web pública: servimos la maqueta definitiva de Kirana (src/home.html) tal cual
+// — es autocontenida (CSS/JS/i18n en línea, imágenes en CDN). El panel sigue en
+// /panel (SSR). Las habitaciones de esta home son su propio contenido; conectar
+// el bloqueo del panel a esta web (regla #2) es el siguiente paso.
+export const prerender = false;
+import html from '../home.html?raw';
 
-// ES vive en la raíz (prefixDefaultLocale: false).
-const lang = defaultLang;
+return new Response(html, {
+  headers: { 'content-type': 'text/html; charset=utf-8' },
+});
 ---
-
-<BaseLayout lang={lang}>
-  <Hero lang={lang} />
-  <SeccionCasa lang={lang} />
-  <SeccionEspacios lang={lang} />
-  <SeccionIdea lang={lang} />
-  <RoomsSection lang={lang} />
-  <SeccionServicios lang={lang} />
-  <Banda lang={lang} />
-  <SeccionEntorno lang={lang} />
-  <SeccionActividades lang={lang} />
-  <SeccionEstancia lang={lang} />
-  <SeccionOpiniones lang={lang} />
-  <SeccionOfertas lang={lang} />
-  <SeccionReserva lang={lang} />
-</BaseLayout>

@@ -1,41 +1,16 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import Hero from '@/components/Hero.astro';
-import SeccionCasa from '@/components/SeccionCasa.astro';
-import SeccionEspacios from '@/components/SeccionEspacios.astro';
-import SeccionIdea from '@/components/SeccionIdea.astro';
-import RoomsSection from '@/components/RoomsSection.astro';
-import SeccionServicios from '@/components/SeccionServicios.astro';
-import Banda from '@/components/Banda.astro';
-import SeccionEntorno from '@/components/SeccionEntorno.astro';
-import SeccionActividades from '@/components/SeccionActividades.astro';
-import SeccionEstancia from '@/components/SeccionEstancia.astro';
-import SeccionOpiniones from '@/components/SeccionOpiniones.astro';
-import SeccionOfertas from '@/components/SeccionOfertas.astro';
-import SeccionReserva from '@/components/SeccionReserva.astro';
-import { languages, defaultLang, type Lang } from '@/i18n/ui';
+// La maqueta hace el cambio de idioma en cliente, así que servimos la MISMA
+// home para cualquier locale válido (/eu, /fr…). ES vive en la raíz.
+export const prerender = false;
+import html from '../../home.html?raw';
+import { languages, defaultLang } from '@/i18n/ui';
 
-// SSR: validar el idioma en cada petición (ES vive en la raíz). Así la web
-// refleja en vivo el bloquear/activar del panel (regla #2).
 const param = Astro.params.lang;
 if (!param || !(param in languages) || param === defaultLang) {
   return new Response('Not found', { status: 404 });
 }
-const lang = param as Lang;
----
 
-<BaseLayout lang={lang}>
-  <Hero lang={lang} />
-  <SeccionCasa lang={lang} />
-  <SeccionEspacios lang={lang} />
-  <SeccionIdea lang={lang} />
-  <RoomsSection lang={lang} />
-  <SeccionServicios lang={lang} />
-  <Banda lang={lang} />
-  <SeccionEntorno lang={lang} />
-  <SeccionActividades lang={lang} />
-  <SeccionEstancia lang={lang} />
-  <SeccionOpiniones lang={lang} />
-  <SeccionOfertas lang={lang} />
-  <SeccionReserva lang={lang} />
-</BaseLayout>
+return new Response(html, {
+  headers: { 'content-type': 'text/html; charset=utf-8' },
+});
+---
