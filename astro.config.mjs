@@ -9,18 +9,26 @@ import cloudflare from '@astrojs/cloudflare';
 // Dominio canónico recomendado (consolidar en uno + 301). Confirmar con Fran.
 const SITE = 'https://kiranabermeo.es';
 
-// Adaptador según el entorno de despliegue, autodetectado por su variable:
-//   Cloudflare Pages (CF_PAGES) · Netlify (NETLIFY) · Vercel (VERCEL).
-// Todos despliegan desde el repo de GitHub (URL de pruebas y luego dominio
-// propio) y ejecutan el panel. Node en local y en hostings con servidor.
-// Cambiar de uno a otro no toca el resto del código.
-const adapter = process.env.CF_PAGES
-  ? cloudflare({ imageService: 'compile' })
-  : process.env.NETLIFY
-    ? netlify()
-    : process.env.VERCEL
+// Adaptador según destino. El despliegue es Cloudflare Workers, así que es el
+// POR DEFECTO (el `npm run build` del builder de Cloudflare genera el worker en
+// dist/_worker.js/). Vercel/Netlify se autodetectan por su variable de entorno.
+// Node es para pruebas locales: `npm run build:node`.
+const target = process.env.npm_lifecycle_event === 'build:node'
+  ? 'node'
+  : process.env.VERCEL
+    ? 'vercel'
+    : process.env.NETLIFY
+      ? 'netlify'
+      : 'cloudflare';
+
+const adapter =
+  target === 'node'
+    ? node({ mode: 'standalone' })
+    : target === 'vercel'
       ? vercel()
-      : node({ mode: 'standalone' });
+      : target === 'netlify'
+        ? netlify()
+        : cloudflare({ imageService: 'compile' });
 
 // SSR (output server): la web pública y el panel leen rooms.json en cada
 // petición, de modo que bloquear/activar una habitación en el panel se refleja
