@@ -1,10 +1,15 @@
-# Configuración de Cloudflare Pages.
-# Cloudflare lee esto al desplegar: carpeta de salida del build y los flags de
-# compatibilidad que necesita el adaptador @astrojs/cloudflare (Node integrado).
-name = "kirana"
-pages_build_output_dir = "./dist"
+# Configuración de despliegue en Cloudflare Workers (flujo "Workers Builds").
+# Cloudflare ejecuta `npm run build` y luego `npx wrangler deploy`, que lee esto.
+name = "alojamientohotel-rural"
+main = "./dist/_worker.js/index.js"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
+# Sirve los ficheros estáticos generados (la web) junto al SSR (panel).
+[assets]
+binding = "ASSETS"
+directory = "./dist"
+
 # Recordatorio: define PANEL_PASSWORD en
-# Cloudflare Pages → Settings → Variables and Secrets (no se commitea, regla #5).
+# el panel de Cloudflare (Settings → Variables and Secrets) o en el campo
+# "Nombre/Valor de la variable" del asistente. No se commitea (regla #5).
