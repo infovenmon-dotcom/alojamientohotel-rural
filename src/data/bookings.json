@@ -62,6 +62,216 @@
       "pax": 2,
       "source": "web",
       "ref": "Directa"
+    },
+    {
+      "id": "seed7",
+      "room": "Itsaso",
+      "in": "2026-07-03",
+      "out": "2026-07-07",
+      "name": "Familia Agirre",
+      "pax": 3,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed8",
+      "room": "Argia",
+      "in": "2026-07-08",
+      "out": "2026-07-11",
+      "name": "Laura & Tom",
+      "pax": 2,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed9",
+      "room": "Basoa",
+      "in": "2026-07-10",
+      "out": "2026-07-14",
+      "name": "S. Müller",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Booking"
+    },
+    {
+      "id": "seed10",
+      "room": "Izar",
+      "in": "2026-07-12",
+      "out": "2026-07-15",
+      "name": "J. Dubois",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Booking"
+    },
+    {
+      "id": "seed11",
+      "room": "Itsaso",
+      "in": "2026-07-18",
+      "out": "2026-07-22",
+      "name": "H. Becker",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Booking"
+    },
+    {
+      "id": "seed12",
+      "room": "Lorategia",
+      "in": "2026-07-18",
+      "out": "2026-07-24",
+      "name": "The Walkers (4 pax)",
+      "pax": 4,
+      "source": "channel",
+      "ref": "Expedia/Vrbo"
+    },
+    {
+      "id": "seed13",
+      "room": "Lasai",
+      "in": "2026-07-20",
+      "out": "2026-07-23",
+      "name": "Marta S.",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Teléfono/WhatsApp"
+    },
+    {
+      "id": "seed14",
+      "room": "Argia",
+      "in": "2026-07-20",
+      "out": "2026-07-24",
+      "name": "Nora & Beñat",
+      "pax": 2,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed15",
+      "room": "Argia",
+      "in": "2026-08-01",
+      "out": "2026-08-06",
+      "name": "F. Rossi",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Booking"
+    },
+    {
+      "id": "seed16",
+      "room": "Lasai",
+      "in": "2026-08-05",
+      "out": "2026-08-09",
+      "name": "R. O'Brien",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Booking"
+    },
+    {
+      "id": "seed17",
+      "room": "Basoa",
+      "in": "2026-08-08",
+      "out": "2026-08-12",
+      "name": "L. Janssen",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Booking"
+    },
+    {
+      "id": "seed18",
+      "room": "Itsaso",
+      "in": "2026-08-10",
+      "out": "2026-08-15",
+      "name": "Familia Etxeberria",
+      "pax": 3,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed19",
+      "room": "Izar",
+      "in": "2026-08-12",
+      "out": "2026-08-16",
+      "name": "P. Schmidt",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Expedia/Vrbo"
+    },
+    {
+      "id": "seed20",
+      "room": "Lorategia",
+      "in": "2026-08-15",
+      "out": "2026-08-22",
+      "name": "The Browns (4 pax)",
+      "pax": 4,
+      "source": "channel",
+      "ref": "Booking"
+    },
+    {
+      "id": "seed21",
+      "room": "Basoa",
+      "in": "2026-08-20",
+      "out": "2026-08-24",
+      "name": "Iker & Maite",
+      "pax": 2,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed22",
+      "room": "Lasai",
+      "in": "2026-08-23",
+      "out": "2026-08-27",
+      "name": "K. Andersen",
+      "pax": 2,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed23",
+      "room": "Basoa",
+      "in": "2026-09-01",
+      "out": "2026-09-04",
+      "name": "Claire D.",
+      "pax": 2,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed24",
+      "room": "Argia",
+      "in": "2026-09-05",
+      "out": "2026-09-09",
+      "name": "Sophie & Marc",
+      "pax": 2,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed25",
+      "room": "Itsaso",
+      "in": "2026-09-10",
+      "out": "2026-09-14",
+      "name": "De Vries",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Booking"
+    },
+    {
+      "id": "seed26",
+      "room": "Izar",
+      "in": "2026-09-12",
+      "out": "2026-09-15",
+      "name": "Unai & Leire",
+      "pax": 2,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed27",
+      "room": "Lorategia",
+      "in": "2026-09-18",
+      "out": "2026-09-22",
+      "name": "Familia Ruiz (4 pax)",
+      "pax": 4,
+      "source": "web",
+      "ref": "Directa"
     }
   ],
   "external": {},

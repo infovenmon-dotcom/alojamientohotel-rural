@@ -1,26 +1,567 @@
 {
   "_meta": "DATOS DE EJEMPLO para el panel (portados de kirana-panel-control.html). Se sustituyen por datos reales con el motor de reservas (Fase 4) y la contabilidad real (Fase 6). No usar en producción.",
   "bookings": [
-    { "room": "Argia", "name": "Marie & Paul L.", "in": "2026-06-20", "out": "2026-06-25", "guests": 2, "ch": "Directa", "mp": false, "rate": 95 },
-    { "room": "Basoa", "name": "Anke V.", "in": "2026-06-22", "out": "2026-06-26", "guests": 2, "ch": "Booking", "mp": false, "rate": 95 },
-    { "room": "Itsaso", "name": "Familia Etxeberria", "in": "2026-06-23", "out": "2026-06-28", "guests": 2, "ch": "Directa", "mp": true, "rate": 105 },
-    { "room": "Lorategia", "name": "Jensen (4 pax)", "in": "2026-06-24", "out": "2026-06-30", "guests": 4, "ch": "Expedia/Vrbo", "mp": false, "rate": 160 },
-    { "room": "Lasai", "name": "Cristina R.", "in": "2026-06-27", "out": "2026-06-29", "guests": 2, "ch": "Teléfono/WhatsApp", "mp": false, "rate": 90 },
-    { "room": "Argia", "name": "Hans & Greta", "in": "2026-06-28", "out": "2026-07-02", "guests": 2, "ch": "Directa", "mp": true, "rate": 95 }
+    {
+      "room": "Argia",
+      "name": "Marie & Paul L.",
+      "in": "2026-06-20",
+      "out": "2026-06-25",
+      "guests": 2,
+      "ch": "Directa",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Basoa",
+      "name": "Anke V.",
+      "in": "2026-06-22",
+      "out": "2026-06-26",
+      "guests": 2,
+      "ch": "Booking",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Itsaso",
+      "name": "Familia Etxeberria",
+      "in": "2026-06-23",
+      "out": "2026-06-28",
+      "guests": 2,
+      "ch": "Directa",
+      "mp": true,
+      "rate": 105
+    },
+    {
+      "room": "Lorategia",
+      "name": "Jensen (4 pax)",
+      "in": "2026-06-24",
+      "out": "2026-06-30",
+      "guests": 4,
+      "ch": "Expedia/Vrbo",
+      "mp": false,
+      "rate": 160
+    },
+    {
+      "room": "Lasai",
+      "name": "Cristina R.",
+      "in": "2026-06-27",
+      "out": "2026-06-29",
+      "guests": 2,
+      "ch": "Teléfono/WhatsApp",
+      "mp": false,
+      "rate": 90
+    },
+    {
+      "room": "Argia",
+      "name": "Hans & Greta",
+      "in": "2026-06-28",
+      "out": "2026-07-02",
+      "guests": 2,
+      "ch": "Directa",
+      "mp": true,
+      "rate": 95
+    },
+    {
+      "room": "Itsaso",
+      "name": "Familia Agirre",
+      "in": "2026-07-03",
+      "out": "2026-07-07",
+      "guests": 3,
+      "ch": "Directa",
+      "mp": false,
+      "rate": 105
+    },
+    {
+      "room": "Argia",
+      "name": "Laura & Tom",
+      "in": "2026-07-08",
+      "out": "2026-07-11",
+      "guests": 2,
+      "ch": "Directa",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Basoa",
+      "name": "S. Müller",
+      "in": "2026-07-10",
+      "out": "2026-07-14",
+      "guests": 2,
+      "ch": "Booking",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Izar",
+      "name": "J. Dubois",
+      "in": "2026-07-12",
+      "out": "2026-07-15",
+      "guests": 2,
+      "ch": "Booking",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Itsaso",
+      "name": "H. Becker",
+      "in": "2026-07-18",
+      "out": "2026-07-22",
+      "guests": 2,
+      "ch": "Booking",
+      "mp": false,
+      "rate": 105
+    },
+    {
+      "room": "Lorategia",
+      "name": "The Walkers (4 pax)",
+      "in": "2026-07-18",
+      "out": "2026-07-24",
+      "guests": 4,
+      "ch": "Expedia/Vrbo",
+      "mp": false,
+      "rate": 160
+    },
+    {
+      "room": "Lasai",
+      "name": "Marta S.",
+      "in": "2026-07-20",
+      "out": "2026-07-23",
+      "guests": 2,
+      "ch": "Teléfono/WhatsApp",
+      "mp": false,
+      "rate": 90
+    },
+    {
+      "room": "Argia",
+      "name": "Nora & Beñat",
+      "in": "2026-07-20",
+      "out": "2026-07-24",
+      "guests": 2,
+      "ch": "Directa",
+      "mp": true,
+      "rate": 95
+    },
+    {
+      "room": "Argia",
+      "name": "F. Rossi",
+      "in": "2026-08-01",
+      "out": "2026-08-06",
+      "guests": 2,
+      "ch": "Booking",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Lasai",
+      "name": "R. O'Brien",
+      "in": "2026-08-05",
+      "out": "2026-08-09",
+      "guests": 2,
+      "ch": "Booking",
+      "mp": false,
+      "rate": 90
+    },
+    {
+      "room": "Basoa",
+      "name": "L. Janssen",
+      "in": "2026-08-08",
+      "out": "2026-08-12",
+      "guests": 2,
+      "ch": "Booking",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Itsaso",
+      "name": "Familia Etxeberria",
+      "in": "2026-08-10",
+      "out": "2026-08-15",
+      "guests": 3,
+      "ch": "Directa",
+      "mp": true,
+      "rate": 105
+    },
+    {
+      "room": "Izar",
+      "name": "P. Schmidt",
+      "in": "2026-08-12",
+      "out": "2026-08-16",
+      "guests": 2,
+      "ch": "Expedia/Vrbo",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Lorategia",
+      "name": "The Browns (4 pax)",
+      "in": "2026-08-15",
+      "out": "2026-08-22",
+      "guests": 4,
+      "ch": "Booking",
+      "mp": false,
+      "rate": 160
+    },
+    {
+      "room": "Basoa",
+      "name": "Iker & Maite",
+      "in": "2026-08-20",
+      "out": "2026-08-24",
+      "guests": 2,
+      "ch": "Directa",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Lasai",
+      "name": "K. Andersen",
+      "in": "2026-08-23",
+      "out": "2026-08-27",
+      "guests": 2,
+      "ch": "Directa",
+      "mp": false,
+      "rate": 90
+    },
+    {
+      "room": "Basoa",
+      "name": "Claire D.",
+      "in": "2026-09-01",
+      "out": "2026-09-04",
+      "guests": 2,
+      "ch": "Directa",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Argia",
+      "name": "Sophie & Marc",
+      "in": "2026-09-05",
+      "out": "2026-09-09",
+      "guests": 2,
+      "ch": "Directa",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Itsaso",
+      "name": "De Vries",
+      "in": "2026-09-10",
+      "out": "2026-09-14",
+      "guests": 2,
+      "ch": "Booking",
+      "mp": false,
+      "rate": 105
+    },
+    {
+      "room": "Izar",
+      "name": "Unai & Leire",
+      "in": "2026-09-12",
+      "out": "2026-09-15",
+      "guests": 2,
+      "ch": "Directa",
+      "mp": false,
+      "rate": 95
+    },
+    {
+      "room": "Lorategia",
+      "name": "Familia Ruiz (4 pax)",
+      "in": "2026-09-18",
+      "out": "2026-09-22",
+      "guests": 4,
+      "ch": "Directa",
+      "mp": false,
+      "rate": 160
+    }
   ],
   "invoices": [
-    { "n": "2026/041", "date": "2026-06-20", "client": "Marie & Paul L.", "base": 431.82, "iva": 43.18, "status": "Cobrada", "ch": "Directa", "concept": "Estancia 5 noches · hab. Argia" },
-    { "n": "2026/042", "date": "2026-06-22", "client": "Anke V.", "base": 345.45, "iva": 34.55, "status": "Cobrada", "ch": "Booking", "concept": "Estancia 4 noches · hab. Basoa" },
-    { "n": "2026/043", "date": "2026-06-23", "client": "Familia Etxeberria", "base": 704.55, "iva": 70.45, "status": "Pendiente", "ch": "Directa", "concept": "Estancia 5 noches · hab. Itsaso · media pensión" }
+    {
+      "n": "2026/041",
+      "date": "2026-06-20",
+      "client": "Marie & Paul L.",
+      "base": 431.82,
+      "iva": 43.18,
+      "status": "Pendiente",
+      "ch": "Directa",
+      "concept": "Estancia 5 noches · hab. Argia"
+    },
+    {
+      "n": "2026/042",
+      "date": "2026-06-22",
+      "client": "Anke V.",
+      "base": 345.45,
+      "iva": 34.55,
+      "status": "Cobrada",
+      "ch": "Booking",
+      "concept": "Estancia 4 noches · hab. Basoa"
+    },
+    {
+      "n": "2026/043",
+      "date": "2026-06-23",
+      "client": "Familia Etxeberria",
+      "base": 477.27,
+      "iva": 47.73,
+      "status": "Cobrada",
+      "ch": "Directa",
+      "concept": "Estancia 5 noches · hab. Itsaso · media pensión"
+    },
+    {
+      "n": "2026/044",
+      "date": "2026-06-24",
+      "client": "Jensen (4 pax)",
+      "base": 872.73,
+      "iva": 87.27,
+      "status": "Pendiente",
+      "ch": "Expedia/Vrbo",
+      "concept": "Estancia 6 noches · hab. Lorategia"
+    },
+    {
+      "n": "2026/045",
+      "date": "2026-06-27",
+      "client": "Cristina R.",
+      "base": 163.64,
+      "iva": 16.36,
+      "status": "Cobrada",
+      "ch": "Teléfono/WhatsApp",
+      "concept": "Estancia 2 noches · hab. Lasai"
+    },
+    {
+      "n": "2026/046",
+      "date": "2026-06-28",
+      "client": "Hans & Greta",
+      "base": 345.45,
+      "iva": 34.55,
+      "status": "Cobrada",
+      "ch": "Directa",
+      "concept": "Estancia 4 noches · hab. Argia · media pensión"
+    },
+    {
+      "n": "2026/047",
+      "date": "2026-07-03",
+      "client": "Familia Agirre",
+      "base": 381.82,
+      "iva": 38.18,
+      "status": "Pendiente",
+      "ch": "Directa",
+      "concept": "Estancia 4 noches · hab. Itsaso"
+    },
+    {
+      "n": "2026/048",
+      "date": "2026-07-08",
+      "client": "Laura & Tom",
+      "base": 259.09,
+      "iva": 25.91,
+      "status": "Cobrada",
+      "ch": "Directa",
+      "concept": "Estancia 3 noches · hab. Argia"
+    },
+    {
+      "n": "2026/049",
+      "date": "2026-07-10",
+      "client": "S. Müller",
+      "base": 345.45,
+      "iva": 34.55,
+      "status": "Cobrada",
+      "ch": "Booking",
+      "concept": "Estancia 4 noches · hab. Basoa"
+    },
+    {
+      "n": "2026/050",
+      "date": "2026-07-12",
+      "client": "J. Dubois",
+      "base": 259.09,
+      "iva": 25.91,
+      "status": "Pendiente",
+      "ch": "Booking",
+      "concept": "Estancia 3 noches · hab. Izar"
+    },
+    {
+      "n": "2026/051",
+      "date": "2026-07-18",
+      "client": "H. Becker",
+      "base": 381.82,
+      "iva": 38.18,
+      "status": "Cobrada",
+      "ch": "Booking",
+      "concept": "Estancia 4 noches · hab. Itsaso"
+    },
+    {
+      "n": "2026/052",
+      "date": "2026-07-18",
+      "client": "The Walkers (4 pax)",
+      "base": 872.73,
+      "iva": 87.27,
+      "status": "Cobrada",
+      "ch": "Expedia/Vrbo",
+      "concept": "Estancia 6 noches · hab. Lorategia"
+    },
+    {
+      "n": "2026/053",
+      "date": "2026-07-20",
+      "client": "Marta S.",
+      "base": 245.45,
+      "iva": 24.55,
+      "status": "Pendiente",
+      "ch": "Teléfono/WhatsApp",
+      "concept": "Estancia 3 noches · hab. Lasai"
+    },
+    {
+      "n": "2026/054",
+      "date": "2026-07-20",
+      "client": "Nora & Beñat",
+      "base": 345.45,
+      "iva": 34.55,
+      "status": "Cobrada",
+      "ch": "Directa",
+      "concept": "Estancia 4 noches · hab. Argia · media pensión"
+    },
+    {
+      "n": "2026/055",
+      "date": "2026-08-01",
+      "client": "F. Rossi",
+      "base": 431.82,
+      "iva": 43.18,
+      "status": "Cobrada",
+      "ch": "Booking",
+      "concept": "Estancia 5 noches · hab. Argia"
+    },
+    {
+      "n": "2026/056",
+      "date": "2026-08-05",
+      "client": "R. O'Brien",
+      "base": 327.27,
+      "iva": 32.73,
+      "status": "Pendiente",
+      "ch": "Booking",
+      "concept": "Estancia 4 noches · hab. Lasai"
+    },
+    {
+      "n": "2026/057",
+      "date": "2026-08-08",
+      "client": "L. Janssen",
+      "base": 345.45,
+      "iva": 34.55,
+      "status": "Cobrada",
+      "ch": "Booking",
+      "concept": "Estancia 4 noches · hab. Basoa"
+    },
+    {
+      "n": "2026/058",
+      "date": "2026-08-10",
+      "client": "Familia Etxeberria",
+      "base": 477.27,
+      "iva": 47.73,
+      "status": "Cobrada",
+      "ch": "Directa",
+      "concept": "Estancia 5 noches · hab. Itsaso · media pensión"
+    },
+    {
+      "n": "2026/059",
+      "date": "2026-08-12",
+      "client": "P. Schmidt",
+      "base": 345.45,
+      "iva": 34.55,
+      "status": "Pendiente",
+      "ch": "Expedia/Vrbo",
+      "concept": "Estancia 4 noches · hab. Izar"
+    },
+    {
+      "n": "2026/060",
+      "date": "2026-08-15",
+      "client": "The Browns (4 pax)",
+      "base": 1018.18,
+      "iva": 101.82,
+      "status": "Cobrada",
+      "ch": "Booking",
+      "concept": "Estancia 7 noches · hab. Lorategia"
+    }
   ],
   "expenses": [
-    { "date": "2026-06-03", "desc": "Luz y agua", "cat": "Suministros", "amt": 280 },
-    { "date": "2026-06-07", "desc": "Lavandería (sábanas/toallas)", "cat": "Limpieza y lavandería", "amt": 190 },
-    { "date": "2026-06-10", "desc": "Compra desayunos", "cat": "Desayuno/alimentación", "amt": 240 },
-    { "date": "2026-06-12", "desc": "Comisión Booking (mayo)", "cat": "Comisiones OTA", "amt": 410 },
-    { "date": "2026-06-15", "desc": "Campaña Google + web", "cat": "Marketing/web", "amt": 150 },
-    { "date": "2026-06-18", "desc": "Fontanería baño Itsaso", "cat": "Mantenimiento", "amt": 120 }
+    {
+      "date": "2026-06-03",
+      "desc": "Luz y agua",
+      "cat": "Suministros",
+      "amt": 280
+    },
+    {
+      "date": "2026-06-07",
+      "desc": "Lavandería (sábanas/toallas)",
+      "cat": "Limpieza y lavandería",
+      "amt": 190
+    },
+    {
+      "date": "2026-06-10",
+      "desc": "Compra desayunos",
+      "cat": "Desayuno/alimentación",
+      "amt": 240
+    },
+    {
+      "date": "2026-06-12",
+      "desc": "Comisión Booking (mayo)",
+      "cat": "Comisiones OTA",
+      "amt": 410
+    },
+    {
+      "date": "2026-06-15",
+      "desc": "Campaña Google + web",
+      "cat": "Marketing/web",
+      "amt": 150
+    },
+    {
+      "date": "2026-06-18",
+      "desc": "Fontanería baño Itsaso",
+      "cat": "Mantenimiento",
+      "amt": 120
+    },
+    {
+      "date": "2026-07-04",
+      "desc": "Luz y agua",
+      "cat": "Suministros",
+      "amt": 295
+    },
+    {
+      "date": "2026-07-09",
+      "desc": "Lavandería (sábanas/toallas)",
+      "cat": "Limpieza y lavandería",
+      "amt": 220
+    },
+    {
+      "date": "2026-07-12",
+      "desc": "Compra desayunos",
+      "cat": "Desayuno/alimentación",
+      "amt": 310
+    },
+    {
+      "date": "2026-07-14",
+      "desc": "Comisión Booking (junio)",
+      "cat": "Comisiones OTA",
+      "amt": 520
+    },
+    {
+      "date": "2026-08-06",
+      "desc": "Compra desayunos",
+      "cat": "Desayuno/alimentación",
+      "amt": 340
+    },
+    {
+      "date": "2026-08-12",
+      "desc": "Comisión Booking (julio)",
+      "cat": "Comisiones OTA",
+      "amt": 610
+    }
   ],
-  "channelColors": { "Directa": "#2B3A2E", "Booking": "#3C5A7A", "Expedia/Vrbo": "#A6543E", "Teléfono/WhatsApp": "#5F6E52" },
-  "catColors": { "Suministros": "#5F6E52", "Limpieza y lavandería": "#3C5A7A", "Desayuno/alimentación": "#B49A72", "Mantenimiento": "#8A6E4B", "Marketing/web": "#7A6BA0", "Comisiones OTA": "#A6543E", "Impuestos/seguros": "#536B4A", "Otros": "#9AA08F" }
+  "channelColors": {
+    "Directa": "#2B3A2E",
+    "Booking": "#3C5A7A",
+    "Expedia/Vrbo": "#A6543E",
+    "Teléfono/WhatsApp": "#5F6E52"
+  },
+  "catColors": {
+    "Suministros": "#5F6E52",
+    "Limpieza y lavandería": "#3C5A7A",
+    "Desayuno/alimentación": "#B49A72",
+    "Mantenimiento": "#8A6E4B",
+    "Marketing/web": "#7A6BA0",
+    "Comisiones OTA": "#A6543E",
+    "Impuestos/seguros": "#536B4A",
+    "Otros": "#9AA08F"
+  }
 }
