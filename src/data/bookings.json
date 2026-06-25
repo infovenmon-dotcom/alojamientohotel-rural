@@ -1,0 +1,69 @@
+{
+  "_meta": {
+    "nota": "Reservas + bloqueos externos (Booking iCal). Fuente única de disponibilidad."
+  },
+  "bookings": [
+    {
+      "id": "seed1",
+      "room": "Argia",
+      "in": "2026-06-20",
+      "out": "2026-06-25",
+      "name": "Marie & Paul L.",
+      "pax": 2,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed2",
+      "room": "Basoa",
+      "in": "2026-06-22",
+      "out": "2026-06-26",
+      "name": "Anke V.",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Booking"
+    },
+    {
+      "id": "seed3",
+      "room": "Itsaso",
+      "in": "2026-06-23",
+      "out": "2026-06-28",
+      "name": "Familia Etxeberria",
+      "pax": 2,
+      "source": "web",
+      "ref": "Directa"
+    },
+    {
+      "id": "seed4",
+      "room": "Lorategia",
+      "in": "2026-06-24",
+      "out": "2026-06-30",
+      "name": "Jensen (4 pax)",
+      "pax": 4,
+      "source": "channel",
+      "ref": "Expedia/Vrbo"
+    },
+    {
+      "id": "seed5",
+      "room": "Lasai",
+      "in": "2026-06-27",
+      "out": "2026-06-29",
+      "name": "Cristina R.",
+      "pax": 2,
+      "source": "channel",
+      "ref": "Teléfono/WhatsApp"
+    },
+    {
+      "id": "seed6",
+      "room": "Argia",
+      "in": "2026-06-28",
+      "out": "2026-07-02",
+      "name": "Hans & Greta",
+      "pax": 2,
+      "source": "web",
+      "ref": "Directa"
+    }
+  ],
+  "external": {},
+  "icalUrls": {}
+}

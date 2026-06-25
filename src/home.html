@@ -1075,8 +1075,18 @@
     if(MODE==='room'){
       if(ROOM&&active.indexOf(ROOM)<0){f.innerHTML='<p class="kb-none">Esta habitación no está disponible para reservar ahora mismo.</p>';return;}
       if(selIn&&selOut){var n=nights(selIn,selOut),tot=(PRICE[ROOM]||0)*n;
-        f.innerHTML='<p class="kb-summary"><b>'+ROOM+'</b> · '+fmt(selIn)+' &rarr; '+fmt(selOut)+' · '+n+' noche'+(n>1?'s':'')+' · desde <b>'+tot+'&euro;</b></p>'
-          +'<a class="kb-cta" href="'+waLink(ROOM,pax())+'" target="_blank" rel="noopener">Reservar por WhatsApp</a>';
+        var sum='<p class="kb-summary"><b>'+ROOM+'</b> &middot; '+fmt(selIn)+' &rarr; '+fmt(selOut)+' &middot; '+n+' noche'+(n>1?'s':'')+' &middot; desde <b>'+tot+'&euro;</b></p>';
+        if(AV.stripe){
+          f.innerHTML=sum+'<button class="kb-cta" id="kbPay">Reservar y pagar</button>'+
+            '<p style="margin:10px 0 0;text-align:center;font-size:.8rem"><a href="'+waLink(ROOM,pax())+'" target="_blank" rel="noopener" style="color:#5F6E52">&iquest;Dudas? Escr&iacute;benos por WhatsApp</a></p>';
+          var pb=document.getElementById('kbPay');
+          pb.onclick=function(){pb.disabled=true;pb.textContent='Conectando con el pago\u2026';
+            fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({room:ROOM,in:selIn,out:selOut,pax:pax()})})
+              .then(function(r){return r.json();}).then(function(d){if(d&&d.url){location.href=d.url;}else{pb.disabled=false;pb.textContent='Reservar y pagar';alert(d&&d.error?d.error:'No se pudo iniciar el pago.');}})
+              .catch(function(){pb.disabled=false;pb.textContent='Reservar y pagar';alert('No se pudo iniciar el pago.');});};
+        }else{
+          f.innerHTML=sum+'<a class="kb-cta" href="'+waLink(ROOM,pax())+'" target="_blank" rel="noopener">Reservar por WhatsApp</a>';
+        }
       }else f.innerHTML='<p class="kb-hint">Elige la fecha de entrada y la de salida en el calendario.</p>';
     }else{ // modo fecha → habitaciones libres
       if(selIn&&selOut){var libres=ORDER.filter(function(r){return roomFree(r,selIn,selOut);});

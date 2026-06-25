@@ -5,16 +5,14 @@
 export const prerender = false;
 import html from '../home.html?raw';
 import { getActiveRooms } from '@/lib/rooms';
-import sample from '@/data/panel-sample.json';
+import { getBookedMap } from '@/lib/bookings';
 
 let out = html;
 try {
   const activeNames = (await getActiveRooms()).map((r) => r.nombre);
-  const booked: Record<string, [string, string][]> = {};
-  for (const b of sample.bookings as { room: string; in: string; out: string }[]) {
-    (booked[b.room] ??= []).push([b.in, b.out]);
-  }
-  const json = JSON.stringify({ activeNames, booked }).replace(/</g, '\\u003c');
+  const booked = await getBookedMap();
+  const stripe = !!process.env.STRIPE_SECRET_KEY;
+  const json = JSON.stringify({ activeNames, booked, stripe }).replace(/</g, '\\u003c');
   out = html.replace('<!--KIRANA_AVAIL-->', `<script>window.KIRANA_AVAIL=${json}</script>`);
 } catch {
   // Si falla, se sirve la maqueta tal cual (usa su disponibilidad de respaldo).
