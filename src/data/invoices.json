@@ -1,0 +1,8 @@
+{
+  "_meta": {
+    "nota": "Facturas con numeración CORRELATIVA (serie+número) y estado TicketBAI. El encadenado lo hace el software garante."
+  },
+  "serie": "A",
+  "next": 1,
+  "invoices": []
+}
