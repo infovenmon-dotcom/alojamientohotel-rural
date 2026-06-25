@@ -1,4 +1,75 @@
 ---
+// Panel de gestión (SPA v3): diseño visual unificado servido con datos REALES.
+// - Habitaciones: leídas de rooms.json; el toggle activa/bloquea vía /api/rooms.
+// - Reservas: del store real; "Nueva reserva" persiste vía /api/panel/booking.
+// - Facturas/gastos: datos de ejemplo (panel-sample.json) hasta conectar el motor.
+// El CSS/JS/markup del diseño viven como assets crudos para no chocar con el
+// parser de Astro (las llaves de CSS/JS se interpretarían como expresiones).
+import { getAllRooms } from '@/lib/rooms';
+import { listBookings } from '@/lib/bookings';
+import sample from '@/data/panel-sample.json';
+import css from '@/lib/panel.css?raw';
+import markup from '@/lib/panel-markup.html?raw';
+import appJs from '@/lib/panel-app.js?raw';
+
 export const prerender = false;
-return Astro.redirect('/panel/reservas');
+
+const roomsData = await getAllRooms();
+const priceByName = Object.fromEntries(roomsData.map((r) => [r.nombre, r.precio]));
+
+const rooms = roomsData.map((r) => ({
+  id: r.nombre, // nombre visible y clave de colores/reservas
+  rid: r.id, // id real para la API (/api/rooms/:id)
+  cap: r.capacidad,
+  rate: r.precio,
+  floor: r.planta === 'superior' ? 'sup' : 'baja',
+  kind: r.tipo,
+  m2: r.m2,
+  active: r.activa,
+  mean: r.significado,
+  story: r.storytelling,
+  thumb: (r.fotos && r.fotos[0]) || '',
+}));
+
+const bookings = (await listBookings()).map((b) => ({
+  room: b.room,
+  name: b.name || 'Reserva',
+  in: b.in,
+  out: b.out,
+  guests: b.pax || 2,
+  ch: b.ref || 'Directa',
+  mp: false,
+  rate: priceByName[b.room] || 0,
+}));
+
+const PANEL = {
+  rooms,
+  bookings,
+  invoices: sample.invoices,
+  expenses: sample.expenses,
+  monthRev: { Ene: 3120, Feb: 2980, Mar: 4150, Abr: 6890, May: 8230, Jun: 9460, Jul: 0, Ago: 0, Sep: 0, Oct: 0, Nov: 0, Dic: 0 },
+  today: new Date().toISOString().slice(0, 10),
+};
+
+const panelJson = JSON.stringify(PANEL).replace(/</g, '\\u003c');
+const inlineJs = `const PANEL=${panelJson};\n${appJs}`;
 ---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kirana · Panel de gestión</title>
+    <meta name="robots" content="noindex" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style is:global set:html={css}></style>
+  </head>
+  <body>
+    <Fragment set:html={markup} />
+    <script is:inline set:html={inlineJs}></script>
+  </body>
+</html>

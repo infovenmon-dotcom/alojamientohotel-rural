@@ -15,7 +15,7 @@ if (Astro.request.method === 'POST') {
       secure: import.meta.env.PROD,
       maxAge: 60 * 60 * 8, // 8 h
     });
-    return Astro.redirect('/panel/habitaciones');
+    return Astro.redirect('/panel');
   }
   error = 'Contraseña incorrecta.';
 }

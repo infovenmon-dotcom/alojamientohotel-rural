@@ -4,33 +4,34 @@ import { setRoomActive, getRoomById } from '@/lib/roomsStore';
 export const prerender = false;
 
 /**
- * POST /api/rooms/:id  (form: activa=true|false)
- * Bloquea/activa una habitación y persiste. La web pública (SSR) lo refleja
- * en la siguiente petición. Protegido por el middleware de auth.
+ * POST /api/rooms/:id  — activa/bloquea una habitación y persiste.
+ * Acepta JSON ({ activa: true|false }) o formulario (activa=true|false).
+ * La web pública (SSR) lo refleja en la siguiente petición.
+ * Protegido por el middleware de auth.
  */
-export const POST: APIRoute = async ({ params, request, redirect }) => {
+export const POST: APIRoute = async ({ params, request }) => {
   const id = params.id!;
   if (!(await getRoomById(id))) {
     return new Response('Habitación no encontrada', { status: 404 });
   }
-  const form = await request.formData();
-  const activa = String(form.get('activa')) === 'true';
-  const accept = request.headers.get('accept') ?? '';
+  const ct = request.headers.get('content-type') ?? '';
+  let activa: boolean;
+  if (ct.includes('application/json')) {
+    const b = await request.json().catch(() => ({}));
+    activa = b.activa === true || b.activa === 'true';
+  } else {
+    const form = await request.formData();
+    activa = String(form.get('activa')) === 'true';
+  }
   try {
     await setRoomActive(id, activa);
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Error al guardar';
-    if (accept.includes('text/html')) {
-      return redirect('/panel/habitaciones?error=' + encodeURIComponent(msg));
-    }
     return new Response(JSON.stringify({ error: msg }), {
       status: 503,
       headers: { 'content-type': 'application/json' },
     });
   }
-
-  // Si viene de un formulario del panel, volver a Habitaciones.
-  if (accept.includes('text/html')) return redirect('/panel/habitaciones');
   return new Response(JSON.stringify({ id, activa }), {
     status: 200,
     headers: { 'content-type': 'application/json' },

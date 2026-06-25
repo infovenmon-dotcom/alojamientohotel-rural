@@ -1,0 +1,171 @@
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="side">
+    <div class="brand"><span class="mk">k</span><span><b>kirana</b><small>Gestión</small></span></div>
+    <div class="nav-it on" data-v="reservas"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg> Reservas</div>
+    <div class="nav-it" data-v="ingresos"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 8-8M21 8v5h-5"/></svg> Ingresos</div>
+    <div class="nav-it" data-v="facturas"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg> Facturas</div>
+    <div class="nav-it" data-v="contabilidad"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 10h16M10 10v10"/></svg> Contabilidad</div>
+    <div class="nav-it" data-v="habitaciones"><svg viewBox="0 0 24 24"><path d="M3 20v-9l9-6 9 6v9M9 20v-6h6v6"/></svg> Habitaciones</div>
+    <div class="sp"></div>
+    <div class="who"><b>Casa Kirana</b>Bermeo · Bizkaia<br><a href="/panel/logout" style="color:#9FAA92;text-decoration:underline">Cerrar sesión</a></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="top">
+      <div><h1 id="vtitle">Reservas</h1><p id="vsub">Calendario de ocupación por habitación</p></div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span class="demo">Demo · facturas y gastos de ejemplo</span>
+        <button class="btn" id="newBtn">+ Nueva reserva</button>
+      </div>
+    </div>
+
+    <!-- ===== RESERVAS ===== -->
+    <section class="view on" id="v-reservas">
+      <div class="kpis">
+        <div class="kpi"><div class="l">Ocupación (mes)</div><div class="v" id="k-occ">—</div><div class="d up">Junio 2026</div></div>
+        <div class="kpi"><div class="l">Reservas activas</div><div class="v" id="k-res">—</div><div class="d">próximas + en curso</div></div>
+        <div class="kpi"><div class="l">Entradas hoy</div><div class="v" id="k-in">—</div><div class="d">check-in 14:00</div></div>
+        <div class="kpi"><div class="l">Salidas hoy</div><div class="v" id="k-out">—</div><div class="d">check-out 12:00</div></div>
+      </div>
+      <div class="card">
+        <div class="bd" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <div style="flex:1;min-width:220px">
+            <div style="font-weight:600;display:flex;align-items:center;gap:8px"><span class="syncdot"></span>Canales conectados · sincronizados</div>
+            <div class="muted" style="font-size:12px;margin-top:3px">Las reservas de todos los canales entran a este mismo calendario. Al ocupar una fecha, se bloquea en todos a la vez → <b>sin reservas duplicadas ni overbooking</b>.</div>
+          </div>
+          <div class="chips">
+            <span class="chip on">● Web directa</span>
+            <span class="chip on">● Booking.com</span>
+            <span class="chip on">● Expedia / Vrbo</span>
+            <span class="chip">+ Airbnb</span>
+          </div>
+          <div class="muted" style="font-size:11px;width:100%;border-top:1px solid var(--line2);padding-top:8px">Demo. En producción la sincronización es bidireccional y en tiempo real vía <b>channel manager</b> (Smoobu, Octorate…) o la API de conectividad de Booking. El panel nunca toca el cobro de cada portal.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="hd"><h3>Calendario · <span id="calMonth"></span></h3>
+          <div style="display:flex;gap:6px"><button class="btn ghost sm" id="prevM">‹</button><button class="btn ghost sm" id="nextM">›</button></div>
+        </div>
+        <div class="bd cal-wrap"><table class="cal" id="calTable"></table>
+          <div class="legend" id="calLegend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="hd"><h3>Próximas reservas</h3></div>
+        <div class="bd" style="padding:0"><table id="bkTable"></table></div>
+      </div>
+    </section>
+
+    <!-- ===== INGRESOS ===== -->
+    <section class="view" id="v-ingresos">
+      <div class="kpis">
+        <div class="kpi"><div class="l">Ingresos (mes)</div><div class="v" id="i-mes">—</div><div class="d up" id="i-mesd"></div></div>
+        <div class="kpi"><div class="l">Ingresos (año)</div><div class="v" id="i-anio">—</div><div class="d">2026 acumulado</div></div>
+        <div class="kpi"><div class="l">Tarifa media (ADR)</div><div class="v" id="i-adr">—</div><div class="d">por noche</div></div>
+        <div class="kpi"><div class="l">Estancia media</div><div class="v" id="i-los">—</div><div class="d">noches/reserva</div></div>
+      </div>
+      <div class="row2">
+        <div class="card"><div class="hd"><h3>Ingresos por mes</h3></div><div class="bd"><div class="bars" id="barMonth"></div></div></div>
+        <div class="card"><div class="hd"><h3>Ingresos por habitación</h3></div><div class="bd"><div class="bars" id="barRoom"></div></div></div>
+      </div>
+      <div class="card"><div class="hd"><h3>Ingresos por canal</h3><span class="muted" style="font-size:12px">la reserva directa evita comisiones</span></div>
+        <div class="bd" style="padding:0"><table id="chTable"></table></div></div>
+    </section>
+
+    <!-- ===== FACTURAS ===== -->
+    <section class="view" id="v-facturas">
+      <div class="kpis">
+        <div class="kpi"><div class="l">Facturado (año)</div><div class="v" id="f-tot">—</div><div class="d">base + IVA</div></div>
+        <div class="kpi"><div class="l">Emitidas</div><div class="v" id="f-num">—</div><div class="d">2026</div></div>
+        <div class="kpi"><div class="l">Pendientes de cobro</div><div class="v" id="f-pend">—</div><div class="d">por cobrar</div></div>
+        <div class="kpi"><div class="l">IVA repercutido</div><div class="v" id="f-iva">—</div><div class="d">10% alojamiento</div></div>
+      </div>
+      <div class="card">
+        <div class="bd" style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
+          <div class="tbai-badge">TicketBAI<br><b>Batuz · Bizkaia</b></div>
+          <div style="flex:1;min-width:240px">
+            <div style="font-weight:600">Facturación conectada a la Hacienda Foral de Bizkaia</div>
+            <div class="muted" style="font-size:12.5px;margin-top:4px;line-height:1.55">Obligatorio desde el <b>1 de enero de 2026</b> para toda actividad económica en Bizkaia, hostelería incluida. Cada factura se firma digitalmente, se encadena con la anterior, lleva <b>código TBAI + QR</b> y se envía a Hacienda; en Bizkaia se anota además en el <b>LROE</b> (modelo 140 para autónomos).</div>
+          </div>
+          <div class="muted" style="font-size:11px;width:100%;border-top:1px solid var(--line2);padding-top:8px">Demo. La firma y el envío reales los realiza un <b>software garante homologado</b> + certificado digital, o la app oficial gratuita <b>batuz.eus/haztufactura</b>. Este panel organiza los datos; no sustituye al software certificado. Sanciones desde 2.000 €/factura.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="hd"><h3>Facturas emitidas</h3><button class="btn sm" id="newInv">+ Emitir factura</button></div>
+        <div class="bd" style="padding:0"><table id="invTable"></table></div>
+      </div>
+    </section>
+
+    <!-- ===== CONTABILIDAD ===== -->
+    <section class="view" id="v-contabilidad">
+      <div class="kpis">
+        <div class="kpi"><div class="l">Ingresos (año)</div><div class="v" id="c-ing">—</div><div class="d up">acumulado</div></div>
+        <div class="kpi"><div class="l">Gastos (año)</div><div class="v" id="c-gas">—</div><div class="d down">acumulado</div></div>
+        <div class="kpi"><div class="l">Resultado</div><div class="v" id="c-res">—</div><div class="d">ingresos − gastos</div></div>
+        <div class="kpi"><div class="l">Margen</div><div class="v" id="c-mar">—</div><div class="d">sobre ingresos</div></div>
+      </div>
+      <div class="row2">
+        <div class="card"><div class="hd"><h3>Movimientos recientes</h3><button class="btn ghost sm" id="addMov">+ Gasto</button></div>
+          <div class="bd" style="padding:0"><table id="movTable"></table></div></div>
+        <div class="card"><div class="hd"><h3>Gastos por categoría</h3></div><div class="bd" id="catBox"></div></div>
+      </div>
+      <div class="card"><div class="hd"><h3>Resumen para el trimestre (modelo 130 / IVA)</h3><span class="muted" style="font-size:12px">orientativo · revisar con la gestoría</span></div>
+        <div class="bd" id="taxBox"></div></div>
+    </section>
+
+    <!-- ===== HABITACIONES ===== -->
+    <section class="view" id="v-habitaciones">
+      <div class="card"><div class="hd"><h3>Habitaciones</h3><span class="muted" style="font-size:12px">8 en total · activa o bloquea cada una</span></div>
+        <div class="bd"><p id="roomSummary" class="muted"></p><div class="rgrid" id="roomGrid"></div></div></div>
+      <p class="muted" style="font-size:12.5px">Bloquear una habitación la quita del calendario y de la web al instante; al activarla, vuelve a aparecer. Útil mientras no estén listas todas. En producción el estado se guarda y se sincroniza con el motor de reservas y los canales (channel manager). <span style="color:var(--mist)">(Demo: el bloqueo se mantiene durante la sesión.)</span></p>
+    </section>
+  </main>
+</div>
+
+<!-- MODAL: nueva reserva -->
+<div class="modal" id="mBooking"><div class="sheet">
+  <div class="sh-hd"><h3>Nueva reserva</h3><button class="x" data-close>✕</button></div>
+  <div class="sh-bd">
+    <div class="fg"><label>Huésped</label><input id="b-name" placeholder="Nombre y apellidos"></div>
+    <div class="grid2">
+      <div class="fg"><label>Habitación</label><select id="b-room"></select></div>
+      <div class="fg"><label>Personas</label><select id="b-guests"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></div>
+    </div>
+    <div class="grid2">
+      <div class="fg"><label>Entrada</label><input type="date" id="b-in"></div>
+      <div class="fg"><label>Salida</label><input type="date" id="b-out"></div>
+    </div>
+    <div class="grid2">
+      <div class="fg"><label>Canal</label><select id="b-ch"><option>Directa</option><option>Booking</option><option>Expedia/Vrbo</option><option>Teléfono/WhatsApp</option></select></div>
+      <div class="fg"><label>Media pensión</label><select id="b-mp"><option>No</option><option>Sí (+25 €/pers./noche)</option></select></div>
+    </div>
+    <div class="avail neutral" id="b-avail"></div>
+    <div class="fg" style="background:var(--paper);border-radius:9px;padding:12px 14px;margin-top:4px">
+      <span class="muted" style="font-size:12px">Total estimado</span>
+      <div style="font-family:var(--serif);font-size:24px" id="b-total">—</div>
+    </div>
+    <button class="btn" style="width:100%;justify-content:center" id="b-save">Guardar reserva</button>
+  </div>
+</div></div>
+
+<!-- MODAL: factura -->
+<div class="modal" id="mInvoice"><div class="sheet" style="max-width:680px">
+  <div class="sh-hd"><h3>Factura</h3><div style="display:flex;gap:8px"><button class="btn ghost sm noprint" onclick="window.print()">Imprimir / PDF</button><button class="x" data-close>✕</button></div></div>
+  <div class="sh-bd inv-print" id="invBody"></div>
+</div></div>
+
+<!-- MODAL: gasto -->
+<div class="modal" id="mExpense"><div class="sheet">
+  <div class="sh-hd"><h3>Nuevo gasto</h3><button class="x" data-close>✕</button></div>
+  <div class="sh-bd">
+    <div class="fg"><label>Concepto</label><input id="e-desc" placeholder="p. ej. Suministros, limpieza…"></div>
+    <div class="grid2">
+      <div class="fg"><label>Categoría</label><select id="e-cat"><option>Suministros</option><option>Limpieza y lavandería</option><option>Desayuno/alimentación</option><option>Mantenimiento</option><option>Marketing/web</option><option>Comisiones OTA</option><option>Impuestos/seguros</option><option>Otros</option></select></div>
+      <div class="fg"><label>Importe (€)</label><input type="number" id="e-amt" placeholder="0"></div>
+    </div>
+    <div class="fg"><label>Fecha</label><input type="date" id="e-date"></div>
+    <button class="btn" style="width:100%;justify-content:center" id="e-save">Guardar gasto</button>
+  </div>
+</div></div>
