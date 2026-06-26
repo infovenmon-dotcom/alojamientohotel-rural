@@ -1,0 +1,125 @@
+{
+  "_meta": "Gastos con IVA soportado (deducible). IVA a liquidar = repercutido(facturas) - soportado(gastos). Comisiones OTA intracomunitarias: las autoliquida la gestoría.",
+  "expenses": [
+    {
+      "id": "exp1",
+      "date": "2026-06-03",
+      "desc": "Luz y agua",
+      "cat": "Suministros",
+      "total": 280,
+      "ivaPct": 21,
+      "iva": 48.6,
+      "deducible": true
+    },
+    {
+      "id": "exp2",
+      "date": "2026-06-07",
+      "desc": "Lavandería (sábanas/toallas)",
+      "cat": "Limpieza y lavandería",
+      "total": 190,
+      "ivaPct": 21,
+      "iva": 32.98,
+      "deducible": true
+    },
+    {
+      "id": "exp3",
+      "date": "2026-06-10",
+      "desc": "Compra desayunos",
+      "cat": "Desayuno/alimentación",
+      "total": 240,
+      "ivaPct": 10,
+      "iva": 21.82,
+      "deducible": true
+    },
+    {
+      "id": "exp4",
+      "date": "2026-06-12",
+      "desc": "Comisión Booking (mayo)",
+      "cat": "Comisiones OTA",
+      "total": 410,
+      "ivaPct": 0,
+      "iva": 0,
+      "deducible": false
+    },
+    {
+      "id": "exp5",
+      "date": "2026-06-15",
+      "desc": "Campaña Google + web",
+      "cat": "Marketing/web",
+      "total": 150,
+      "ivaPct": 21,
+      "iva": 26.03,
+      "deducible": true
+    },
+    {
+      "id": "exp6",
+      "date": "2026-06-18",
+      "desc": "Fontanería baño Itsaso",
+      "cat": "Mantenimiento",
+      "total": 120,
+      "ivaPct": 21,
+      "iva": 20.83,
+      "deducible": true
+    },
+    {
+      "id": "exp7",
+      "date": "2026-07-04",
+      "desc": "Luz y agua",
+      "cat": "Suministros",
+      "total": 295,
+      "ivaPct": 21,
+      "iva": 51.2,
+      "deducible": true
+    },
+    {
+      "id": "exp8",
+      "date": "2026-07-09",
+      "desc": "Lavandería (sábanas/toallas)",
+      "cat": "Limpieza y lavandería",
+      "total": 220,
+      "ivaPct": 21,
+      "iva": 38.18,
+      "deducible": true
+    },
+    {
+      "id": "exp9",
+      "date": "2026-07-12",
+      "desc": "Compra desayunos",
+      "cat": "Desayuno/alimentación",
+      "total": 310,
+      "ivaPct": 10,
+      "iva": 28.18,
+      "deducible": true
+    },
+    {
+      "id": "exp10",
+      "date": "2026-07-14",
+      "desc": "Comisión Booking (junio)",
+      "cat": "Comisiones OTA",
+      "total": 520,
+      "ivaPct": 0,
+      "iva": 0,
+      "deducible": false
+    },
+    {
+      "id": "exp11",
+      "date": "2026-08-06",
+      "desc": "Compra desayunos",
+      "cat": "Desayuno/alimentación",
+      "total": 340,
+      "ivaPct": 10,
+      "iva": 30.91,
+      "deducible": true
+    },
+    {
+      "id": "exp12",
+      "date": "2026-08-12",
+      "desc": "Comisión Booking (julio)",
+      "cat": "Comisiones OTA",
+      "total": 610,
+      "ivaPct": 0,
+      "iva": 0,
+      "deducible": false
+    }
+  ]
+}

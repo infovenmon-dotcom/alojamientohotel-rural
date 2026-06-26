@@ -163,9 +163,12 @@
     <div class="fg"><label>Concepto</label><input id="e-desc" placeholder="p. ej. Suministros, limpieza…"></div>
     <div class="grid2">
       <div class="fg"><label>Categoría</label><select id="e-cat"><option>Suministros</option><option>Limpieza y lavandería</option><option>Desayuno/alimentación</option><option>Mantenimiento</option><option>Marketing/web</option><option>Comisiones OTA</option><option>Impuestos/seguros</option><option>Otros</option></select></div>
-      <div class="fg"><label>Importe (€)</label><input type="number" id="e-amt" placeholder="0"></div>
+      <div class="fg"><label>Importe total (€)</label><input type="number" id="e-amt" placeholder="0"></div>
     </div>
-    <div class="fg"><label>Fecha</label><input type="date" id="e-date"></div>
+    <div class="grid2">
+      <div class="fg"><label>Tipo de IVA</label><select id="e-iva"><option value="21">21%</option><option value="10">10%</option><option value="4">4%</option><option value="0">Sin IVA / no deducible</option></select></div>
+      <div class="fg"><label>Fecha</label><input type="date" id="e-date"></div>
+    </div>
     <button class="btn" style="width:100%;justify-content:center" id="e-save">Guardar gasto</button>
   </div>
 </div></div>

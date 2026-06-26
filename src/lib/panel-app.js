@@ -185,10 +185,11 @@ function renderConta(){
      <div style="height:7px;background:var(--line2);border-radius:4px;overflow:hidden"><div style="height:100%;width:${Math.round(v/ctot*100)}%;background:${CATCOL[c]||'#888'}"></div></div></div>`).join('');
   // impuestos orientativo
   const ivaRep=invoices.reduce((a,i)=>a+i.iva,0);
+  const ivaSop=expenses.reduce((a,e)=>a+(e.deducible!==false?(e.iva||0):0),0);
   document.getElementById('taxBox').innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px">
      <div><div class="muted" style="font-size:11px;text-transform:uppercase">IVA repercutido (10%)</div><div style="font-family:var(--serif);font-size:22px">${euro(ivaRep)}</div></div>
-     <div><div class="muted" style="font-size:11px;text-transform:uppercase">IVA soportado (est.)</div><div style="font-family:var(--serif);font-size:22px">${euro(Math.round(ivaRep*0.4))}</div></div>
-     <div><div class="muted" style="font-size:11px;text-transform:uppercase">A liquidar (aprox.)</div><div style="font-family:var(--serif);font-size:22px">${euro(Math.round(ivaRep*0.6))}</div></div>
+     <div><div class="muted" style="font-size:11px;text-transform:uppercase">IVA soportado (deducible)</div><div style="font-family:var(--serif);font-size:22px">${euro(ivaSop)}</div></div>
+     <div><div class="muted" style="font-size:11px;text-transform:uppercase">A liquidar</div><div style="font-family:var(--serif);font-size:22px">${euro(Math.max(0,ivaRep-ivaSop))}</div></div>
      <div><div class="muted" style="font-size:11px;text-transform:uppercase">Retención IRPF est.</div><div style="font-family:var(--serif);font-size:22px">${euro(Math.round((Object.values(monthRev).reduce((a,b)=>a+b,0))*0.2*0.15))}</div></div>
    </div>
    <p class="muted" style="font-size:11px;margin-top:12px">Cifras orientativas para tener una foto del trimestre. La liquidación real (modelos 303, 130/131…) la prepara la gestoría; este panel solo organiza los datos.</p>`;
@@ -290,9 +291,21 @@ document.getElementById('b-save').onclick=()=>{
 /* ---------- MODAL gasto ---------- */
 document.getElementById('addMov').onclick=()=>{document.getElementById('e-date').value=ymd(today);document.getElementById('mExpense').classList.add('on');};
 document.getElementById('e-save').onclick=()=>{
-  expenses.push({date:document.getElementById('e-date').value||ymd(today),desc:document.getElementById('e-desc').value||'Gasto',
-    cat:document.getElementById('e-cat').value,amt:+document.getElementById('e-amt').value||0});
-  document.getElementById('mExpense').classList.remove('on');renderConta();
+  const total=+document.getElementById('e-amt').value||0;
+  const ivaPct=+document.getElementById('e-iva').value;
+  const date=document.getElementById('e-date').value||ymd(today);
+  const desc=document.getElementById('e-desc').value||'Gasto';
+  const cat=document.getElementById('e-cat').value;
+  const deducible=ivaPct>0;
+  const iva=deducible?Math.round((total-total/(1+ivaPct/100))*100)/100:0;
+  if(!total){alert('Indica el importe del gasto.');return;}
+  const bt=document.getElementById('e-save');bt.disabled=true;bt.textContent='Guardando…';
+  fetch('/api/panel/expense',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({date,desc,cat,total,ivaPct,deducible})})
+    .then(r=>r.json()).then(d=>{
+      if(d&&d.ok){expenses.push({date,desc,cat,amt:total,iva,deducible});document.getElementById('mExpense').classList.remove('on');renderConta();}
+      else alert(d&&d.error?d.error:'No se pudo guardar el gasto.');
+    }).catch(()=>alert('No se pudo guardar el gasto.'))
+    .finally(()=>{bt.disabled=false;bt.textContent='Guardar gasto';});
 };
 document.getElementById('newInv').onclick=()=>showInvoice(invoices[invoices.length-1]);
 

@@ -7,7 +7,7 @@
 // parser de Astro (las llaves de CSS/JS se interpretarían como expresiones).
 import { getAllRooms } from '@/lib/rooms';
 import { listBookings } from '@/lib/bookings';
-import sample from '@/data/panel-sample.json';
+import { listExpenses } from '@/lib/expenses';
 import css from '@/lib/panel.css?raw';
 import markup from '@/lib/panel-markup.html?raw';
 import appJs from '@/lib/panel-app.js?raw';
@@ -74,11 +74,21 @@ for (const b of bookings) {
   monthRev[MES3[Number(b.in.slice(5, 7)) - 1]] += (b.rate || 0) * nightsOf(b.in, b.out);
 }
 
+// Gastos reales (con IVA soportado) desde el store.
+const expenses = (await listExpenses()).map((e) => ({
+  date: e.date,
+  desc: e.desc,
+  cat: e.cat,
+  amt: e.total,
+  iva: e.iva,
+  deducible: e.deducible,
+}));
+
 const PANEL = {
   rooms,
   bookings,
   invoices,
-  expenses: sample.expenses, // gastos: ejemplo (aún sin módulo de gastos real)
+  expenses,
   monthRev,
   today,
 };
