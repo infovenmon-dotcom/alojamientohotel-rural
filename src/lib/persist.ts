@@ -13,7 +13,7 @@ export async function readJson<T>(key: string, seed: T, localPath: string): Prom
   // 1) Netlify Blobs (si hay contexto, p. ej. función de Netlify).
   try {
     const { getStore } = await import('@netlify/blobs');
-    const data = (await getStore(BLOB_STORE).get(key, { type: 'json' })) as T | null;
+    const data = (await getStore({ name: BLOB_STORE, consistency: 'strong' }).get(key, { type: 'json' })) as T | null;
     return data ?? seed; // Blobs disponible; si aún no hay datos, semilla.
   } catch {
     /* no estamos en Netlify o Blobs no disponible → seguimos */
@@ -55,7 +55,7 @@ export async function updateJson<T>(
   // 1) Netlify Blobs con concurrencia optimista (etag + reintentos).
   try {
     const { getStore } = await import('@netlify/blobs');
-    const store = getStore(BLOB_STORE);
+    const store = getStore({ name: BLOB_STORE, consistency: 'strong' });
     for (let i = 0; i < 8; i++) {
       const res = (await store.getWithMetadata(key, { type: 'json' })) as { data: T; etag: string } | null;
       const base = res && res.data != null ? res.data : seed;
@@ -96,7 +96,7 @@ export async function writeJson(key: string, data: unknown, localPath: string): 
   // 1) Netlify Blobs.
   try {
     const { getStore } = await import('@netlify/blobs');
-    await getStore(BLOB_STORE).setJSON(key, data);
+    await getStore({ name: BLOB_STORE, consistency: 'strong' }).setJSON(key, data);
     return;
   } catch {
     /* no estamos en Netlify o Blobs no disponible → probamos disco */
