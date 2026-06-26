@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import seed from '../data/invoices.json';
-import { readJson, writeJson } from './persist';
+import { readJson, updateJson } from './persist';
 
 /**
  * Facturas con numeración CORRELATIVA (serie + número) en orden de emisión, como
@@ -42,9 +42,6 @@ function filePath(): string {
 async function read(): Promise<InvoicesFile> {
   return readJson<InvoicesFile>(KEY, seed as InvoicesFile, filePath());
 }
-async function write(data: InvoicesFile): Promise<void> {
-  return writeJson(KEY, data, filePath());
-}
 
 export async function listInvoices(): Promise<Invoice[]> {
   return (await read()).invoices;
@@ -58,27 +55,29 @@ export async function listInvoices(): Promise<Invoice[]> {
 export async function createInvoice(
   data: Omit<Invoice, 'serie' | 'numero' | 'ref' | 'tbai'>
 ): Promise<Invoice> {
-  const d = await read();
-  const numero = d.next;
-  const inv: Invoice = {
-    ...data,
-    serie: d.serie,
-    numero,
-    ref: `${d.serie}/${numero}`,
-    tbai: { estado: 'pendiente' },
-  };
-  d.invoices.push(inv);
-  d.next = numero + 1; // correlativo, en orden
-  await write(d);
+  let inv!: Invoice;
+  // Numeración correlativa segura ante concurrencia (sin huecos ni duplicados).
+  await updateJson<InvoicesFile>(KEY, seed as InvoicesFile, filePath(), (d) => {
+    const numero = d.next;
+    inv = {
+      ...data,
+      serie: d.serie,
+      numero,
+      ref: `${d.serie}/${numero}`,
+      tbai: { estado: 'pendiente' },
+    };
+    d.invoices.push(inv);
+    d.next = numero + 1; // correlativo, en orden
+    return d;
+  });
   return inv;
 }
 
 /** Actualiza el resultado de la declaración TicketBAI de una factura. */
 export async function setTbaiResult(ref: string, tbai: Invoice['tbai']): Promise<void> {
-  const d = await read();
-  const inv = d.invoices.find((i) => i.ref === ref);
-  if (inv) {
-    inv.tbai = tbai;
-    await write(d);
-  }
+  await updateJson<InvoicesFile>(KEY, seed as InvoicesFile, filePath(), (d) => {
+    const inv = d.invoices.find((i) => i.ref === ref);
+    if (inv) inv.tbai = tbai;
+    return d;
+  });
 }

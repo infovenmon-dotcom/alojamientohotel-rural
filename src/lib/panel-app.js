@@ -238,12 +238,16 @@ function renderRooms(){
 }
 function toggleRoom(id){
   var r=rooms.find(function(x){return x.id===id;});if(!r)return;var next=!r.active;
-  fetch('/api/rooms/'+r.rid,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({activa:next})})
-    .then(function(res){return res.json().catch(function(){return {};}).then(function(d){
-      if(!res.ok)throw new Error(d.error||('HTTP '+res.status));
-      r.active=next;renderRooms();renderCal();
-      if(document.getElementById('mBooking').classList.contains('on')){refreshRoomOptions();calcTotal();}});})
-    .catch(function(e){alert('No se pudo guardar el cambio: '+(e&&e.message?e.message:'error de red')+'.');});
+  // Encolar las escrituras (una a una) para no perder cambios al activar/bloquear
+  // varias habitaciones seguidas (read-modify-write sobre el mismo almacén).
+  window.__roomQ=(window.__roomQ||Promise.resolve()).then(function(){
+    return fetch('/api/rooms/'+r.rid,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({activa:next})})
+      .then(function(res){return res.json().catch(function(){return {};}).then(function(d){
+        if(!res.ok)throw new Error(d.error||('HTTP '+res.status));
+        r.active=next;renderRooms();renderCal();
+        if(document.getElementById('mBooking').classList.contains('on')){refreshRoomOptions();calcTotal();}});})
+      .catch(function(e){alert('No se pudo guardar el cambio: '+(e&&e.message?e.message:'error de red')+'.');});
+  });
 }
 
 /* ---------- MODAL nueva reserva ---------- */

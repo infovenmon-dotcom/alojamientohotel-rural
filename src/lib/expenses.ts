@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import seed from '../data/expenses.json';
-import { readJson, writeJson } from './persist';
+import { readJson, writeJson, updateJson } from './persist';
 
 /**
  * Gastos con IVA soportado (deducible) para la contabilidad. El IVA a liquidar
@@ -43,20 +43,22 @@ export async function listExpenses(): Promise<Expense[]> {
 export async function addExpense(
   data: Omit<Expense, 'id' | 'iva'> & { iva?: number }
 ): Promise<Expense> {
-  const d = await read();
   const deducible = data.deducible && data.ivaPct > 0;
   const iva = deducible ? Math.round((data.total - data.total / (1 + data.ivaPct / 100)) * 100) / 100 : 0;
-  const exp: Expense = {
-    id: 'exp_' + data.date.replace(/-/g, '') + '_' + (d.expenses.length + 1),
-    date: data.date,
-    desc: data.desc,
-    cat: data.cat,
-    total: data.total,
-    ivaPct: data.ivaPct,
-    iva,
-    deducible,
-  };
-  d.expenses.push(exp);
-  await write(d);
+  let exp!: Expense;
+  await updateJson<ExpensesFile>(KEY, seed as ExpensesFile, filePath(), (d) => {
+    exp = {
+      id: 'exp_' + data.date.replace(/-/g, '') + '_' + (d.expenses.length + 1),
+      date: data.date,
+      desc: data.desc,
+      cat: data.cat,
+      total: data.total,
+      ivaPct: data.ivaPct,
+      iva,
+      deducible,
+    };
+    d.expenses.push(exp);
+    return d;
+  });
   return exp;
 }

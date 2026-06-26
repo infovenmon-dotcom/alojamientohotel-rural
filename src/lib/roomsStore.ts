@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import type { Room } from './rooms';
-import { readJson, writeJson } from './persist';
+import { readJson, writeJson, updateJson } from './persist';
 // Copia incluida en el bundle: semilla y respaldo de LECTURA (funciona en
 // cualquier runtime, incl. Cloudflare Workers, sin tocar disco).
 import seed from '../data/rooms.json';
@@ -50,14 +50,19 @@ export async function getRoomById(id: string): Promise<Room | undefined> {
   return (await read()).rooms.find((r) => r.id === id);
 }
 
-/** Cambia el estado activa/bloqueada de una habitación y persiste. */
+/** Cambia el estado activa/bloqueada de una habitación y persiste (seguro ante
+ *  cambios concurrentes: no se pierden activaciones seguidas). */
 export async function setRoomActive(id: string, activa: boolean): Promise<Room | undefined> {
-  const data = await read();
-  const room = data.rooms.find((r) => r.id === id);
-  if (!room) return undefined;
-  room.activa = activa;
-  await write(data);
-  return room;
+  let found: Room | undefined;
+  await updateJson<RoomsFile>(BLOB_KEY, seed as RoomsFile, roomsPath(), (data) => {
+    const room = data.rooms.find((r) => r.id === id);
+    if (room) {
+      room.activa = activa;
+      found = room;
+    }
+    return data;
+  });
+  return found;
 }
 
 /** Alterna el estado y devuelve el nuevo valor. */

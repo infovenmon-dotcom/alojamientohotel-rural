@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import seed from '../data/bookings.json';
-import { readJson, writeJson } from './persist';
+import { readJson, writeJson, updateJson } from './persist';
 
 /**
  * Disponibilidad por habitación = reservas propias (web/manual/canales) +
@@ -70,13 +70,14 @@ export async function isFree(room: string, inS: string, outS: string): Promise<b
 
 /** Añade una reserva (rechaza si solapa). Devuelve la reserva creada. */
 export async function addBooking(b: Omit<Booking, 'id' | 'created'>, created: string): Promise<Booking> {
-  const d = await read();
-  const clash = d.bookings.some((x) => x.room === b.room && b.in < x.out && x.in < b.out);
-  const extClash = (d.external[b.room] || []).some(([a, c]) => b.in < c && a < b.out);
-  if (clash || extClash) throw new Error('Esas fechas ya no están disponibles para ' + b.room);
   const booking: Booking = { ...b, id: 'bk_' + created.replace(/\D/g, '').slice(0, 14), created };
-  d.bookings.push(booking);
-  await write(d);
+  await updateJson<BookingsFile>(KEY, seed as BookingsFile, filePath(), (d) => {
+    const clash = d.bookings.some((x) => x.room === b.room && b.in < x.out && x.in < b.out);
+    const extClash = (d.external[b.room] || []).some(([a, c]) => b.in < c && a < b.out);
+    if (clash || extClash) throw new Error('Esas fechas ya no están disponibles para ' + b.room);
+    d.bookings.push(booking);
+    return d;
+  });
   return booking;
 }
 
