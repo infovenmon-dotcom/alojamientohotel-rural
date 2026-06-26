@@ -42,13 +42,45 @@ const bookings = (await listBookings()).map((b) => ({
   rate: priceByName[b.room] || 0,
 }));
 
+const today = new Date().toISOString().slice(0, 10);
+
+// Fuente única: TODA reserva (web o panel) alimenta facturas e ingresos.
+const nightsOf = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000);
+const r2 = (n: number) => Math.round(n * 100) / 100;
+const MES3 = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+// Facturas derivadas de las reservas (IVA 10% incluido en la tarifa).
+const invoices = [...bookings]
+  .sort((a, b) => a.in.localeCompare(b.in))
+  .map((b, idx) => {
+    const n = nightsOf(b.in, b.out);
+    const total = (b.rate || 0) * n;
+    const base = r2(total / 1.1);
+    return {
+      n: '2026/' + String(41 + idx).padStart(3, '0'),
+      date: b.in,
+      client: b.name,
+      base,
+      iva: r2(total - base),
+      status: b.out < today ? 'Cobrada' : 'Pendiente',
+      ch: b.ch,
+      concept: `Estancia ${n} noche${n > 1 ? 's' : ''} · hab. ${b.room}`,
+    };
+  });
+
+// Ingresos por mes calculados a partir de las reservas reales.
+const monthRev: Record<string, number> = Object.fromEntries(MES3.map((m) => [m, 0]));
+for (const b of bookings) {
+  monthRev[MES3[Number(b.in.slice(5, 7)) - 1]] += (b.rate || 0) * nightsOf(b.in, b.out);
+}
+
 const PANEL = {
   rooms,
   bookings,
-  invoices: sample.invoices,
-  expenses: sample.expenses,
-  monthRev: { Ene: 3120, Feb: 2980, Mar: 4150, Abr: 6890, May: 8230, Jun: 9460, Jul: 0, Ago: 0, Sep: 0, Oct: 0, Nov: 0, Dic: 0 },
-  today: new Date().toISOString().slice(0, 10),
+  invoices,
+  expenses: sample.expenses, // gastos: ejemplo (aún sin módulo de gastos real)
+  monthRev,
+  today,
 };
 
 const panelJson = JSON.stringify(PANEL).replace(/</g, '\\u003c');
