@@ -126,3 +126,7 @@
   .rstate.on{color:var(--ok)}.rstate.off{color:var(--bad)}
   #roomSummary{font-size:13px;margin:2px 0 10px}
   .ramen{font-size:11.5px;margin:6px 0 0}
+
+/* Logo Kirana en la barra lateral */
+.side .brand{flex-direction:column;gap:4px;text-align:center}
+.brand-logo{height:62px;width:auto;display:block;margin:0 auto}
