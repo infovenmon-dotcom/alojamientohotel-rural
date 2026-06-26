@@ -965,11 +965,17 @@
 .kb-summary b{color:var(--pine,#2B3A2E)}
 .kb-hint{color:var(--mist,#777);font-size:.9rem;margin:0}
 .kb-cta{display:inline-flex;gap:8px;align-items:center;justify-content:center;width:100%;padding:13px;border-radius:8px;background:#2B3A2E;color:#fff;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-size:.92rem}
-.kb-rooms{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.kb-rooms li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 13px;border:1px solid var(--line,#e5e5e5);border-radius:9px}
+.kb-rooms{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.kb-rooms li{display:grid;grid-template-columns:84px 1fr auto;grid-template-areas:'img info btn';gap:12px;align-items:center;padding:10px;border:1px solid var(--line,#e5e5e5);border-radius:11px}
+.kb-thumb{grid-area:img;width:84px;height:84px;object-fit:cover;border-radius:8px;background:#e7e7e2;display:block}
+.kb-info{grid-area:info;min-width:0}
+.kb-rtop{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .kb-rooms .nm{font-family:var(--serif,serif);font-size:1.15rem}
 .kb-rooms .pr{font-size:.78rem;color:var(--mist,#777)}
-.kb-rooms button{background:var(--oak,#B07B4F);color:#fff;border:0;border-radius:7px;padding:8px 14px;cursor:pointer;font-size:.82rem;font-weight:600}
+.kb-specs{font-size:.74rem;color:var(--moss,#5F6E52);margin:2px 0 4px;font-weight:600}
+.kb-story{font-size:.8rem;color:var(--mist,#777);line-height:1.45;margin:0}
+.kb-rooms button{grid-area:btn;align-self:center;background:var(--oak,#B07B4F);color:#fff;border:0;border-radius:7px;padding:9px 15px;cursor:pointer;font-size:.82rem;font-weight:600;white-space:nowrap}
+@media(max-width:520px){.kb-rooms li{grid-template-columns:64px 1fr;grid-template-areas:'img info' 'btn btn'}.kb-thumb{width:64px;height:64px}.kb-rooms button{width:100%}}
 .kb-none{color:var(--mist,#777);font-size:.92rem;margin:0}
 </style>
 
@@ -1002,6 +1008,10 @@
   // Precio/aforo (espejo de RM). Solo para el resumen; el cobro va por WhatsApp.
   var PRICE={Argia:95,Itsaso:105,Basoa:95,Lasai:90,Izar:95,Haize:95,Ibai:95,Aritz:100,Lorategia:160,Lur:95};
   var ORDER=['Argia','Itsaso','Basoa','Lasai','Izar','Lorategia','Haize','Ibai','Aritz','Lur'];
+  // Metadatos por habitación (foto, aforo, m², tipo, storytelling) para el
+  // listado de reserva: los inyecta el servidor en AV.rooms (fuente: rooms.json).
+  var RMETA={}; (AV.rooms||[]).forEach(function(r){RMETA[r.id]=r;});
+  function bathWord(m){return m.kind==='apartamento'?'baño propio':(m.kind==='accesible'?'baño adaptado':'baño privado');}
 
   var MES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   var DOW=['lun','mar','mié','jue','vie','sáb','dom'];
@@ -1099,7 +1109,18 @@
         var n2=nights(selIn,selOut);
         if(!libres.length){f.innerHTML='<p class="kb-none">No quedan habitaciones libres para esas fechas. Prueba otras fechas.</p>';return;}
         f.innerHTML='<p class="kb-summary">Para <b>'+fmt(selIn)+' &rarr; '+fmt(selOut)+'</b> ('+n2+' noche'+(n2>1?'s':'')+') tienes disponibles:</p>'
-          +'<ul class="kb-rooms">'+libres.map(function(r){return '<li><span><span class="nm">'+r+'</span> <span class="pr">desde '+(PRICE[r]||'')+'&euro;/noche</span></span><button data-pick="'+r+'">Reservar</button></li>';}).join('')+'</ul>';
+          +'<ul class="kb-rooms">'+libres.map(function(r){
+              var m=RMETA[r]||{};
+              var specs=(m.cap?m.cap+' pers':'')+(m.m2?' · ≈'+m.m2+' m²':'')+' · '+bathWord(m);
+              return '<li>'
+                +(m.img?'<img class="kb-thumb" src="'+m.img+'" alt="'+r+'" loading="lazy">':'<span class="kb-thumb"></span>')
+                +'<div class="kb-info">'
+                  +'<div class="kb-rtop"><span class="nm">'+r+'</span> <span class="pr">desde '+(m.price||PRICE[r]||'')+'&euro;/noche</span></div>'
+                  +'<div class="kb-specs">'+specs+'</div>'
+                  +(m.story?'<p class="kb-story">'+m.story+'</p>':'')
+                +'</div>'
+                +'<button data-pick="'+r+'">Reservar</button></li>';
+            }).join('')+'</ul>';
         Array.prototype.forEach.call(f.querySelectorAll('button[data-pick]'),function(b){
           b.onclick=function(){MODE='room';ROOM=b.getAttribute('data-pick');
             document.getElementById('kbTitle').textContent=ROOM;
