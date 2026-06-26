@@ -903,10 +903,10 @@
   }
   function card(r,lc){
     var tag=r.kind==='apartamento'?'<span class="tag">'+t('Apartamento · 4 personas',lc)+'</span>':(r.kind==='accesible'?'<span class="tag">'+t('Accesible · movilidad reducida',lc)+'</span>':'');
-    var img=IMG[r.id]||IMG.Argia;
+    var src=r.img?r.img:('https://l.icdbcdn.com/oh/'+(IMG[r.id]||IMG.Argia)+'.jpg?w=900');
     var amen=amenList(r).map(function(a){return '<li>'+t(a,lc)+'</li>';}).join('');
     return '<article class="room'+(r.kind==='apartamento'?' apt':'')+'">'
-      +'<div class="ph"><img loading="lazy" src="https://l.icdbcdn.com/oh/'+img+'.jpg?w=900" alt="'+r.id+'"></div>'
+      +'<div class="ph"><img loading="lazy" src="'+src+'" alt="'+r.id+'"></div>'
       +'<div class="room-body">'+tag
       +'<p class="room-concept">'+t(r.concept,lc)+'</p>'
       +'<h3 class="name">'+r.id+'</h3>'
@@ -917,7 +917,11 @@
       +'</div></article>';
   }
   function renderRooms(lc){var g=document.getElementById('roomsGrid');if(!g)return;
-    g.innerHTML=RM.filter(function(r){return r.active;}).map(function(r){return card(r,lc);}).join('');}
+    // Fuente única: las habitaciones activas que inyecta el servidor (panel/rooms.json).
+    // Respaldo: el array local RM filtrado por active (si la web se sirve sin datos).
+    var AV=window.KIRANA_AVAIL||{};
+    var list=(AV.rooms&&AV.rooms.length)?AV.rooms:RM.filter(function(r){return r.active;});
+    g.innerHTML=list.map(function(r){return card(r,lc);}).join('');}
   function init(){
     renderRooms('es');
     var _apply=window.applyLang;
