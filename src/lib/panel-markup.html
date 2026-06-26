@@ -62,7 +62,7 @@
     <section class="view" id="v-ingresos">
       <div class="kpis">
         <div class="kpi"><div class="l">Ingresos (mes)</div><div class="v" id="i-mes">—</div><div class="d up" id="i-mesd"></div></div>
-        <div class="kpi"><div class="l">Ingresos (año)</div><div class="v" id="i-anio">—</div><div class="d">2026 acumulado</div></div>
+        <div class="kpi"><div class="l">Ingresos</div><div class="v" id="i-anio">—</div><div class="d">2026 acumulado</div></div>
         <div class="kpi"><div class="l">Tarifa media (ADR)</div><div class="v" id="i-adr">—</div><div class="d">por noche</div></div>
         <div class="kpi"><div class="l">Estancia media</div><div class="v" id="i-los">—</div><div class="d">noches/reserva</div></div>
       </div>
@@ -100,9 +100,22 @@
 
     <!-- ===== CONTABILIDAD ===== -->
     <section class="view" id="v-contabilidad">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+        <span class="muted" style="font-size:12.5px">Periodo:</span>
+        <select id="contaPeriod" style="padding:7px 11px;border:1px solid var(--line);border-radius:9px;font-family:var(--sans);font-size:13px;background:#fff">
+          <option value="2026">Año 2026</option>
+          <option value="T1">T1 · ene–mar</option><option value="T2">T2 · abr–jun</option>
+          <option value="T3">T3 · jul–sep</option><option value="T4">T4 · oct–dic</option>
+          <option value="M01">Enero</option><option value="M02">Febrero</option><option value="M03">Marzo</option>
+          <option value="M04">Abril</option><option value="M05">Mayo</option><option value="M06">Junio</option>
+          <option value="M07">Julio</option><option value="M08">Agosto</option><option value="M09">Septiembre</option>
+          <option value="M10">Octubre</option><option value="M11">Noviembre</option><option value="M12">Diciembre</option>
+        </select>
+        <span class="muted" id="contaPeriodLabel" style="font-size:12.5px"></span>
+      </div>
       <div class="kpis">
         <div class="kpi"><div class="l">Ingresos (año)</div><div class="v" id="c-ing">—</div><div class="d up">acumulado</div></div>
-        <div class="kpi"><div class="l">Gastos (año)</div><div class="v" id="c-gas">—</div><div class="d down">acumulado</div></div>
+        <div class="kpi"><div class="l">Gastos</div><div class="v" id="c-gas">—</div><div class="d down">acumulado</div></div>
         <div class="kpi"><div class="l">Resultado</div><div class="v" id="c-res">—</div><div class="d">ingresos − gastos</div></div>
         <div class="kpi"><div class="l">Margen</div><div class="v" id="c-mar">—</div><div class="d">sobre ingresos</div></div>
       </div>

@@ -164,37 +164,48 @@ function openInvoiceFor(b){
 
 /* ---------- CONTABILIDAD ---------- */
 const CATCOL={'Suministros':'#5F6E52','Limpieza y lavandería':'#3C5A7A','Desayuno/alimentación':'#B49A72','Mantenimiento':'#8A6E4B','Marketing/web':'#7A6BA0','Comisiones OTA':'#A6543E','Impuestos/seguros':'#536B4A','Otros':'#9AA08F'};
+let contaPeriod='2026';
+function inContaPeriod(ds){
+  if(!ds)return false;
+  const y=ds.slice(0,4),mo=+ds.slice(5,7);
+  if(y!=='2026')return false;
+  if(contaPeriod==='2026')return true;
+  if(contaPeriod[0]==='T'){const q=+contaPeriod[1];return mo>=(q-1)*3+1&&mo<=q*3;}
+  if(contaPeriod[0]==='M')return mo===+contaPeriod.slice(1);
+  return true;
+}
+function periodLabel(){
+  if(contaPeriod==='2026')return 'Año 2026';
+  if(contaPeriod[0]==='T')return 'Trimestre '+contaPeriod[1]+' · 2026';
+  const MM=['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  return MM[+contaPeriod.slice(1)]+' 2026';
+}
 function renderConta(){
-  const ingAnio=Object.values(monthRev).reduce((a,b)=>a+b,0);
-  const gasAnio=expenses.reduce((a,e)=>a+e.amt,0)*4; // demo anualización aprox
-  const res=ingAnio-gasAnio;
-  document.getElementById('c-ing').textContent=euro(ingAnio);
-  document.getElementById('c-gas').textContent=euro(gasAnio);
+  const inv=invoices.filter(i=>inContaPeriod(i.date));
+  const exp=expenses.filter(e=>inContaPeriod(e.date));
+  const ing=inv.reduce((a,i)=>a+i.base+i.iva,0);
+  const gas=exp.reduce((a,e)=>a+(e.amt||0),0);
+  const res=ing-gas;
+  document.getElementById('c-ing').textContent=euro(ing);
+  document.getElementById('c-gas').textContent=euro(gas);
   document.getElementById('c-res').textContent=euro(res);
-  document.getElementById('c-mar').textContent=Math.round(res/ingAnio*100)+'%';
-  // movimientos
-  const movs=[...expenses.map(e=>({...e,type:'g'})), ...invoices.map(i=>({date:i.date,desc:'Factura '+i.n+' · '+i.client,cat:'Ingreso alojamiento',amt:i.base+i.iva,type:'i'}))]
-    .sort((a,b)=>b.date.localeCompare(a.date));
-  document.getElementById('movTable').innerHTML=`<thead><tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th class="right">Importe</th></tr></thead><tbody>`+
-    movs.map(m=>`<tr><td>${fmt(m.date)}</td><td>${m.desc}</td><td><span class="muted">${m.cat}</span></td><td class="right" style="color:${m.type==='i'?'var(--ok)':'var(--bad)'};font-weight:600">${m.type==='i'?'+':'−'}${euro2(m.amt)}</td></tr>`).join('')+`</tbody>`;
-  // categorías
-  const cats={};expenses.forEach(e=>cats[e.cat]=(cats[e.cat]||0)+e.amt);
-  const ctot=Object.values(cats).reduce((a,b)=>a+b,0);
-  document.getElementById('catBox').innerHTML=Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,v])=>
-    `<div style="margin-bottom:11px"><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px"><span>${c}</span><b>${euro(v)}</b></div>
-     <div style="height:7px;background:var(--line2);border-radius:4px;overflow:hidden"><div style="height:100%;width:${Math.round(v/ctot*100)}%;background:${CATCOL[c]||'#888'}"></div></div></div>`).join('');
-  // impuestos orientativo
-  const ivaRep=invoices.reduce((a,i)=>a+i.iva,0);
-  const ivaSop=expenses.reduce((a,e)=>a+(e.deducible!==false?(e.iva||0):0),0);
+  document.getElementById('c-mar').textContent=(ing?Math.round(res/ing*100):0)+'%';
+  const pl=document.getElementById('contaPeriodLabel');if(pl)pl.textContent=periodLabel();
+  const movs=[...exp.map(e=>({date:e.date,desc:e.desc,cat:e.cat,amt:e.amt,iva:e.iva||0,type:'g'})),...inv.map(i=>({date:i.date,desc:'Factura '+i.n+' · '+i.client,cat:'Ingreso alojamiento',amt:i.base+i.iva,iva:i.iva,type:'i'}))].sort((a,b)=>b.date.localeCompare(a.date));
+  document.getElementById('movTable').innerHTML=`<thead><tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th class="right">IVA</th><th class="right">Importe</th></tr></thead><tbody>`+
+    (movs.length?movs.map(m=>`<tr><td>${fmt(m.date)}</td><td>${m.desc}</td><td><span class="muted">${m.cat}</span></td><td class="right muted">${m.iva?euro2(m.iva):'—'}</td><td class="right" style="color:${m.type==='i'?'var(--ok)':'var(--bad)'};font-weight:600">${m.type==='i'?'+':'−'}${euro2(m.amt)}</td></tr>`).join(''):'<tr><td colspan="5" class="muted" style="padding:16px">Sin movimientos en este periodo.</td></tr>')+`</tbody>`;
+  const cats={};exp.forEach(e=>cats[e.cat]=(cats[e.cat]||0)+e.amt);
+  const ctot=Object.values(cats).reduce((a,b)=>a+b,0)||1;
+  document.getElementById('catBox').innerHTML=Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<div style="margin-bottom:11px"><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px"><span>${c}</span><b>${euro(v)}</b></div><div style="height:7px;background:var(--line2);border-radius:4px;overflow:hidden"><div style="height:100%;width:${Math.round(v/ctot*100)}%;background:${CATCOL[c]||'#888'}"></div></div></div>`).join('')||'<p class="muted">Sin gastos en este periodo.</p>';
+  const ivaRep=inv.reduce((a,i)=>a+i.iva,0);
+  const ivaSop=exp.reduce((a,e)=>a+(e.deducible!==false?(e.iva||0):0),0);
   document.getElementById('taxBox').innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px">
      <div><div class="muted" style="font-size:11px;text-transform:uppercase">IVA repercutido (10%)</div><div style="font-family:var(--serif);font-size:22px">${euro(ivaRep)}</div></div>
      <div><div class="muted" style="font-size:11px;text-transform:uppercase">IVA soportado (deducible)</div><div style="font-family:var(--serif);font-size:22px">${euro(ivaSop)}</div></div>
      <div><div class="muted" style="font-size:11px;text-transform:uppercase">A liquidar</div><div style="font-family:var(--serif);font-size:22px">${euro(Math.max(0,ivaRep-ivaSop))}</div></div>
-     <div><div class="muted" style="font-size:11px;text-transform:uppercase">Retención IRPF est.</div><div style="font-family:var(--serif);font-size:22px">${euro(Math.round((Object.values(monthRev).reduce((a,b)=>a+b,0))*0.2*0.15))}</div></div>
    </div>
-   <p class="muted" style="font-size:11px;margin-top:12px">Cifras orientativas para tener una foto del trimestre. La liquidación real (modelos 303, 130/131…) la prepara la gestoría; este panel solo organiza los datos.</p>`;
+   <p class="muted" style="font-size:11px;margin-top:12px">${periodLabel()} · Cifras orientativas. La liquidación oficial (modelos 303 trimestral de IVA, 130…) la prepara la gestoría; este panel organiza los datos.</p>`;
 }
-
 /* ---------- HABITACIONES ---------- */
 function roomCard(r){const info=r;
   const kindLabel=r.kind==='apartamento'?'Apartamento · 4 pers.':(r.kind==='accesible'?'Accesible':'Doble');
@@ -228,9 +239,11 @@ function renderRooms(){
 function toggleRoom(id){
   var r=rooms.find(function(x){return x.id===id;});if(!r)return;var next=!r.active;
   fetch('/api/rooms/'+r.rid,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({activa:next})})
-    .then(function(res){if(!res.ok)throw 0;r.active=next;renderRooms();renderCal();
-      if(document.getElementById('mBooking').classList.contains('on')){refreshRoomOptions();calcTotal();}})
-    .catch(function(){alert('No se pudo guardar el cambio de la habitación.');});
+    .then(function(res){return res.json().catch(function(){return {};}).then(function(d){
+      if(!res.ok)throw new Error(d.error||('HTTP '+res.status));
+      r.active=next;renderRooms();renderCal();
+      if(document.getElementById('mBooking').classList.contains('on')){refreshRoomOptions();calcTotal();}});})
+    .catch(function(e){alert('No se pudo guardar el cambio: '+(e&&e.message?e.message:'error de red')+'.');});
 }
 
 /* ---------- MODAL nueva reserva ---------- */
@@ -312,5 +325,6 @@ document.getElementById('newInv').onclick=()=>showInvoice(invoices[invoices.leng
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.modal').classList.remove('on'));
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('on')}));
 
+var __cps=document.getElementById('contaPeriod');if(__cps)__cps.onchange=function(){contaPeriod=this.value;renderConta();};
 /* init */
 renderCal();renderBk();renderIngresos();renderFacturas();renderConta();renderRooms();
