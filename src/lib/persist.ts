@@ -28,10 +28,10 @@ function isNoBlobs(err: unknown): boolean {
 }
 
 export async function readJson<T>(key: string, seed: T, localPath: string): Promise<T> {
-  // 1) Netlify Blobs (lectura fuerte).
+  // 1) Netlify Blobs (lectura FUERTE: ver siempre lo último escrito).
   try {
     const store = await getBlobStore();
-    const data = (await store.get(key, { type: 'json' })) as T | null;
+    const data = (await store.get(key, { type: 'json', consistency: 'strong' })) as T | null;
     return data ?? seed;
   } catch {
     /* no estamos en Netlify o Blobs no disponible → seguimos */
@@ -80,10 +80,11 @@ export async function updateJson<T>(
   localPath: string,
   mutate: (current: T) => T
 ): Promise<T> {
-  // 1) Netlify Blobs.
+  // 1) Netlify Blobs. Lectura FUERTE para no "resucitar" cambios previos
+  //    (read-your-writes) al hacer lee-modifica-escribe.
   try {
     const store = await getBlobStore();
-    const cur = (await store.get(key, { type: 'json' })) as T | null;
+    const cur = (await store.get(key, { type: 'json', consistency: 'strong' })) as T | null;
     const next = mutate(cur ?? seed);
     await store.setJSON(key, next);
     return next;
