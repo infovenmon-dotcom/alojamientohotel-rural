@@ -7,7 +7,7 @@ import html from '../home.html?raw';
 import { getActiveRooms } from '@/lib/rooms';
 import { getBookedMap } from '@/lib/bookings';
 
-let out = html;
+let injected = '';
 try {
   const activeRooms = await getActiveRooms();
   const activeNames = activeRooms.map((r) => r.nombre);
@@ -16,14 +16,22 @@ try {
     id: r.nombre, concept: r.concepto, price: r.precio, cap: r.capacidad,
     m2: r.m2, bed: r.cama, kind: r.tipo, story: r.storytelling, img: (r.fotos && r.fotos[0]) || '',
   }));
-  const booked = await getBookedMap();
+  // booked es secundario: si falla, NO debe impedir pintar las habitaciones.
+  let booked: Record<string, [string, string][]> = {};
+  try {
+    booked = await getBookedMap();
+  } catch {
+    booked = {};
+  }
   const stripe = !!process.env.STRIPE_SECRET_KEY;
   const demo = !stripe; // sin Stripe: modo demostración (simula reserva+factura)
   const json = JSON.stringify({ activeNames, rooms, booked, stripe, demo }).replace(/</g, '\\u003c');
-  out = html.replace('<!--KIRANA_AVAIL-->', `<script>window.KIRANA_AVAIL=${json}</script>`);
-} catch {
-  // Si falla, se sirve la maqueta tal cual (usa su disponibilidad de respaldo).
+  injected = `<script>window.KIRANA_AVAIL=${json}</script>`;
+} catch (e) {
+  const msg = (e instanceof Error ? e.message : String(e)).replace(/--+>/g, '');
+  injected = `<!-- KIRANA_AVAIL inject error: ${msg} -->`;
 }
+const out = html.replace('<!--KIRANA_AVAIL-->', injected);
 
 return new Response(out, {
   headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' },

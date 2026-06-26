@@ -45,7 +45,7 @@ async function write(data: BookingsFile): Promise<void> {
 export async function getUnavailable(room: string): Promise<[string, string][]> {
   const d = await read();
   const own = d.bookings.filter((b) => b.room === room).map((b) => [b.in, b.out] as [string, string]);
-  const ext = d.external[room] || [];
+  const ext = (d.external || {})[room] || [];
   return own.concat(ext);
 }
 
@@ -54,7 +54,8 @@ export async function getBookedMap(): Promise<Record<string, [string, string][]>
   const d = await read();
   const map: Record<string, [string, string][]> = {};
   for (const b of d.bookings) (map[b.room] ??= []).push([b.in, b.out]);
-  for (const room of Object.keys(d.external)) (map[room] ??= []).push(...d.external[room]);
+  const ext = d.external || {};
+  for (const room of Object.keys(ext)) (map[room] ??= []).push(...ext[room]);
   return map;
 }
 
