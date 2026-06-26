@@ -14,6 +14,10 @@ import appJs from '@/lib/panel-app.js?raw';
 
 export const prerender = false;
 
+// Nunca cachear el panel: que el navegador (móvil) cargue siempre la última
+// versión del código y el estado real de las habitaciones.
+Astro.response.headers.set('cache-control', 'no-store');
+
 const roomsData = await getAllRooms();
 const priceByName = Object.fromEntries(roomsData.map((r) => [r.nombre, r.precio]));
 
