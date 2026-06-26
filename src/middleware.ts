@@ -2,7 +2,7 @@ import { defineMiddleware } from 'astro:middleware';
 import { COOKIE, isValidSession } from '@/lib/auth';
 
 // Endpoints públicos (reservas/disponibilidad/pago): no requieren sesión.
-const PUBLIC_API = ['/api/availability', '/api/ical', '/api/checkout', '/api/sync', '/api/stripe-webhook', '/api/_debug'];
+const PUBLIC_API = ['/api/availability', '/api/ical', '/api/checkout', '/api/sync', '/api/stripe-webhook', '/api/diag'];
 
 /** Protege /panel/* y la API del panel (/api/rooms). El login y los endpoints
  *  públicos de reservas quedan abiertos. */
