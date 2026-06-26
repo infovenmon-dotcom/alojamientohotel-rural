@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import seed from '../data/expenses.json';
+import { readJson, writeJson } from './persist';
 
 /**
  * Gastos con IVA soportado (deducible) para la contabilidad. El IVA a liquidar
@@ -21,8 +22,6 @@ interface ExpensesFile {
   expenses: Expense[];
 }
 
-const ON_NETLIFY = !!process.env.NETLIFY;
-const STORE = 'kirana';
 const KEY = 'expenses';
 
 function filePath(): string {
@@ -30,26 +29,10 @@ function filePath(): string {
   return resolve(process.cwd(), 'src/data/expenses.json');
 }
 async function read(): Promise<ExpensesFile> {
-  if (ON_NETLIFY) {
-    const { getStore } = await import('@netlify/blobs');
-    const data = (await getStore(STORE).get(KEY, { type: 'json' })) as ExpensesFile | null;
-    return data ?? (seed as ExpensesFile);
-  }
-  try {
-    const { readFileSync } = await import('node:fs');
-    return JSON.parse(readFileSync(filePath(), 'utf8')) as ExpensesFile;
-  } catch {
-    return seed as ExpensesFile;
-  }
+  return readJson<ExpensesFile>(KEY, seed as ExpensesFile, filePath());
 }
 async function write(data: ExpensesFile): Promise<void> {
-  if (ON_NETLIFY) {
-    const { getStore } = await import('@netlify/blobs');
-    await getStore(STORE).setJSON(KEY, data);
-    return;
-  }
-  const { writeFileSync } = await import('node:fs');
-  writeFileSync(filePath(), JSON.stringify(data, null, 2) + '\n', 'utf8');
+  return writeJson(KEY, data, filePath());
 }
 
 export async function listExpenses(): Promise<Expense[]> {

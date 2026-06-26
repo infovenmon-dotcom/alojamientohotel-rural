@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import seed from '../data/bookings.json';
+import { readJson, writeJson } from './persist';
 
 /**
  * Disponibilidad por habitación = reservas propias (web/manual/canales) +
@@ -25,8 +26,6 @@ interface BookingsFile {
   icalUrls: Record<string, string>; // URL .ics de Booking por habitación (import)
 }
 
-const ON_NETLIFY = !!process.env.NETLIFY;
-const STORE = 'kirana';
 const KEY = 'bookings';
 
 function filePath(): string {
@@ -35,27 +34,11 @@ function filePath(): string {
 }
 
 async function read(): Promise<BookingsFile> {
-  if (ON_NETLIFY) {
-    const { getStore } = await import('@netlify/blobs');
-    const data = (await getStore(STORE).get(KEY, { type: 'json' })) as BookingsFile | null;
-    return data ?? (seed as BookingsFile);
-  }
-  try {
-    const { readFileSync } = await import('node:fs');
-    return JSON.parse(readFileSync(filePath(), 'utf8')) as BookingsFile;
-  } catch {
-    return seed as BookingsFile;
-  }
+  return readJson<BookingsFile>(KEY, seed as BookingsFile, filePath());
 }
 
 async function write(data: BookingsFile): Promise<void> {
-  if (ON_NETLIFY) {
-    const { getStore } = await import('@netlify/blobs');
-    await getStore(STORE).setJSON(KEY, data);
-    return;
-  }
-  const { writeFileSync } = await import('node:fs');
-  writeFileSync(filePath(), JSON.stringify(data, null, 2) + '\n', 'utf8');
+  return writeJson(KEY, data, filePath());
 }
 
 /** Rangos ocupados [in,out) de una habitación: reservas propias + externos. */

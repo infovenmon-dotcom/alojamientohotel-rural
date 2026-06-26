@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import type { Room } from './rooms';
+import { readJson, writeJson } from './persist';
 // Copia incluida en el bundle: semilla y respaldo de LECTURA (funciona en
 // cualquier runtime, incl. Cloudflare Workers, sin tocar disco).
 import seed from '../data/rooms.json';
@@ -15,8 +16,6 @@ import seed from '../data/rooms.json';
  *
  * Las funciones son asíncronas para soportar almacenes remotos.
  */
-const ON_NETLIFY = !!process.env.NETLIFY;
-const BLOB_STORE = 'kirana';
 const BLOB_KEY = 'rooms';
 
 interface RoomsFile {
@@ -30,35 +29,11 @@ function roomsPath(): string {
 }
 
 async function read(): Promise<RoomsFile> {
-  if (ON_NETLIFY) {
-    const { getStore } = await import('@netlify/blobs');
-    const data = (await getStore(BLOB_STORE).get(BLOB_KEY, { type: 'json' })) as RoomsFile | null;
-    return data ?? (seed as RoomsFile);
-  }
-  // Disco (local/Node). Si no hay sistema de ficheros (Cloudflare), respaldo.
-  try {
-    const { readFileSync } = await import('node:fs');
-    return JSON.parse(readFileSync(roomsPath(), 'utf8')) as RoomsFile;
-  } catch {
-    return seed as RoomsFile;
-  }
+  return readJson<RoomsFile>(BLOB_KEY, seed as RoomsFile, roomsPath());
 }
 
 async function write(data: RoomsFile): Promise<void> {
-  if (ON_NETLIFY) {
-    const { getStore } = await import('@netlify/blobs');
-    await getStore(BLOB_STORE).setJSON(BLOB_KEY, data);
-    return;
-  }
-  try {
-    const { writeFileSync } = await import('node:fs');
-    writeFileSync(roomsPath(), JSON.stringify(data, null, 2) + '\n', 'utf8');
-  } catch {
-    throw new Error(
-      'Persistencia no disponible: este hosting es de solo lectura. ' +
-        'Conecta KV o una base de datos para guardar cambios.'
-    );
-  }
+  return writeJson(BLOB_KEY, data, roomsPath());
 }
 
 /** Todas las habitaciones (incluye bloqueadas). */

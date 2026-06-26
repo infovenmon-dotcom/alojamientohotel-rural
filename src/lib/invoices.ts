@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import seed from '../data/invoices.json';
+import { readJson, writeJson } from './persist';
 
 /**
  * Facturas con numeración CORRELATIVA (serie + número) en orden de emisión, como
@@ -32,8 +33,6 @@ interface InvoicesFile {
   invoices: Invoice[];
 }
 
-const ON_NETLIFY = !!process.env.NETLIFY;
-const STORE = 'kirana';
 const KEY = 'invoices';
 
 function filePath(): string {
@@ -41,26 +40,10 @@ function filePath(): string {
   return resolve(process.cwd(), 'src/data/invoices.json');
 }
 async function read(): Promise<InvoicesFile> {
-  if (ON_NETLIFY) {
-    const { getStore } = await import('@netlify/blobs');
-    const data = (await getStore(STORE).get(KEY, { type: 'json' })) as InvoicesFile | null;
-    return data ?? (seed as InvoicesFile);
-  }
-  try {
-    const { readFileSync } = await import('node:fs');
-    return JSON.parse(readFileSync(filePath(), 'utf8')) as InvoicesFile;
-  } catch {
-    return seed as InvoicesFile;
-  }
+  return readJson<InvoicesFile>(KEY, seed as InvoicesFile, filePath());
 }
 async function write(data: InvoicesFile): Promise<void> {
-  if (ON_NETLIFY) {
-    const { getStore } = await import('@netlify/blobs');
-    await getStore(STORE).setJSON(KEY, data);
-    return;
-  }
-  const { writeFileSync } = await import('node:fs');
-  writeFileSync(filePath(), JSON.stringify(data, null, 2) + '\n', 'utf8');
+  return writeJson(KEY, data, filePath());
 }
 
 export async function listInvoices(): Promise<Invoice[]> {
