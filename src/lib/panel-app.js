@@ -237,16 +237,17 @@ function renderRooms(){
   }).join('');
 }
 function toggleRoom(id){
-  var r=rooms.find(function(x){return x.id===id;});if(!r)return;var next=!r.active;
-  // Encolar las escrituras (una a una) para no perder cambios al activar/bloquear
-  // varias habitaciones seguidas (read-modify-write sobre el mismo almacén).
+  var r=rooms.find(function(x){return x.id===id;});if(!r)return;
+  r.active=!r.active;renderRooms();renderCal();
+  if(document.getElementById('mBooking').classList.contains('on')){refreshRoomOptions();calcTotal();}
+  // Mandar el estado COMPLETO de todas las habitaciones (foto entera) en una
+  // sola operación: la última orden gana y nunca se pierden cambios.
+  var states={};rooms.forEach(function(x){states[x.rid]=!!x.active;});
   window.__roomQ=(window.__roomQ||Promise.resolve()).then(function(){
-    return fetch('/api/rooms/'+r.rid,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({activa:next})})
+    return fetch('/api/panel/rooms',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({states:states})})
       .then(function(res){return res.json().catch(function(){return {};}).then(function(d){
-        if(!res.ok)throw new Error(d.error||('HTTP '+res.status));
-        r.active=next;renderRooms();renderCal();
-        if(document.getElementById('mBooking').classList.contains('on')){refreshRoomOptions();calcTotal();}});})
-      .catch(function(e){alert('No se pudo guardar el cambio: '+(e&&e.message?e.message:'error de red')+'.');});
+        if(!res.ok)throw new Error(d.error||('HTTP '+res.status));});})
+      .catch(function(e){alert('No se pudo guardar el cambio: '+(e&&e.message?e.message:'error de red')+'. Recarga e int\u00e9ntalo de nuevo.');});
   });
 }
 

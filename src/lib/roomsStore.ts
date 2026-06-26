@@ -71,3 +71,18 @@ export async function toggleRoom(id: string): Promise<boolean | undefined> {
   if (!room) return undefined;
   return (await setRoomActive(id, !room.activa))?.activa;
 }
+
+/**
+ * Fija el estado activa/bloqueada de VARIAS habitaciones de una sola vez.
+ * El panel envía el estado COMPLETO en cada cambio: una única escritura, sin
+ * carreras ni "resurrección" de cambios previos. `states` = { id: boolean }.
+ */
+export async function setRoomsActive(states: Record<string, boolean>): Promise<Room[]> {
+  const data = await updateJson<RoomsFile>(BLOB_KEY, seed as RoomsFile, roomsPath(), (d) => {
+    for (const r of d.rooms) {
+      if (Object.prototype.hasOwnProperty.call(states, r.id)) r.activa = !!states[r.id];
+    }
+    return d;
+  });
+  return data.rooms;
+}

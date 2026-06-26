@@ -25,6 +25,7 @@ export {
   getActiveRooms,
   getRoomById,
   setRoomActive,
+  setRoomsActive,
   toggleRoom,
 } from './roomsStore';
 
