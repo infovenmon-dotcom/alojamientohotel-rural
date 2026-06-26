@@ -38,6 +38,8 @@ const rooms = roomsData.map((r) => ({
 const bookings = (await listBookings()).map((b) => ({
   room: b.room,
   name: b.name || 'Reserva',
+  email: b.email || '',
+  phone: b.phone || '',
   in: b.in,
   out: b.out,
   guests: b.pax || 2,

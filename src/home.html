@@ -963,6 +963,8 @@
 .kb-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:13px;font-size:.73rem;color:var(--mist,#777)}
 .kb-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:middle;margin-right:5px}
 .kb-foot{padding:16px 20px;border-top:1px solid var(--line,#e5e5e5)}
+.kb-fields{display:grid;gap:8px;margin:0 0 12px}
+.kb-fields input{border:1px solid var(--line,#e5e5e5);border-radius:8px;padding:11px 12px;font-family:var(--sans,system-ui);font-size:.95rem;background:#fff;color:var(--ink,#222);width:100%;box-sizing:border-box}
 .kb-summary{font-size:.95rem;margin:0 0 12px;color:var(--ink,#222)}
 .kb-summary b{color:var(--pine,#2B3A2E)}
 .kb-hint{color:var(--mist,#777);font-size:.9rem;margin:0}
@@ -1094,12 +1096,24 @@
         var sum='<p class="kb-summary"><b>'+ROOM+'</b> &middot; '+fmt(selIn)+' &rarr; '+fmt(selOut)+' &middot; '+n+' noche'+(n>1?'s':'')+' &middot; desde <b>'+tot+'&euro;</b></p>';
         if(AV.stripe||AV.demo){
           var label=AV.stripe?'Reservar y pagar':'Reservar (demostraci\u00f3n)';
-          f.innerHTML=sum+'<button class="kb-cta" id="kbPay">'+label+'</button>'+
+          f.innerHTML=sum
+            +'<div class="kb-fields">'
+              +'<input id="kbName" type="text" placeholder="Nombre y apellidos" autocomplete="name">'
+              +'<input id="kbEmail" type="email" placeholder="Email" autocomplete="email">'
+              +'<input id="kbPhone" type="tel" placeholder="Tel\u00e9fono" autocomplete="tel">'
+            +'</div>'
+            +'<button class="kb-cta" id="kbPay">'+label+'</button>'+
             (AV.demo?'<p style="margin:8px 0 0;text-align:center;font-size:.75rem;color:#A6543E">Demostraci\u00f3n: no se cobra nada real.</p>':'')+
             '<p style="margin:10px 0 0;text-align:center;font-size:.8rem"><a href="'+waLink(ROOM,pax())+'" target="_blank" rel="noopener" style="color:#5F6E52">&iquest;Dudas? Escr&iacute;benos por WhatsApp</a></p>';
           var pb=document.getElementById('kbPay');
-          pb.onclick=function(){pb.disabled=true;pb.textContent='Un momento\u2026';
-            fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({room:ROOM,in:selIn,out:selOut,pax:pax()})})
+          pb.onclick=function(){
+            var name=(document.getElementById('kbName').value||'').trim();
+            var email=(document.getElementById('kbEmail').value||'').trim();
+            var phone=(document.getElementById('kbPhone').value||'').trim();
+            if(!name||!email||!phone){alert('Por favor, completa nombre, email y tel\u00e9fono.');return;}
+            if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){alert('Revisa el email, parece incorrecto.');return;}
+            pb.disabled=true;pb.textContent='Un momento\u2026';
+            fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({room:ROOM,in:selIn,out:selOut,pax:pax(),name:name,email:email,phone:phone})})
               .then(function(r){return r.json();}).then(function(d){if(d&&d.url){location.href=d.url;}else{pb.disabled=false;pb.textContent=label;alert(d&&d.error?d.error:'No se pudo completar.');}})
               .catch(function(){pb.disabled=false;pb.textContent=label;alert('No se pudo completar.');});};
         }else{

@@ -15,6 +15,8 @@ export interface Booking {
   in: string; // YYYY-MM-DD (entrada)
   out: string; // YYYY-MM-DD (salida, exclusiva)
   name?: string;
+  email?: string;
+  phone?: string;
   pax?: number;
   source?: 'web' | 'manual' | 'channel' | 'stripe';
   ref?: string;

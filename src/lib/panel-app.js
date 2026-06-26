@@ -80,7 +80,7 @@ function renderBk(){
   const rowsH=bookings.slice().sort((a,b)=>a.in.localeCompare(b.in)).map(b=>{
     const n=nights(b.in,b.out);const tot=n*b.rate+(b.mp?n*b.guests*25:0);
     const st = b.in> ymd(today)?'<span class="pill in">Confirmada</span>':(b.out>=ymd(today)?'<span class="pill ok">En casa</span>':'<span class="pill">Pasada</span>');
-    return `<tr><td><b>${b.name}</b></td><td><span class="dot" style="background:${COLORS[b.room]}"></span>${b.room}</td><td>${fmt(b.in)} → ${fmt(b.out)}</td><td>${n} noches</td><td>${b.guests}</td><td>${chTag(b.ch)}</td><td>${st}</td><td class="right"><b>${euro(tot)}</b></td></tr>`;
+    return `<tr><td><b>${b.name}</b>${(b.email||b.phone)?`<br><span class="muted" style="font-size:11px">${[b.email,b.phone].filter(Boolean).join(" · ")}</span>`:""}</td><td><span class="dot" style="background:${COLORS[b.room]}"></span>${b.room}</td><td>${fmt(b.in)} → ${fmt(b.out)}</td><td>${n} noches</td><td>${b.guests}</td><td>${chTag(b.ch)}</td><td>${st}</td><td class="right"><b>${euro(tot)}</b></td></tr>`;
   }).join('');
   document.getElementById('bkTable').innerHTML=`<thead><tr><th>Huésped</th><th>Habitación</th><th>Fechas</th><th>Noches</th><th>Pax</th><th>Canal</th><th>Estado</th><th class="right">Total</th></tr></thead><tbody>${rowsH}</tbody>`;
 }
