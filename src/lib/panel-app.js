@@ -449,12 +449,12 @@ function syncCanales(){
     .catch(function(){if(bt){bt.disabled=false;bt.textContent='Sincronizar ahora';}alert('No se pudo sincronizar.');});
 }
 
-/* ---------- RESEÑAS (respuestas con IA · demo) ---------- */
+/* ---------- RESEÑAS (traducción + respuesta IA · demo) ---------- */
 function platColor(p){return ({Google:'#3C5A7A',Booking:'#1A4FA0','Expedia/Vrbo':'#B4894A',Airbnb:'#A6543E'})[p]||'#6C7065';}
-function draftReply(rv){
-  // Borrador DEMO por idioma y según la nota. Con la API de Claude será a medida.
-  var pos=(rv.rating>=4);
-  var n=(rv.author||'').split(' ')[0];
+function langName2(c){return ({es:'español',eu:'euskera',fr:'francés',en:'inglés',de:'alemán',it:'italiano',nl:'neerlandés'})[(c||'').slice(0,2)]||c;}
+function draftReply(rv,lc){
+  // Borrador DEMO. Con la API de Claude: redacta en español y traduce al idioma del cliente.
+  var pos=(rv.rating>=4); var n=(rv.author||'').split(' ')[0];
   var M={
     es:{p:'Hola '+n+', ¡muchas gracias por tu reseña y por elegir Kirana! Nos alegra muchísimo que disfrutaras de la calma de Urdaibai. Te esperamos de nuevo. Un abrazo, el equipo de Kirana.',
         i:'Hola '+n+', gracias por tu comentario y por alojarte en Kirana. Tomamos nota de lo que indicas para mejorar. Esperamos darte la bienvenida de nuevo. Un saludo, el equipo de Kirana.'},
@@ -465,12 +465,9 @@ function draftReply(rv){
     de:{p:'Hallo '+n+', vielen Dank für deine Bewertung und dass du dich für Kirana entschieden hast! Es freut uns sehr, dass du die Ruhe von Urdaibai genossen hast. Wir freuen uns auf deinen nächsten Besuch. Herzliche Grüße, das Kirana-Team.',
         i:'Hallo '+n+', danke für dein Feedback und deinen Aufenthalt bei Kirana. Wir nehmen deine Hinweise auf, um uns zu verbessern. Wir würden uns freuen, dich wiederzusehen. Herzliche Grüße, das Kirana-Team.'},
     it:{p:'Ciao '+n+', grazie mille per la tua recensione e per aver scelto Kirana! Siamo felicissimi che tu abbia apprezzato la tranquillità di Urdaibai. Ti aspettiamo di nuovo. Un saluto, il team di Kirana.',
-        i:'Ciao '+n+', grazie per il tuo commento e per aver soggiornato a Kirana. Prendiamo nota delle tue osservazioni per migliorare. Speriamo di rivederti presto. Un saluto, il team di Kirana.'},
-    eu:{p:'Kaixo '+n+', mila esker zure iritziagatik eta Kirana aukeratzeagatik! Asko poztu gara Urdaibaiko lasaitasunaz gozatu izanaz. Berriz ere zain zaitugu. Besarkada bat, Kirana taldea.',
-        i:'Kaixo '+n+', eskerrik asko zure iruzkinagatik eta Kiranan egon izanagatik. Zure oharrak kontuan hartuko ditugu hobetzeko. Berriz ikustea espero dugu. Agur bero bat, Kirana taldea.'}
+        i:'Ciao '+n+', grazie per il tuo commento e per aver soggiornato a Kirana. Prendiamo nota delle tue osservazioni per migliorare. Speriamo di rivederti presto. Un saluto, il team di Kirana.'}
   };
-  var L=M[(rv.lang||'es').slice(0,2)]||M.es;
-  return pos?L.p:L.i;
+  var L=M[(lc||'es').slice(0,2)]||M.es; return pos?L.p:L.i;
 }
 function renderResenas(){
   var list=(PANEL.reviews||[]);
@@ -483,16 +480,18 @@ function renderResenas(){
   var cards=list.map(function(r){
     var col=platColor(r.platform);
     var stars='★★★★★'.slice(0,r.rating)+'☆☆☆☆☆'.slice(0,5-r.rating);
-    var head='<div class="rv-head"><span><b>'+r.author+'</b> <span class="chtag" style="background:'+col+'1F;color:'+col+'">'+r.platform+'</span></span>'
-      +'<span class="rv-stars">'+stars+'</span></div>'
-      +'<div class="muted" style="font-size:11px">'+fmt(r.date)+' · '+r.lang.toUpperCase()+'</div>'
-      +'<p class="rv-text">'+r.text+'</p>';
+    var es=(r.lang||'es').slice(0,2)==='es';
+    var head='<div class="rv-head"><span><b>'+r.author+'</b> <span class="chtag" style="background:'+col+'1F;color:'+col+'">'+r.platform+'</span></span><span class="rv-stars">'+stars+'</span></div>'
+      +'<div class="muted" style="font-size:11px">'+fmt(r.date)+' · '+langName2(r.lang)+'</div>'
+      +'<p class="rv-text">'+r.text+'</p>'
+      +(es?'':'<div class="rv-trad"><b>Traducción:</b> '+(r.textES||'')+'</div>');
     var body;
     if(r.replied){
       body='<div class="rv-replied"><b>Respondida ✓</b><p>'+(r.reply||'')+'</p></div>';
     }else{
-      var draft=draftReply(r);
-      body='<textarea id="reply-'+r.id+'" class="rv-area">'+draft+'</textarea>'
+      body='<label class="rv-lbl">Tu respuesta (en español)</label>'
+        +'<textarea id="reply-'+r.id+'" class="rv-area" oninput="syncSend(\''+r.id+'\')">'+draftReply(r,'es')+'</textarea>'
+        +(es?'':'<div class="rv-send"><b>Se enviará en '+langName2(r.lang)+':</b> <span id="send-'+r.id+'">'+draftReply(r,r.lang)+'</span></div>')
         +'<div class="rv-actions"><button class="btn ghost sm" onclick="regenReply(\''+r.id+'\')">Regenerar IA</button>'
         +'<button class="btn ghost sm" onclick="copyReply(\''+r.id+'\')">Copiar</button>'
         +'<button class="btn sm" onclick="sendReply(\''+r.id+'\')">Enviar</button></div>';
@@ -502,9 +501,14 @@ function renderResenas(){
   T('rvList').innerHTML=cards||'<p class="muted">Sin reseñas.</p>';
 }
 function findRv(id){return (PANEL.reviews||[]).find(function(r){return r.id===id;});}
-function regenReply(id){var r=findRv(id);var el=document.getElementById('reply-'+id);if(r&&el)el.value=draftReply(r);}
-function copyReply(id){var el=document.getElementById('reply-'+id);if(!el)return;try{navigator.clipboard&&navigator.clipboard.writeText(el.value);}catch(e){}alert('Respuesta copiada. Pégala en la plataforma si no permite respuesta automática.');}
+function regenReply(id){var r=findRv(id);var el=document.getElementById('reply-'+id);if(r&&el){el.value=draftReply(r,'es');var s=document.getElementById('send-'+id);if(s)s.textContent=draftReply(r,r.lang);}}
+function syncSend(id){ /* Demo: el envío usa la plantilla del idioma. Con IA, traduce tu texto en español. */ }
+function copyReply(id){var r=findRv(id);var es=(r&&(r.lang||'es').slice(0,2)==='es');var s=document.getElementById('send-'+id);var el=document.getElementById('reply-'+id);
+  var txt=(!es&&s)?s.textContent:(el?el.value:'');
+  try{navigator.clipboard&&navigator.clipboard.writeText(txt);}catch(e){}
+  alert('Respuesta copiada (en el idioma del cliente). Pégala si la plataforma no permite respuesta automática.');}
 function sendReply(id){var r=findRv(id);var el=document.getElementById('reply-'+id);if(!r||!el)return;
-  r.replied=true;r.reply=el.value;renderResenas();
-  alert('(Demo) En real se publicaría automáticamente en '+r.platform+'. Con la API de Claude el borrador lo redacta la IA.');
+  var es=(r.lang||'es').slice(0,2)==='es';var s=document.getElementById('send-'+id);
+  r.replied=true;r.reply=(!es&&s)?s.textContent:el.value;renderResenas();
+  alert('(Demo) En real se publicaría automáticamente en '+r.platform+', en '+langName2(r.lang)+'. Con la API de Claude tu texto en español se traduce solo.');
 }
