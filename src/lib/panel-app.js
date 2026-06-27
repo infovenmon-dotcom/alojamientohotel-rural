@@ -164,21 +164,32 @@ function openInvoiceFor(b){
 
 /* ---------- CONTABILIDAD ---------- */
 const CATCOL={'Suministros':'#5F6E52','Limpieza y lavandería':'#3C5A7A','Desayuno/alimentación':'#B49A72','Mantenimiento':'#8A6E4B','Marketing/web':'#7A6BA0','Comisiones OTA':'#A6543E','Impuestos/seguros':'#536B4A','Otros':'#9AA08F'};
-let contaPeriod='2026';
+let contaYear = today.getFullYear();
+let contaPeriod = 'full';
 function inContaPeriod(ds){
   if(!ds)return false;
   const y=ds.slice(0,4),mo=+ds.slice(5,7);
-  if(y!=='2026')return false;
-  if(contaPeriod==='2026')return true;
+  if(y!==String(contaYear))return false;
+  if(contaPeriod==='full')return true;
   if(contaPeriod[0]==='T'){const q=+contaPeriod[1];return mo>=(q-1)*3+1&&mo<=q*3;}
   if(contaPeriod[0]==='M')return mo===+contaPeriod.slice(1);
   return true;
 }
 function periodLabel(){
-  if(contaPeriod==='2026')return 'Año 2026';
-  if(contaPeriod[0]==='T')return 'Trimestre '+contaPeriod[1]+' · 2026';
+  if(contaPeriod==='full')return 'Año '+contaYear;
+  if(contaPeriod[0]==='T')return 'Trimestre '+contaPeriod[1]+' · '+contaYear;
   const MM=['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  return MM[+contaPeriod.slice(1)]+' 2026';
+  return MM[+contaPeriod.slice(1)]+' '+contaYear;
+}
+function populateContaYears(){
+  var sel=document.getElementById('contaYear'); if(!sel)return;
+  var ys={};
+  (invoices||[]).forEach(function(i){if(i.date)ys[i.date.slice(0,4)]=1;});
+  (expenses||[]).forEach(function(e){if(e.date)ys[e.date.slice(0,4)]=1;});
+  var now=today.getFullYear(); ys[now]=1; ys[now+1]=1; // disponible también el año próximo
+  var arr=Object.keys(ys).map(Number).sort(function(a,b){return b-a;});
+  if(arr.indexOf(contaYear)<0)contaYear=arr[0];
+  sel.innerHTML=arr.map(function(y){return '<option value="'+y+'"'+(y===contaYear?' selected':'')+'>'+y+'</option>';}).join('');
 }
 function renderConta(){
   const inv=invoices.filter(i=>inContaPeriod(i.date));
@@ -330,7 +341,7 @@ document.getElementById('newInv').onclick=()=>showInvoice(invoices[invoices.leng
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.modal').classList.remove('on'));
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('on')}));
 
-var __cps=document.getElementById('contaPeriod');if(__cps)__cps.onchange=function(){contaPeriod=this.value;renderConta();};
+(function(){var ys=document.getElementById('contaYear');if(ys){populateContaYears();ys.onchange=function(){contaYear=+this.value;renderConta();};}var ps=document.getElementById('contaPeriod');if(ps)ps.onchange=function(){contaPeriod=this.value;renderConta();};})();
 var __clc=document.getElementById('cl-csv');if(__clc)__clc.onclick=exportClientesCSV;var __cls=document.getElementById('cl-search');if(__cls)__cls.oninput=renderClientes;
 /* init */
 renderCal();renderBk();renderIngresos();renderFacturas();renderConta();renderRooms();renderClientes();
