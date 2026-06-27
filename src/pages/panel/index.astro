@@ -41,6 +41,8 @@ const bookings = (await listBookings()).map((b) => ({
   email: b.email || '',
   phone: b.phone || '',
   nif: b.nif || '',
+  lang: b.lang || '',
+  consent: !!b.consent,
   in: b.in,
   out: b.out,
   guests: b.pax || 2,

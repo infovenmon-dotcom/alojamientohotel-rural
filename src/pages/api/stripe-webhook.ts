@@ -38,6 +38,8 @@ export const POST: APIRoute = async ({ request }) => {
             phone: m.phone || s.customer_details?.phone || undefined,
             nif: m.nif || undefined,
             address: m.address || undefined,
+            lang: m.lang || undefined,
+            consent: m.consent === 'true',
             source: 'stripe',
             ref: s.id,
           },

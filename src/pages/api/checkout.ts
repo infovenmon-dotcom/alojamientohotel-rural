@@ -24,6 +24,8 @@ export const POST: APIRoute = async ({ request }) => {
   const phone = (body?.phone || '').toString().trim();
   const nif = (body?.nif || '').toString().trim(); // opcional (factura con NIF)
   const address = (body?.address || '').toString().trim(); // opcional
+  const lang = (body?.lang || 'es').toString().trim().slice(0, 5); // idioma del cliente
+  const consent = body?.consent === true || body?.consent === 'true'; // marketing
   if (!room || !inS || !outS || !(inS < outS)) return json({ error: 'fechas inválidas' }, 400);
   if (!PRICE_PER_NIGHT[room]) return json({ error: 'habitación desconocida' }, 400);
   if (!name || !email || !phone) return json({ error: 'faltan tus datos (nombre, email y teléfono)' }, 400);
@@ -35,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
   if (!key) {
     const now = new Date().toISOString();
     const booking = await addBooking(
-      { room, in: inS, out: outS, pax: pax ? Number(pax) : undefined, name, email, phone, nif: nif || undefined, address: address || undefined, source: 'web', ref: 'demo' },
+      { room, in: inS, out: outS, pax: pax ? Number(pax) : undefined, name, email, phone, nif: nif || undefined, address: address || undefined, lang, consent, source: 'web', ref: 'demo' },
       now
     );
     const { base, iva, ivaPct, total } = invoiceAmounts(room, inS, outS);
@@ -72,7 +74,7 @@ export const POST: APIRoute = async ({ request }) => {
     ],
     customer_email: email || undefined,
     phone_number_collection: { enabled: true },
-    metadata: { room, in: inS, out: outS, pax: String(pax || ''), name, email, phone, nif, address },
+    metadata: { room, in: inS, out: outS, pax: String(pax || ''), name, email, phone, nif, address, lang, consent: String(consent) },
     success_url: `${origin}/reserva-ok?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/#habitaciones`,
   });

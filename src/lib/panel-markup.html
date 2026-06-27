@@ -7,6 +7,7 @@
     <div class="nav-it" data-v="facturas"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg> Facturas</div>
     <div class="nav-it" data-v="contabilidad"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 10h16M10 10v10"/></svg> Contabilidad</div>
     <div class="nav-it" data-v="habitaciones"><svg viewBox="0 0 24 24"><path d="M3 20v-9l9-6 9 6v9M9 20v-6h6v6"/></svg> Habitaciones</div>
+    <div class="nav-it" data-v="clientes"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg> Clientes</div>
     <div class="sp"></div>
     <div class="who"><b>Casa Kirana</b>Bermeo · Bizkaia<br><a href="/panel/logout" style="color:#9FAA92;text-decoration:underline">Cerrar sesión</a></div>
   </aside>
@@ -133,6 +134,18 @@
       <div class="card"><div class="hd"><h3>Habitaciones</h3><span class="muted" style="font-size:12px">8 en total · activa o bloquea cada una</span></div>
         <div class="bd"><p id="roomSummary" class="muted"></p><div class="rgrid" id="roomGrid"></div></div></div>
       <p class="muted" style="font-size:12.5px">Bloquear una habitación la quita del calendario y de la web al instante; al activarla, vuelve a aparecer. Útil mientras no estén listas todas. En producción el estado se guarda y se sincroniza con el motor de reservas y los canales (channel manager). <span style="color:var(--mist)">(Demo: el bloqueo se mantiene durante la sesión.)</span></p>
+    </section>
+  
+    <!-- ===== CLIENTES ===== -->
+    <section class="view" id="v-clientes">
+      <div class="kpis">
+        <div class="kpi"><div class="l">Clientes</div><div class="v" id="cl-total">—</div><div class="d">únicos por email</div></div>
+        <div class="kpi"><div class="l">Aceptan ofertas</div><div class="v" id="cl-optin">—</div><div class="d">consentimiento (RGPD)</div></div>
+        <div class="kpi"><div class="l">Estancias</div><div class="v" id="cl-stays">—</div><div class="d">totales</div></div>
+      </div>
+      <div class="card"><div class="hd"><h3>Base de datos de clientes</h3><div style="display:flex;gap:8px;align-items:center"><input id="cl-search" placeholder="Buscar…" style="padding:7px 11px;border:1px solid var(--line);border-radius:9px;font-family:var(--sans);font-size:13px"><button class="btn ghost sm" id="cl-csv">Exportar CSV</button></div></div>
+        <div class="bd" style="padding:0;overflow-x:auto"><table id="clTable"></table></div></div>
+      <p class="muted" style="font-size:12px;padding:2px">Para enviar ofertas por email en el idioma de cada cliente conectaremos Brevo. Solo se escribirá a quienes aceptaron recibir ofertas (RGPD).</p>
     </section>
   </main>
 </div>

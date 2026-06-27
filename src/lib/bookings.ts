@@ -19,6 +19,8 @@ export interface Booking {
   phone?: string;
   nif?: string; // opcional: para factura con datos fiscales
   address?: string; // opcional: dirección fiscal
+  lang?: string; // idioma del cliente al reservar (es, eu, fr, en…)
+  consent?: boolean; // acepta recibir ofertas por email (marketing)
   pax?: number;
   source?: 'web' | 'manual' | 'channel' | 'stripe';
   ref?: string;

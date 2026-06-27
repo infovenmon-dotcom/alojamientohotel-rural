@@ -18,7 +18,7 @@ let expenses = PANEL.expenses;
 function absRand(x){return x}
 
 /* ---------- NAV ---------- */
-const titles={reservas:['Reservas','Calendario de ocupación por habitación'],ingresos:['Ingresos','Evolución y desglose de ingresos'],facturas:['Facturas','Emisión y seguimiento de facturas'],contabilidad:['Contabilidad','Ingresos, gastos y resultado'],habitaciones:['Habitaciones','Tarifas y configuración']};
+const titles={reservas:['Reservas','Calendario de ocupación por habitación'],ingresos:['Ingresos','Evolución y desglose de ingresos'],facturas:['Facturas','Emisión y seguimiento de facturas'],contabilidad:['Contabilidad','Ingresos, gastos y resultado'],habitaciones:['Habitaciones','Tarifas y configuración'],clientes:['Clientes','Base de datos y email marketing']};
 document.querySelectorAll('.nav-it').forEach(it=>it.onclick=()=>{
   document.querySelectorAll('.nav-it').forEach(x=>x.classList.remove('on'));it.classList.add('on');
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
@@ -331,5 +331,42 @@ document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.m
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('on')}));
 
 var __cps=document.getElementById('contaPeriod');if(__cps)__cps.onchange=function(){contaPeriod=this.value;renderConta();};
+var __clc=document.getElementById('cl-csv');if(__clc)__clc.onclick=exportClientesCSV;var __cls=document.getElementById('cl-search');if(__cls)__cls.oninput=renderClientes;
 /* init */
-renderCal();renderBk();renderIngresos();renderFacturas();renderConta();renderRooms();
+renderCal();renderBk();renderIngresos();renderFacturas();renderConta();renderRooms();renderClientes();
+
+/* ---------- CLIENTES (CRM ligero) ---------- */
+function langName(c){var M={es:'Español',eu:'Euskera',fr:'Francés',en:'Inglés',de:'Alemán',it:'Italiano',nl:'Neerlandés',da:'Danés',no:'Noruego'};return M[(c||'').toLowerCase()]||(c?c.toUpperCase():'—');}
+function buildClientes(){
+  var by={};
+  bookings.forEach(function(b){
+    var key=((b.email||'')||(b.name||'')).toLowerCase(); if(!key)return;
+    var c=by[key]; if(!c){c=by[key]={name:b.name||'',email:b.email||'',phone:b.phone||'',nif:b.nif||'',lang:b.lang||'',consent:!!b.consent,stays:0,nights:0,total:0,last:''};}
+    var nN=nights(b.in,b.out); c.stays++; c.nights+=nN; c.total+=nN*(b.rate||0);
+    if((b.out||'')>c.last)c.last=b.out||'';
+    if(b.consent)c.consent=true;
+    if(!c.phone&&b.phone)c.phone=b.phone; if(!c.nif&&b.nif)c.nif=b.nif; if(!c.lang&&b.lang)c.lang=b.lang;
+    if(b.name&&b.name.length>(c.name||'').length)c.name=b.name;
+  });
+  return Object.values(by).sort(function(a,b){return (b.last||'').localeCompare(a.last||'');});
+}
+function renderClientes(){
+  var list=buildClientes(); window.__clientes=list;
+  var T=function(id){return document.getElementById(id);};
+  if(T('cl-total'))T('cl-total').textContent=list.length;
+  if(T('cl-optin'))T('cl-optin').textContent=list.filter(function(c){return c.consent;}).length;
+  if(T('cl-stays'))T('cl-stays').textContent=list.reduce(function(a,c){return a+c.stays;},0);
+  var q=((T('cl-search')&&T('cl-search').value)||'').toLowerCase();
+  var rows=list.filter(function(c){return !q||((c.name+' '+c.email+' '+c.phone).toLowerCase().indexOf(q)>=0);}).map(function(c){
+    return '<tr><td><b>'+(c.name||'—')+'</b></td><td>'+(c.email||'—')+'</td><td>'+(c.phone||'—')+'</td><td>'+langName(c.lang)+'</td><td>'+c.stays+'</td><td>'+(c.last?fmt(c.last):'—')+'</td><td class="right">'+euro(Math.round(c.total))+'</td><td>'+(c.consent?'<span class="pill ok">Sí</span>':'<span class="pill">No</span>')+'</td></tr>';
+  }).join('');
+  if(T('clTable'))T('clTable').innerHTML='<thead><tr><th>Cliente</th><th>Email</th><th>Teléfono</th><th>Idioma</th><th>Estancias</th><th>Última</th><th class="right">Gasto</th><th>Ofertas</th></tr></thead><tbody>'+(rows||'<tr><td colspan="8" class="muted" style="padding:16px">Aún no hay clientes registrados.</td></tr>')+'</tbody>';
+}
+function exportClientesCSV(){
+  var list=window.__clientes||buildClientes();
+  var head=['Nombre','Email','Telefono','NIF','Idioma','Estancias','Noches','Ultima estancia','Gasto EUR','Acepta ofertas'];
+  var rows=[head].concat(list.map(function(c){return [c.name,c.email,c.phone,c.nif,c.lang,c.stays,c.nights,c.last,Math.round(c.total),c.consent?'si':'no'];}));
+  var csv=rows.map(function(r){return r.map(function(x){var s=(x==null?'':String(x)).replace(/"/g,'""');return /[",;\n]/.test(s)?'"'+s+'"':s;}).join(',');}).join('\n');
+  var blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='clientes-kirana.csv';document.body.appendChild(a);a.click();a.remove();
+}

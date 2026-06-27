@@ -963,8 +963,10 @@
 .kb-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:13px;font-size:.73rem;color:var(--mist,#777)}
 .kb-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:middle;margin-right:5px}
 .kb-foot{padding:16px 20px;border-top:1px solid var(--line,#e5e5e5)}
-.kb-fields{display:grid;gap:8px;margin:0 0 12px}
+.kb-fields{display:grid;gap:8px;margin:0 0 10px}
 .kb-fields input{border:1px solid var(--line,#e5e5e5);border-radius:8px;padding:11px 12px;font-family:var(--sans,system-ui);font-size:.95rem;background:#fff;color:var(--ink,#222);width:100%;box-sizing:border-box}
+.kb-consent{display:flex;gap:8px;align-items:flex-start;font-size:.82rem;color:var(--mist,#777);margin:0 0 12px;cursor:pointer;line-height:1.4}
+.kb-consent input{margin-top:2px;flex:0 0 auto}
 .kb-summary{font-size:.95rem;margin:0 0 12px;color:var(--ink,#222)}
 .kb-summary b{color:var(--pine,#2B3A2E)}
 .kb-hint{color:var(--mist,#777);font-size:.9rem;margin:0}
@@ -1104,6 +1106,7 @@
               +'<input id="kbNif" type="text" placeholder="NIF/CIF (opcional, para factura con tus datos)" autocomplete="off">'
               +'<input id="kbAddr" type="text" placeholder="Direcci\u00f3n fiscal (opcional)" autocomplete="off">'
             +'</div>'
+            +'<label class="kb-consent"><input type="checkbox" id="kbConsent"> Quiero recibir ofertas y novedades de Kirana por email.</label>'
             +'<button class="kb-cta" id="kbPay">'+label+'</button>'+
             (AV.demo?'<p style="margin:8px 0 0;text-align:center;font-size:.75rem;color:#A6543E">Demostraci\u00f3n: no se cobra nada real.</p>':'')+
             '<p style="margin:10px 0 0;text-align:center;font-size:.8rem"><a href="'+waLink(ROOM,pax())+'" target="_blank" rel="noopener" style="color:#5F6E52">&iquest;Dudas? Escr&iacute;benos por WhatsApp</a></p>';
@@ -1116,8 +1119,10 @@
             if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){alert('Revisa el email, parece incorrecto.');return;}
             var nif=(document.getElementById('kbNif').value||'').trim();
             var addr=(document.getElementById('kbAddr').value||'').trim();
+            var lang=(document.documentElement.lang||'es').slice(0,2);
+            var consent=!!document.getElementById('kbConsent').checked;
             pb.disabled=true;pb.textContent='Un momento\u2026';
-            fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({room:ROOM,in:selIn,out:selOut,pax:pax(),name:name,email:email,phone:phone,nif:nif,address:addr})})
+            fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({room:ROOM,in:selIn,out:selOut,pax:pax(),name:name,email:email,phone:phone,nif:nif,address:addr,lang:lang,consent:consent})})
               .then(function(r){return r.json();}).then(function(d){if(d&&d.url){location.href=d.url;}else{pb.disabled=false;pb.textContent=label;alert(d&&d.error?d.error:'No se pudo completar.');}})
               .catch(function(){pb.disabled=false;pb.textContent=label;alert('No se pudo completar.');});};
         }else{
