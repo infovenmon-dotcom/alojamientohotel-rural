@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { addBooking } from '@/lib/bookings';
+import { nights } from '@/lib/pricing';
+import { sendEmail, bookingEmail } from '@/lib/email';
 
 export const prerender = false;
 
@@ -45,6 +47,23 @@ export const POST: APIRoute = async ({ request }) => {
           },
           new Date(event.created * 1000).toISOString()
         );
+        // Email de confirmación al huésped (si BREVO_API_KEY).
+        try {
+          const to = m.email || s.customer_details?.email || '';
+          if (to) {
+            const em = bookingEmail(m.lang || 'es', {
+              name: m.name || s.customer_details?.name || '',
+              room: m.room,
+              in: m.in,
+              out: m.out,
+              nights: nights(m.in, m.out),
+              total: Number(m.total) || 0,
+            });
+            await sendEmail({ to, name: m.name, subject: em.subject, html: em.html });
+          }
+        } catch {
+          /* el email no debe afectar al webhook */
+        }
       } catch {
         // Si solapó por una reserva simultánea, hay que reembolsar manualmente.
         return new Response('solape', { status: 200 });

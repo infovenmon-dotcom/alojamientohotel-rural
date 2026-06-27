@@ -4,6 +4,7 @@ import { isFree, addBooking } from '@/lib/bookings';
 import { createInvoice, setTbaiResult } from '@/lib/invoices';
 import { getAllRooms } from '@/lib/rooms';
 import { amountCentsFor, invoiceAmountsFor, nights, webPrice } from '@/lib/pricing';
+import { sendEmail, bookingEmail } from '@/lib/email';
 
 export const prerender = false;
 
@@ -54,6 +55,13 @@ export const POST: APIRoute = async ({ request }) => {
       identificador: 'TBAI-DEMO-' + inv.serie + inv.numero,
       qr: 'demo', estado: 'declarada', mensaje: 'Simulación: no se ha enviado a Hacienda.',
     });
+    // Email de confirmación (si BREVO_API_KEY; si no, se omite en demo).
+    try {
+      const em = bookingEmail(lang, { name, room, in: inS, out: outS, nights: nights(inS, outS), total });
+      await sendEmail({ to: email, name, subject: em.subject, html: em.html });
+    } catch {
+      /* el email no debe bloquear la reserva */
+    }
     return json({ url: `/reserva-ok?ref=${encodeURIComponent(inv.ref)}&demo=1` });
   }
 
@@ -78,7 +86,7 @@ export const POST: APIRoute = async ({ request }) => {
     ],
     customer_email: email || undefined,
     phone_number_collection: { enabled: true },
-    metadata: { room, in: inS, out: outS, pax: String(pax || ''), name, email, phone, nif, address, lang, consent: String(consent) },
+    metadata: { room, in: inS, out: outS, pax: String(pax || ''), name, email, phone, nif, address, lang, consent: String(consent), total: String(nightWeb * nights(inS, outS)) },
     success_url: `${origin}/reserva-ok?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/#habitaciones`,
   });
