@@ -6,6 +6,7 @@ export const prerender = false;
 import html from '../home.html?raw';
 import { getActiveRooms } from '@/lib/rooms';
 import { getBookedMap } from '@/lib/bookings';
+import { webPrice } from '@/lib/pricing';
 
 let injected = '';
 try {
@@ -13,7 +14,7 @@ try {
   const activeNames = activeRooms.map((r) => r.nombre);
   // Datos completos para pintar las tarjetas de la web (fuente única: rooms.json).
   const rooms = activeRooms.map((r) => ({
-    id: r.nombre, concept: r.concepto, price: r.precio, cap: r.capacidad,
+    id: r.nombre, concept: r.concepto, price: webPrice(r.precio), ota: r.precio, cap: r.capacidad,
     m2: r.m2, bed: r.cama, kind: r.tipo, story: r.storytelling, img: (r.fotos && r.fotos[0]) || '',
   }));
   // booked es secundario: si falla, NO debe impedir pintar las habitaciones.

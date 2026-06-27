@@ -2,7 +2,8 @@ import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import { isFree, addBooking } from '@/lib/bookings';
 import { createInvoice, setTbaiResult } from '@/lib/invoices';
-import { amountCents, invoiceAmounts, nights, PRICE_PER_NIGHT } from '@/lib/pricing';
+import { getAllRooms } from '@/lib/rooms';
+import { amountCentsFor, invoiceAmountsFor, nights, webPrice } from '@/lib/pricing';
 
 export const prerender = false;
 
@@ -27,9 +28,12 @@ export const POST: APIRoute = async ({ request }) => {
   const lang = (body?.lang || 'es').toString().trim().slice(0, 5); // idioma del cliente
   const consent = body?.consent === true || body?.consent === 'true'; // marketing
   if (!room || !inS || !outS || !(inS < outS)) return json({ error: 'fechas inválidas' }, 400);
-  if (!PRICE_PER_NIGHT[room]) return json({ error: 'habitación desconocida' }, 400);
+  const roomData = (await getAllRooms()).find((r) => r.nombre === room);
+  if (!roomData) return json({ error: 'habitación desconocida' }, 400);
   if (!name || !email || !phone) return json({ error: 'faltan tus datos (nombre, email y teléfono)' }, 400);
   if (!(await isFree(room, inS, outS))) return json({ error: 'esas fechas ya no están disponibles' }, 409);
+
+  const nightWeb = webPrice(roomData.precio); // precio/noche en la web (tarifa OTA − 10%)
 
   const key = process.env.STRIPE_SECRET_KEY;
 
@@ -40,7 +44,7 @@ export const POST: APIRoute = async ({ request }) => {
       { room, in: inS, out: outS, pax: pax ? Number(pax) : undefined, name, email, phone, nif: nif || undefined, address: address || undefined, lang, consent, source: 'web', ref: 'demo' },
       now
     );
-    const { base, iva, ivaPct, total } = invoiceAmounts(room, inS, outS);
+    const { base, iva, ivaPct, total } = invoiceAmountsFor(nightWeb, inS, outS);
     const inv = await createInvoice({
       fecha: now, room, in: inS, out: outS, pax: pax ? Number(pax) : undefined,
       cliente: name, nif: nif || undefined, direccion: address || undefined, base, ivaPct, iva, total, bookingId: booking.id,
@@ -64,7 +68,7 @@ export const POST: APIRoute = async ({ request }) => {
         quantity: 1,
         price_data: {
           currency: 'eur',
-          unit_amount: amountCents(room, inS, outS),
+          unit_amount: amountCentsFor(nightWeb, inS, outS),
           product_data: {
             name: `Kirana · ${room}`,
             description: `${inS} → ${outS} · ${n} noche${n > 1 ? 's' : ''}${pax ? ' · ' + pax + ' pers.' : ''}`,

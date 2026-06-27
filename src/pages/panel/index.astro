@@ -8,6 +8,7 @@
 import { getAllRooms } from '@/lib/rooms';
 import { listBookings } from '@/lib/bookings';
 import { listExpenses } from '@/lib/expenses';
+import { webPrice } from '@/lib/pricing';
 import css from '@/lib/panel.css?raw';
 import markup from '@/lib/panel-markup.html?raw';
 import appJs from '@/lib/panel-app.js?raw';
@@ -19,7 +20,8 @@ export const prerender = false;
 Astro.response.headers.set('cache-control', 'no-store');
 
 const roomsData = await getAllRooms();
-const priceByName = Object.fromEntries(roomsData.map((r) => [r.nombre, r.precio]));
+const priceByName = Object.fromEntries(roomsData.map((r) => [r.nombre, r.precio])); // tarifa plataformas
+const webByName = Object.fromEntries(roomsData.map((r) => [r.nombre, webPrice(r.precio)])); // cobro web (−10%)
 
 const rooms = roomsData.map((r) => ({
   id: r.nombre, // nombre visible y clave de colores/reservas
@@ -48,7 +50,7 @@ const bookings = (await listBookings()).map((b) => ({
   guests: b.pax || 2,
   ch: b.ref || 'Directa',
   mp: false,
-  rate: priceByName[b.room] || 0,
+  rate: webByName[b.room] || 0, // ingresos web = tarifa − 10%
 }));
 
 const today = new Date().toISOString().slice(0, 10);

@@ -230,7 +230,8 @@ function roomCard(r){const info=r;
     <div class="rbody">
       <div class="rname"><span class="dot" style="background:${COLORS[r.id]}"></span><b>${r.id}</b> <span class="rmean">· ${info.mean}</span></div>
       <p class="rstory">${info.story}</p>
-      <div class="rmeta"><span>${r.cap} pers.</span><span>≈${r.m2} m²</span><span>${euro(r.rate)} / noche</span></div>
+      <div class="rmeta"><span>${r.cap} pers.</span><span>≈${r.m2} m²</span></div>
+      <div class="rprice"><span class="rpl">Precio normal</span><input type="number" min="0" id="price-${r.rid}" value="${r.rate}"><span>€/noche</span><button class="btn sm" onclick="savePrice('${r.rid}')">Guardar</button><span class="rweb">Web (−10%): ${Math.round(r.rate*0.9)}€</span></div>
       <div class="ramen muted">${bathLabel} · TV · A/C · WiFi${r.kind==='apartamento'?' · cocina':''}${r.kind==='accesible'?' · sin escalones':''}</div>
       <div class="rtoggle">
         <span class="rstate ${r.active?'on':'off'}">${r.active?'● En uso · en la web':'● Bloqueada · oculta'}</span>
@@ -401,4 +402,17 @@ function exportClientesCSV(){
   var csv=rows.map(function(r){return r.map(function(x){var s=(x==null?'':String(x)).replace(/"/g,'""');return /[",;\n]/.test(s)?'"'+s+'"':s;}).join(',');}).join('\n');
   var blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='clientes-kirana.csv';document.body.appendChild(a);a.click();a.remove();
+}
+
+function savePrice(rid){
+  var el=document.getElementById('price-'+rid); if(!el)return;
+  var v=Math.max(0,Math.round(+el.value||0)); if(!v){alert('Indica un precio válido.');return;}
+  var bt=document.querySelector('[onclick="savePrice(\''+rid+'\')"]'); if(bt){bt.disabled=true;bt.textContent='…';}
+  fetch('/api/panel/room-price',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id:rid,precio:v})})
+    .then(function(res){return res.json().then(function(d){
+      if(!res.ok)throw new Error(d.error||('HTTP '+res.status));
+      var r=rooms.find(function(x){return x.rid===rid;}); if(r)r.rate=v;
+      renderRooms();
+    });})
+    .catch(function(e){if(bt){bt.disabled=false;bt.textContent='Guardar';}alert('No se pudo guardar el precio: '+(e&&e.message?e.message:'error')+'.');});
 }

@@ -6,6 +6,7 @@ import html from '../../home.html?raw';
 import { languages, defaultLang } from '@/i18n/ui';
 import { getActiveRooms } from '@/lib/rooms';
 import { getBookedMap } from '@/lib/bookings';
+import { webPrice } from '@/lib/pricing';
 
 const param = Astro.params.lang;
 if (!param || !(param in languages) || param === defaultLang) {
@@ -17,7 +18,7 @@ try {
   const activeRooms = await getActiveRooms();
   const activeNames = activeRooms.map((r) => r.nombre);
   const rooms = activeRooms.map((r) => ({
-    id: r.nombre, concept: r.concepto, price: r.precio, cap: r.capacidad,
+    id: r.nombre, concept: r.concepto, price: webPrice(r.precio), ota: r.precio, cap: r.capacidad,
     m2: r.m2, bed: r.cama, kind: r.tipo, story: r.storytelling, img: (r.fotos && r.fotos[0]) || '',
   }));
   let booked: Record<string, [string, string][]> = {};

@@ -913,7 +913,7 @@
       +'<p class="room-concept">'+t(r.concept,lc)+'</p>'
       +'<h3 class="name">'+r.id+'</h3>'
       +'<p>'+t(r.story,lc)+'</p>'
-      +'<div class="rspecs"><b>'+t('desde',lc)+' '+r.price+'€</b><span>'+r.cap+' '+t('pers',lc)+' · ≈'+r.m2+' m² · '+t(r.bed,lc)+' · '+t(bathWord(r),lc)+'</span></div>'
+      +'<div class="rspecs"><b>'+t('desde',lc)+' '+((r.ota&&r.ota>r.price)?'<s style="opacity:.5;font-weight:400">'+r.ota+'€</s> ':'')+r.price+'€</b>'+((r.ota&&r.ota>r.price)?'<span style="color:#A6543E;font-weight:600">Precio exclusivo web · −10%</span>':'')+'<span>'+r.cap+' '+t('pers',lc)+' · ≈'+r.m2+' m² · '+t(r.bed,lc)+' · '+t(bathWord(r),lc)+'</span></div>'
       +'<ul class="amen">'+amen+'</ul>'
       +'<div class="meta"><span>'+t('Desayuno incluido',lc)+'</span><a href="#reserva" class="kb-book" data-room="'+r.id+'">'+t('Reservar →',lc)+'</a></div>'
       +'</div></article>';
@@ -1094,8 +1094,8 @@
     var f=document.getElementById('kbFoot');
     if(MODE==='room'){
       if(ROOM&&active.indexOf(ROOM)<0){f.innerHTML='<p class="kb-none">Esta habitación no está disponible para reservar ahora mismo.</p>';return;}
-      if(selIn&&selOut){var n=nights(selIn,selOut),tot=(PRICE[ROOM]||0)*n;
-        var sum='<p class="kb-summary"><b>'+ROOM+'</b> &middot; '+fmt(selIn)+' &rarr; '+fmt(selOut)+' &middot; '+n+' noche'+(n>1?'s':'')+' &middot; desde <b>'+tot+'&euro;</b></p>';
+      if(selIn&&selOut){var rm=RMETA[ROOM]||{};var pr=(rm.price||PRICE[ROOM]||0);var n=nights(selIn,selOut),tot=pr*n;
+        var sum='<p class="kb-summary"><b>'+ROOM+'</b> &middot; '+fmt(selIn)+' &rarr; '+fmt(selOut)+' &middot; '+n+' noche'+(n>1?'s':'')+' &middot; desde <b>'+tot+'&euro;</b></p>'+((rm.ota&&rm.ota>pr)?'<p style="margin:-6px 0 12px;font-size:.78rem;color:#5F6E52">Precio web '+pr+'&euro;/noche &middot; un 10% menos que en plataformas.</p>':'');
         if(AV.stripe||AV.demo){
           var label=AV.stripe?'Reservar y pagar':'Reservar (demostraci\u00f3n)';
           f.innerHTML=sum
@@ -1140,7 +1140,7 @@
               return '<li>'
                 +(m.img?'<img class="kb-thumb" src="'+m.img+'" alt="'+r+'" loading="lazy">':'<span class="kb-thumb"></span>')
                 +'<div class="kb-info">'
-                  +'<div class="kb-rtop"><span class="nm">'+r+'</span> <span class="pr">desde '+(m.price||PRICE[r]||'')+'&euro;/noche</span></div>'
+                  +'<div class="kb-rtop"><span class="nm">'+r+'</span> <span class="pr">'+((m.ota&&m.ota>m.price)?'<s style="opacity:.5">'+m.ota+'&euro;</s> ':'')+(m.price||PRICE[r]||'')+'&euro;/noche'+((m.ota&&m.ota>m.price)?' &middot; -10% web':'')+'</span></div>'
                   +'<div class="kb-specs">'+specs+'</div>'
                   +(m.story?'<p class="kb-story">'+m.story+'</p>':'')
                 +'</div>'

@@ -65,6 +65,20 @@ export async function setRoomActive(id: string, activa: boolean): Promise<Room |
   return found;
 }
 
+/** Actualiza el precio/noche de una habitación y persiste. */
+export async function setRoomPrice(id: string, precio: number): Promise<Room | undefined> {
+  let found: Room | undefined;
+  await updateJson<RoomsFile>(BLOB_KEY, seed as RoomsFile, roomsPath(), (data) => {
+    const room = data.rooms.find((r) => r.id === id);
+    if (room) {
+      room.precio = Math.max(0, Math.round(precio));
+      found = room;
+    }
+    return data;
+  });
+  return found;
+}
+
 /** Alterna el estado y devuelve el nuevo valor. */
 export async function toggleRoom(id: string): Promise<boolean | undefined> {
   const room = await getRoomById(id);

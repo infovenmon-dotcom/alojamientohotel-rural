@@ -130,3 +130,8 @@
 /* Logo Kirana en la barra lateral */
 .side .brand{flex-direction:column;gap:4px;text-align:center}
 .brand-logo{height:62px;width:auto;display:block;margin:0 auto}
+/* Editor de precio en tarjetas de habitación */
+.rprice{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12.5px;margin:8px 0 0;border-top:1px solid var(--line2);padding-top:9px}
+.rprice .rpl{color:var(--moss);font-weight:600}
+.rprice input{width:72px;padding:6px 8px;border:1px solid var(--line);border-radius:7px;font-family:var(--sans);font-size:13px}
+.rprice .rweb{color:#A6543E;font-weight:600;width:100%}
