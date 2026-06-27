@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { addBooking } from '@/lib/bookings';
 import { getAllRooms } from '@/lib/rooms';
+import { clean } from '@/lib/sanitize';
 
 export const prerender = false;
 
@@ -79,9 +80,9 @@ export const POST: APIRoute = async ({ request }) => {
           room: mapRoom(cell(row, idx.room)),
           in: inS,
           out: outS,
-          name: cell(row, idx.name) || 'Importada',
-          email: cell(row, idx.email) || undefined,
-          phone: cell(row, idx.phone) || undefined,
+          name: clean(cell(row, idx.name), 120) || 'Importada',
+          email: clean(cell(row, idx.email), 160).toLowerCase() || undefined,
+          phone: clean(cell(row, idx.phone), 40) || undefined,
           pax: cell(row, idx.pax) ? Number(cell(row, idx.pax)) || undefined : undefined,
           lang: cell(row, idx.lang) ? cell(row, idx.lang).slice(0, 5) : undefined,
           source: 'channel',

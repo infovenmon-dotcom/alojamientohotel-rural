@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { isFree, addBooking } from '@/lib/bookings';
+import { clean } from '@/lib/sanitize';
 
 export const prerender = false;
 
@@ -23,9 +24,9 @@ export const POST: APIRoute = async ({ request }) => {
       in: inS,
       out: outS,
       pax: guests ? Number(guests) : undefined,
-      name: name || 'Reserva',
+      name: clean(name, 120) || 'Reserva',
       source: 'manual',
-      ref: ch || 'Directa',
+      ref: clean(ch, 40) || 'Directa',
     },
     new Date().toISOString()
   );

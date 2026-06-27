@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { addExpense } from '@/lib/expenses';
+import { clean } from '@/lib/sanitize';
 
 export const prerender = false;
 
@@ -16,9 +17,9 @@ export const POST: APIRoute = async ({ request }) => {
   if (!b?.desc || !b?.date || !(total > 0)) return json({ error: 'concepto, fecha e importe son obligatorios' }, 400);
 
   const expense = await addExpense({
-    date: b.date,
-    desc: b.desc,
-    cat: b.cat || 'Otros',
+    date: clean(b.date, 10),
+    desc: clean(b.desc, 120),
+    cat: clean(b.cat, 60) || 'Otros',
     total,
     ivaPct: Number(b.ivaPct) || 0,
     deducible: b.deducible !== false,

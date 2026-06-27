@@ -5,6 +5,7 @@ import { createInvoice, setTbaiResult } from '@/lib/invoices';
 import { getAllRooms } from '@/lib/rooms';
 import { amountCentsFor, invoiceAmountsFor, nights, webPrice } from '@/lib/pricing';
 import { sendEmail, bookingEmail } from '@/lib/email';
+import { clean } from '@/lib/sanitize';
 
 export const prerender = false;
 
@@ -21,12 +22,12 @@ export const POST: APIRoute = async ({ request }) => {
   }
   const { room, in: inS, out: outS, pax } = body || {};
   // Datos del cliente (capturados en el formulario de reserva).
-  const name = (body?.name || '').toString().trim();
-  const email = (body?.email || '').toString().trim();
-  const phone = (body?.phone || '').toString().trim();
-  const nif = (body?.nif || '').toString().trim(); // opcional (factura con NIF)
-  const address = (body?.address || '').toString().trim(); // opcional
-  const lang = (body?.lang || 'es').toString().trim().slice(0, 5); // idioma del cliente
+  const name = clean(body?.name, 120);
+  const email = clean(body?.email, 160).toLowerCase();
+  const phone = clean(body?.phone, 40);
+  const nif = clean(body?.nif, 20); // opcional (factura con NIF)
+  const address = clean(body?.address, 200); // opcional
+  const lang = clean(body?.lang || 'es', 5); // idioma del cliente
   const consent = body?.consent === true || body?.consent === 'true'; // marketing
   if (!room || !inS || !outS || !(inS < outS)) return json({ error: 'fechas inválidas' }, 400);
   const roomData = (await getAllRooms()).find((r) => r.nombre === room);
