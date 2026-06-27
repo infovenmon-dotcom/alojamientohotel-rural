@@ -18,7 +18,7 @@ let expenses = PANEL.expenses;
 function absRand(x){return x}
 
 /* ---------- NAV ---------- */
-const titles={reservas:['Reservas','Calendario de ocupación por habitación'],ingresos:['Ingresos','Evolución y desglose de ingresos'],facturas:['Facturas','Emisión y seguimiento de facturas'],contabilidad:['Contabilidad','Ingresos, gastos y resultado'],habitaciones:['Habitaciones','Tarifas y configuración'],clientes:['Clientes','Base de datos y email marketing']};
+const titles={reservas:['Reservas','Calendario de ocupación por habitación'],ingresos:['Ingresos','Evolución y desglose de ingresos'],facturas:['Facturas','Emisión y seguimiento de facturas'],contabilidad:['Contabilidad','Ingresos, gastos y resultado'],habitaciones:['Habitaciones','Tarifas y configuración'],clientes:['Clientes','Base de datos y email marketing'],canales:['Canales','Sincronización iCal con Booking, Airbnb…']};
 document.querySelectorAll('.nav-it').forEach(it=>it.onclick=()=>{
   document.querySelectorAll('.nav-it').forEach(x=>x.classList.remove('on'));it.classList.add('on');
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
@@ -365,8 +365,9 @@ document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if
   };
 })();
 var __clc=document.getElementById('cl-csv');if(__clc)__clc.onclick=exportClientesCSV;var __cls=document.getElementById('cl-search');if(__cls)__cls.oninput=renderClientes;
+var __csave=document.getElementById('canal-save');if(__csave)__csave.onclick=saveCanales;var __csync=document.getElementById('canal-sync');if(__csync)__csync.onclick=syncCanales;
 /* init */
-renderCal();renderBk();renderIngresos();renderFacturas();renderConta();renderRooms();renderClientes();
+renderCal();renderBk();renderIngresos();renderFacturas();renderConta();renderRooms();renderClientes();renderCanales();
 
 /* ---------- CLIENTES (CRM ligero) ---------- */
 function langName(c){var M={es:'Español',eu:'Euskera',fr:'Francés',en:'Inglés',de:'Alemán',it:'Italiano',nl:'Neerlandés',da:'Danés',no:'Noruego'};return M[(c||'').toLowerCase()]||(c?c.toUpperCase():'—');}
@@ -415,4 +416,35 @@ function savePrice(rid){
       renderRooms();
     });})
     .catch(function(e){if(bt){bt.disabled=false;bt.textContent='Guardar';}alert('No se pudo guardar el precio: '+(e&&e.message?e.message:'error')+'.');});
+}
+
+/* ---------- CANALES (sincronización iCal) ---------- */
+function copyText(t){ try{ if(navigator.clipboard)navigator.clipboard.writeText(t); }catch(e){} alert('Copiado:\n'+t); }
+function renderCanales(){
+  var origin=location.origin;
+  var ical=(PANEL.ical||{});
+  var rows=rooms.map(function(r){
+    var exp=origin+'/api/ical/'+encodeURIComponent(r.id)+'.ics';
+    return '<tr><td><b>'+r.id+'</b></td>'
+      +'<td><input class="canal-in" data-room="'+r.id+'" placeholder="URL iCal de la OTA (Booking/Airbnb/Lodgify…)" value="'+(ical[r.id]||'')+'"></td>'
+      +'<td class="canal-exp"><code>'+exp+'</code> <button class="btn ghost sm" onclick="copyText(\''+exp+'\')">Copiar</button></td></tr>';
+  }).join('');
+  document.getElementById('canalTable').innerHTML='<thead><tr><th>Habitación</th><th>Importar (URL iCal de la OTA)</th><th>Exportar (pégala en la OTA)</th></tr></thead><tbody>'+rows+'</tbody>';
+}
+function saveCanales(){
+  var urls={}; Array.prototype.forEach.call(document.querySelectorAll('.canal-in'),function(i){var v=(i.value||'').trim();if(v)urls[i.getAttribute('data-room')]=v;});
+  var bt=document.getElementById('canal-save'); if(bt){bt.disabled=true;bt.textContent='Guardando…';}
+  fetch('/api/panel/ical',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({urls:urls})})
+    .then(function(r){return r.json();}).then(function(d){if(bt){bt.disabled=false;bt.textContent='Guardar URLs';}
+      if(d&&d.ok){PANEL.ical=urls;alert('URLs guardadas ('+d.count+'). Pulsa "Sincronizar ahora" para traer los bloqueos.');}
+      else alert(d&&d.error?d.error:'No se pudo guardar.');})
+    .catch(function(){if(bt){bt.disabled=false;bt.textContent='Guardar URLs';}alert('No se pudo guardar.');});
+}
+function syncCanales(){
+  var bt=document.getElementById('canal-sync'); if(bt){bt.disabled=true;bt.textContent='Sincronizando…';}
+  fetch('/api/sync').then(function(r){return r.json();}).then(function(d){if(bt){bt.disabled=false;bt.textContent='Sincronizar ahora';}
+    if(d&&d.ok){var im=d.imported||{};var ok=Object.keys(im).filter(function(k){return im[k]>=0;}).length;var err=Object.keys(im).filter(function(k){return im[k]<0;});
+      alert('Sincronizado: '+ok+' habitación(es). '+(err.length?('Con error: '+err.join(', ')+'.'):'')+'\nRecarga para ver los bloqueos en el calendario.');}
+    else alert('No se pudo sincronizar.');})
+    .catch(function(){if(bt){bt.disabled=false;bt.textContent='Sincronizar ahora';}alert('No se pudo sincronizar.');});
 }

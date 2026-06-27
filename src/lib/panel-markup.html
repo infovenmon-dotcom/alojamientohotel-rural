@@ -8,6 +8,7 @@
     <div class="nav-it" data-v="contabilidad"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 10h16M10 10v10"/></svg> Contabilidad</div>
     <div class="nav-it" data-v="habitaciones"><svg viewBox="0 0 24 24"><path d="M3 20v-9l9-6 9 6v9M9 20v-6h6v6"/></svg> Habitaciones</div>
     <div class="nav-it" data-v="clientes"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg> Clientes</div>
+    <div class="nav-it" data-v="canales"><svg viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16M5 19.5a1.5 1.5 0 1 0 0 .01"/></svg> Canales</div>
     <div class="sp"></div>
     <div class="who"><b>Casa Kirana</b>Bermeo · Bizkaia<br><a href="/panel/logout" style="color:#9FAA92;text-decoration:underline">Cerrar sesión</a></div>
   </aside>
@@ -147,6 +148,13 @@
       <div class="card"><div class="hd"><h3>Base de datos de clientes</h3><div style="display:flex;gap:8px;align-items:center"><input id="cl-search" placeholder="Buscar…" style="padding:7px 11px;border:1px solid var(--line);border-radius:9px;font-family:var(--sans);font-size:13px"><button class="btn ghost sm" id="cl-csv">Exportar CSV</button></div></div>
         <div class="bd" style="padding:0;overflow-x:auto"><table id="clTable"></table></div></div>
       <p class="muted" style="font-size:12px;padding:2px">Para enviar ofertas por email en el idioma de cada cliente conectaremos Brevo. Solo se escribirá a quienes aceptaron recibir ofertas (RGPD).</p>
+    </section>
+  
+    <!-- ===== CANALES ===== -->
+    <section class="view" id="v-canales">
+      <div class="card"><div class="hd"><h3>Sincronización de canales (iCal)</h3><div style="display:flex;gap:8px"><button class="btn ghost sm" id="canal-sync">Sincronizar ahora</button><button class="btn sm" id="canal-save">Guardar URLs</button></div></div>
+        <div class="bd"><p class="muted" style="font-size:12.5px;margin-top:0">Pega la <b>URL iCal</b> que te da cada portal (Booking, Airbnb, Vrbo, Lodgify…) para CADA habitación: así se bloquean aquí sus fechas. Y pega tu URL de <b>Exportar</b> en cada portal para que ellos bloqueen lo reservado aquí. Evita overbookings (se actualiza cada pocas horas). Gratis.</p>
+        <div style="overflow-x:auto"><table id="canalTable" class="canal-tbl"></table></div></div></div>
     </section>
   </main>
 </div>

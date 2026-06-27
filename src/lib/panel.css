@@ -135,3 +135,7 @@
 .rprice .rpl{color:var(--moss);font-weight:600}
 .rprice input{width:72px;padding:6px 8px;border:1px solid var(--line);border-radius:7px;font-family:var(--sans);font-size:13px}
 .rprice .rweb{color:#A6543E;font-weight:600;width:100%}
+/* Tabla de canales (iCal) */
+.canal-tbl input{width:100%;min-width:220px;padding:7px 9px;border:1px solid var(--line);border-radius:7px;font-size:12.5px;font-family:var(--sans)}
+.canal-tbl code{font-size:11px;color:var(--mist);word-break:break-all}
+.canal-tbl .canal-exp{white-space:nowrap}

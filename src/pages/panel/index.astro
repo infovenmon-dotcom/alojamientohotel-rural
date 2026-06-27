@@ -6,7 +6,7 @@
 // El CSS/JS/markup del diseño viven como assets crudos para no chocar con el
 // parser de Astro (las llaves de CSS/JS se interpretarían como expresiones).
 import { getAllRooms } from '@/lib/rooms';
-import { listBookings } from '@/lib/bookings';
+import { listBookings, getIcalUrls } from '@/lib/bookings';
 import { listExpenses } from '@/lib/expenses';
 import { webPrice } from '@/lib/pricing';
 import css from '@/lib/panel.css?raw';
@@ -96,6 +96,8 @@ const expenses = (await listExpenses()).map((e) => ({
   deducible: e.deducible,
 }));
 
+const ical = await getIcalUrls();
+
 const PANEL = {
   rooms,
   bookings,
@@ -103,6 +105,7 @@ const PANEL = {
   expenses,
   monthRev,
   today,
+  ical,
 };
 
 const panelJson = JSON.stringify(PANEL).replace(/</g, '\\u003c');
