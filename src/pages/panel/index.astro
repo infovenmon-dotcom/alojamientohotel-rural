@@ -9,6 +9,7 @@ import { getAllRooms } from '@/lib/rooms';
 import { listBookings, getIcalUrls } from '@/lib/bookings';
 import { listExpenses } from '@/lib/expenses';
 import { webPrice } from '@/lib/pricing';
+import reviewsSample from '@/data/reviews-sample.json';
 import css from '@/lib/panel.css?raw';
 import markup from '@/lib/panel-markup.html?raw';
 import appJs from '@/lib/panel-app.js?raw';
@@ -106,6 +107,7 @@ const PANEL = {
   monthRev,
   today,
   ical,
+  reviews: reviewsSample.reviews,
 };
 
 const panelJson = JSON.stringify(PANEL).replace(/</g, '\\u003c');

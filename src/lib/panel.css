@@ -139,3 +139,12 @@
 .canal-tbl input{width:100%;min-width:220px;padding:7px 9px;border:1px solid var(--line);border-radius:7px;font-size:12.5px;font-family:var(--sans)}
 .canal-tbl code{font-size:11px;color:var(--mist);word-break:break-all}
 .canal-tbl .canal-exp{white-space:nowrap}
+/* Reseñas */
+.rv-card{border:1px solid var(--line);border-radius:11px;padding:14px;margin-bottom:12px}
+.rv-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.rv-stars{color:#B4894A;letter-spacing:1px}
+.rv-text{margin:8px 0;color:#3a3f33}
+.rv-area{width:100%;box-sizing:border-box;min-height:80px;border:1px solid var(--line);border-radius:8px;padding:10px;font-family:var(--sans);font-size:13px;background:#fff}
+.rv-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px;flex-wrap:wrap}
+.rv-replied{background:#E4F0E8;border-radius:8px;padding:10px 12px;font-size:13px}
+.rv-replied p{margin:6px 0 0;color:#3a3f33}

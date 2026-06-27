@@ -1,0 +1,10 @@
+{
+  "_meta": "Reseñas de EJEMPLO para el panel (demo). Con la API de Claude + Google/Booking se leen reales y la respuesta la genera la IA.",
+  "reviews": [
+    { "id": "r1", "author": "Marie L.", "platform": "Booking", "rating": 5, "lang": "fr", "date": "2026-06-10", "text": "Séjour parfait, au calme et en pleine nature. Le petit-déjeuner était excellent et l'accueil très chaleureux.", "replied": false },
+    { "id": "r2", "author": "John S.", "platform": "Airbnb", "rating": 4, "lang": "en", "date": "2026-06-05", "text": "Lovely peaceful place, beautiful surroundings. The wifi could be a bit faster but overall a great stay.", "replied": false },
+    { "id": "r3", "author": "Familia García", "platform": "Google", "rating": 5, "lang": "es", "date": "2026-05-28", "text": "Un refugio precioso en Urdaibai. Tranquilidad total y trato inmejorable. Repetiremos sin duda.", "replied": true, "reply": "¡Mil gracias, familia García! Nos encanta que disfrutarais de la calma de Urdaibai. Os esperamos de nuevo en Kirana." },
+    { "id": "r4", "author": "Hans M.", "platform": "Google", "rating": 3, "lang": "de", "date": "2026-05-20", "text": "Schöne Unterkunft und ruhige Lage, aber die Anreise war etwas kompliziert zu finden.", "replied": false },
+    { "id": "r5", "author": "Giulia R.", "platform": "Booking", "rating": 5, "lang": "it", "date": "2026-05-12", "text": "Posto incantevole, silenzio e natura. Colazione ottima. Torneremo!", "replied": false }
+  ]
+}

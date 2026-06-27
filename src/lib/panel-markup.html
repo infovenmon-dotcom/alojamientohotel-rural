@@ -9,6 +9,7 @@
     <div class="nav-it" data-v="habitaciones"><svg viewBox="0 0 24 24"><path d="M3 20v-9l9-6 9 6v9M9 20v-6h6v6"/></svg> Habitaciones</div>
     <div class="nav-it" data-v="clientes"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg> Clientes</div>
     <div class="nav-it" data-v="canales"><svg viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16M5 19.5a1.5 1.5 0 1 0 0 .01"/></svg> Canales</div>
+    <div class="nav-it" data-v="resenas"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg> Reseñas</div>
     <div class="sp"></div>
     <div class="who"><b>Casa Kirana</b>Bermeo · Bizkaia<br><a href="/panel/logout" style="color:#9FAA92;text-decoration:underline">Cerrar sesión</a></div>
   </aside>
@@ -155,6 +156,18 @@
       <div class="card"><div class="hd"><h3>Sincronización de canales (iCal)</h3><div style="display:flex;gap:8px"><button class="btn ghost sm" id="canal-sync">Sincronizar ahora</button><button class="btn sm" id="canal-save">Guardar URLs</button></div></div>
         <div class="bd"><p class="muted" style="font-size:12.5px;margin-top:0">Pega la <b>URL iCal</b> que te da cada portal (Booking, Airbnb, Vrbo, Lodgify…) para CADA habitación: así se bloquean aquí sus fechas. Y pega tu URL de <b>Exportar</b> en cada portal para que ellos bloqueen lo reservado aquí. Evita overbookings (se actualiza cada pocas horas). Gratis.</p>
         <div style="overflow-x:auto"><table id="canalTable" class="canal-tbl"></table></div></div></div>
+    </section>
+  
+    <!-- ===== RESEÑAS ===== -->
+    <section class="view" id="v-resenas">
+      <div class="kpis">
+        <div class="kpi"><div class="l">Reseñas</div><div class="v" id="rv-total">—</div></div>
+        <div class="kpi"><div class="l">Sin responder</div><div class="v" id="rv-pend">—</div></div>
+        <div class="kpi"><div class="l">Nota media</div><div class="v" id="rv-avg">—</div></div>
+      </div>
+      <div class="card"><div class="hd"><h3>Reseñas y respuestas</h3><span class="muted" style="font-size:12px">Borrador con IA · editable antes de enviar</span></div>
+        <div class="bd" id="rvList"></div></div>
+      <p class="muted" style="font-size:12px;padding:2px">Demo: las respuestas las redactará la IA (Claude) y se publicarán en Google/Booking por API; en Airbnb se copian y pegan. Conectaremos la API de Claude y Google Business Profile para activarlo.</p>
     </section>
   </main>
 </div>

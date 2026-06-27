@@ -18,7 +18,7 @@ let expenses = PANEL.expenses;
 function absRand(x){return x}
 
 /* ---------- NAV ---------- */
-const titles={reservas:['Reservas','Calendario de ocupación por habitación'],ingresos:['Ingresos','Evolución y desglose de ingresos'],facturas:['Facturas','Emisión y seguimiento de facturas'],contabilidad:['Contabilidad','Ingresos, gastos y resultado'],habitaciones:['Habitaciones','Tarifas y configuración'],clientes:['Clientes','Base de datos y email marketing'],canales:['Canales','Sincronización iCal con Booking, Airbnb…']};
+const titles={reservas:['Reservas','Calendario de ocupación por habitación'],ingresos:['Ingresos','Evolución y desglose de ingresos'],facturas:['Facturas','Emisión y seguimiento de facturas'],contabilidad:['Contabilidad','Ingresos, gastos y resultado'],habitaciones:['Habitaciones','Tarifas y configuración'],clientes:['Clientes','Base de datos y email marketing'],canales:['Canales','Sincronización iCal con Booking, Airbnb…'],resenas:['Reseñas','Respuestas con IA (editar y enviar)']};
 document.querySelectorAll('.nav-it').forEach(it=>it.onclick=()=>{
   document.querySelectorAll('.nav-it').forEach(x=>x.classList.remove('on'));it.classList.add('on');
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
@@ -367,7 +367,7 @@ document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if
 var __clc=document.getElementById('cl-csv');if(__clc)__clc.onclick=exportClientesCSV;var __cls=document.getElementById('cl-search');if(__cls)__cls.oninput=renderClientes;
 var __csave=document.getElementById('canal-save');if(__csave)__csave.onclick=saveCanales;var __csync=document.getElementById('canal-sync');if(__csync)__csync.onclick=syncCanales;
 /* init */
-renderCal();renderBk();renderIngresos();renderFacturas();renderConta();renderRooms();renderClientes();renderCanales();
+renderCal();renderBk();renderIngresos();renderFacturas();renderConta();renderRooms();renderClientes();renderCanales();renderResenas();
 
 /* ---------- CLIENTES (CRM ligero) ---------- */
 function langName(c){var M={es:'Español',eu:'Euskera',fr:'Francés',en:'Inglés',de:'Alemán',it:'Italiano',nl:'Neerlandés',da:'Danés',no:'Noruego'};return M[(c||'').toLowerCase()]||(c?c.toUpperCase():'—');}
@@ -447,4 +447,64 @@ function syncCanales(){
       alert('Sincronizado: '+ok+' habitación(es). '+(err.length?('Con error: '+err.join(', ')+'.'):'')+'\nRecarga para ver los bloqueos en el calendario.');}
     else alert('No se pudo sincronizar.');})
     .catch(function(){if(bt){bt.disabled=false;bt.textContent='Sincronizar ahora';}alert('No se pudo sincronizar.');});
+}
+
+/* ---------- RESEÑAS (respuestas con IA · demo) ---------- */
+function platColor(p){return ({Google:'#3C5A7A',Booking:'#1A4FA0','Expedia/Vrbo':'#B4894A',Airbnb:'#A6543E'})[p]||'#6C7065';}
+function draftReply(rv){
+  // Borrador DEMO por idioma y según la nota. Con la API de Claude será a medida.
+  var pos=(rv.rating>=4);
+  var n=(rv.author||'').split(' ')[0];
+  var M={
+    es:{p:'Hola '+n+', ¡muchas gracias por tu reseña y por elegir Kirana! Nos alegra muchísimo que disfrutaras de la calma de Urdaibai. Te esperamos de nuevo. Un abrazo, el equipo de Kirana.',
+        i:'Hola '+n+', gracias por tu comentario y por alojarte en Kirana. Tomamos nota de lo que indicas para mejorar. Esperamos darte la bienvenida de nuevo. Un saludo, el equipo de Kirana.'},
+    en:{p:'Hi '+n+', thank you so much for your review and for choosing Kirana! We are delighted you enjoyed the peace of Urdaibai. We hope to welcome you back soon. Warm regards, the Kirana team.',
+        i:'Hi '+n+', thanks for your feedback and for staying at Kirana. We have noted your comments to keep improving. We hope to welcome you again. Best, the Kirana team.'},
+    fr:{p:'Bonjour '+n+', merci beaucoup pour votre avis et d’avoir choisi Kirana ! Nous sommes ravis que vous ayez apprécié le calme d’Urdaibai. Au plaisir de vous accueillir à nouveau. Cordialement, l’équipe Kirana.',
+        i:'Bonjour '+n+', merci pour votre retour et votre séjour chez Kirana. Nous prenons note de vos remarques pour nous améliorer. Au plaisir de vous revoir. Cordialement, l’équipe Kirana.'},
+    de:{p:'Hallo '+n+', vielen Dank für deine Bewertung und dass du dich für Kirana entschieden hast! Es freut uns sehr, dass du die Ruhe von Urdaibai genossen hast. Wir freuen uns auf deinen nächsten Besuch. Herzliche Grüße, das Kirana-Team.',
+        i:'Hallo '+n+', danke für dein Feedback und deinen Aufenthalt bei Kirana. Wir nehmen deine Hinweise auf, um uns zu verbessern. Wir würden uns freuen, dich wiederzusehen. Herzliche Grüße, das Kirana-Team.'},
+    it:{p:'Ciao '+n+', grazie mille per la tua recensione e per aver scelto Kirana! Siamo felicissimi che tu abbia apprezzato la tranquillità di Urdaibai. Ti aspettiamo di nuovo. Un saluto, il team di Kirana.',
+        i:'Ciao '+n+', grazie per il tuo commento e per aver soggiornato a Kirana. Prendiamo nota delle tue osservazioni per migliorare. Speriamo di rivederti presto. Un saluto, il team di Kirana.'},
+    eu:{p:'Kaixo '+n+', mila esker zure iritziagatik eta Kirana aukeratzeagatik! Asko poztu gara Urdaibaiko lasaitasunaz gozatu izanaz. Berriz ere zain zaitugu. Besarkada bat, Kirana taldea.',
+        i:'Kaixo '+n+', eskerrik asko zure iruzkinagatik eta Kiranan egon izanagatik. Zure oharrak kontuan hartuko ditugu hobetzeko. Berriz ikustea espero dugu. Agur bero bat, Kirana taldea.'}
+  };
+  var L=M[(rv.lang||'es').slice(0,2)]||M.es;
+  return pos?L.p:L.i;
+}
+function renderResenas(){
+  var list=(PANEL.reviews||[]);
+  var pend=list.filter(function(r){return !r.replied;}).length;
+  var avg=list.length?(list.reduce(function(a,r){return a+(r.rating||0);},0)/list.length):0;
+  var T=function(id){return document.getElementById(id);};
+  if(T('rv-total'))T('rv-total').textContent=list.length;
+  if(T('rv-pend'))T('rv-pend').textContent=pend;
+  if(T('rv-avg'))T('rv-avg').textContent=avg?avg.toFixed(1)+' ★':'—';
+  var cards=list.map(function(r){
+    var col=platColor(r.platform);
+    var stars='★★★★★'.slice(0,r.rating)+'☆☆☆☆☆'.slice(0,5-r.rating);
+    var head='<div class="rv-head"><span><b>'+r.author+'</b> <span class="chtag" style="background:'+col+'1F;color:'+col+'">'+r.platform+'</span></span>'
+      +'<span class="rv-stars">'+stars+'</span></div>'
+      +'<div class="muted" style="font-size:11px">'+fmt(r.date)+' · '+r.lang.toUpperCase()+'</div>'
+      +'<p class="rv-text">'+r.text+'</p>';
+    var body;
+    if(r.replied){
+      body='<div class="rv-replied"><b>Respondida ✓</b><p>'+(r.reply||'')+'</p></div>';
+    }else{
+      var draft=draftReply(r);
+      body='<textarea id="reply-'+r.id+'" class="rv-area">'+draft+'</textarea>'
+        +'<div class="rv-actions"><button class="btn ghost sm" onclick="regenReply(\''+r.id+'\')">Regenerar IA</button>'
+        +'<button class="btn ghost sm" onclick="copyReply(\''+r.id+'\')">Copiar</button>'
+        +'<button class="btn sm" onclick="sendReply(\''+r.id+'\')">Enviar</button></div>';
+    }
+    return '<div class="rv-card">'+head+body+'</div>';
+  }).join('');
+  T('rvList').innerHTML=cards||'<p class="muted">Sin reseñas.</p>';
+}
+function findRv(id){return (PANEL.reviews||[]).find(function(r){return r.id===id;});}
+function regenReply(id){var r=findRv(id);var el=document.getElementById('reply-'+id);if(r&&el)el.value=draftReply(r);}
+function copyReply(id){var el=document.getElementById('reply-'+id);if(!el)return;try{navigator.clipboard&&navigator.clipboard.writeText(el.value);}catch(e){}alert('Respuesta copiada. Pégala en la plataforma si no permite respuesta automática.');}
+function sendReply(id){var r=findRv(id);var el=document.getElementById('reply-'+id);if(!r||!el)return;
+  r.replied=true;r.reply=el.value;renderResenas();
+  alert('(Demo) En real se publicaría automáticamente en '+r.platform+'. Con la API de Claude el borrador lo redacta la IA.');
 }
