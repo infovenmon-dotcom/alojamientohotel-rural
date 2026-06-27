@@ -342,6 +342,27 @@ document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.m
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('on')}));
 
 (function(){var ys=document.getElementById('contaYear');if(ys){populateContaYears();ys.onchange=function(){contaYear=+this.value;renderConta();};}var ps=document.getElementById('contaPeriod');if(ps)ps.onchange=function(){contaPeriod=this.value;renderConta();};})();
+(function(){
+  var impb=document.getElementById('importBtn'),impf=document.getElementById('importFile');
+  if(!impb||!impf)return;
+  impb.onclick=function(){impf.click();};
+  impf.onchange=function(){
+    var file=impf.files&&impf.files[0]; if(!file)return;
+    var rd=new FileReader();
+    rd.onload=function(){
+      var t=impb.textContent; impb.disabled=true; impb.textContent='Importando…';
+      fetch('/api/panel/import',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({csv:String(rd.result)})})
+        .then(function(r){return r.json();})
+        .then(function(d){
+          impb.disabled=false; impb.textContent=t;
+          if(d&&d.ok){alert('Importadas '+d.imported+' reservas de '+d.total+'.'+(d.skipped?(' Omitidas '+d.skipped+' (solapadas o sin fechas válidas).'):''));location.reload();}
+          else alert(d&&d.error?d.error:'No se pudo importar el CSV.');
+        })
+        .catch(function(){impb.disabled=false;impb.textContent=t;alert('No se pudo importar el CSV.');});
+    };
+    rd.readAsText(file,'utf-8'); impf.value='';
+  };
+})();
 var __clc=document.getElementById('cl-csv');if(__clc)__clc.onclick=exportClientesCSV;var __cls=document.getElementById('cl-search');if(__cls)__cls.oninput=renderClientes;
 /* init */
 renderCal();renderBk();renderIngresos();renderFacturas();renderConta();renderRooms();renderClientes();
