@@ -1101,6 +1101,8 @@
               +'<input id="kbName" type="text" placeholder="Nombre y apellidos" autocomplete="name">'
               +'<input id="kbEmail" type="email" placeholder="Email" autocomplete="email">'
               +'<input id="kbPhone" type="tel" placeholder="Tel\u00e9fono" autocomplete="tel">'
+              +'<input id="kbNif" type="text" placeholder="NIF/CIF (opcional, para factura con tus datos)" autocomplete="off">'
+              +'<input id="kbAddr" type="text" placeholder="Direcci\u00f3n fiscal (opcional)" autocomplete="off">'
             +'</div>'
             +'<button class="kb-cta" id="kbPay">'+label+'</button>'+
             (AV.demo?'<p style="margin:8px 0 0;text-align:center;font-size:.75rem;color:#A6543E">Demostraci\u00f3n: no se cobra nada real.</p>':'')+
@@ -1112,8 +1114,10 @@
             var phone=(document.getElementById('kbPhone').value||'').trim();
             if(!name||!email||!phone){alert('Por favor, completa nombre, email y tel\u00e9fono.');return;}
             if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){alert('Revisa el email, parece incorrecto.');return;}
+            var nif=(document.getElementById('kbNif').value||'').trim();
+            var addr=(document.getElementById('kbAddr').value||'').trim();
             pb.disabled=true;pb.textContent='Un momento\u2026';
-            fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({room:ROOM,in:selIn,out:selOut,pax:pax(),name:name,email:email,phone:phone})})
+            fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({room:ROOM,in:selIn,out:selOut,pax:pax(),name:name,email:email,phone:phone,nif:nif,address:addr})})
               .then(function(r){return r.json();}).then(function(d){if(d&&d.url){location.href=d.url;}else{pb.disabled=false;pb.textContent=label;alert(d&&d.error?d.error:'No se pudo completar.');}})
               .catch(function(){pb.disabled=false;pb.textContent=label;alert('No se pudo completar.');});};
         }else{

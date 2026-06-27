@@ -19,6 +19,8 @@ export interface Invoice {
   out: string;
   pax?: number;
   cliente?: string;
+  nif?: string; // NIF/CIF del cliente (factura con datos fiscales)
+  direccion?: string; // dirección fiscal del cliente
   base: number; // base imponible (€)
   ivaPct: number; // % IVA (alojamiento turístico: 10)
   iva: number; // cuota IVA (€)

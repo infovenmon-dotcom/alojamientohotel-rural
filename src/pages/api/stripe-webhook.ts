@@ -36,6 +36,8 @@ export const POST: APIRoute = async ({ request }) => {
             name: m.name || s.customer_details?.name || s.customer_details?.email || 'Web',
             email: m.email || s.customer_details?.email || undefined,
             phone: m.phone || s.customer_details?.phone || undefined,
+            nif: m.nif || undefined,
+            address: m.address || undefined,
             source: 'stripe',
             ref: s.id,
           },

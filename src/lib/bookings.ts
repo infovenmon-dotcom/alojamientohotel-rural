@@ -17,6 +17,8 @@ export interface Booking {
   name?: string;
   email?: string;
   phone?: string;
+  nif?: string; // opcional: para factura con datos fiscales
+  address?: string; // opcional: dirección fiscal
   pax?: number;
   source?: 'web' | 'manual' | 'channel' | 'stripe';
   ref?: string;

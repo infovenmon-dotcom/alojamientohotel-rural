@@ -22,6 +22,8 @@ export const POST: APIRoute = async ({ request }) => {
   const name = (body?.name || '').toString().trim();
   const email = (body?.email || '').toString().trim();
   const phone = (body?.phone || '').toString().trim();
+  const nif = (body?.nif || '').toString().trim(); // opcional (factura con NIF)
+  const address = (body?.address || '').toString().trim(); // opcional
   if (!room || !inS || !outS || !(inS < outS)) return json({ error: 'fechas inválidas' }, 400);
   if (!PRICE_PER_NIGHT[room]) return json({ error: 'habitación desconocida' }, 400);
   if (!name || !email || !phone) return json({ error: 'faltan tus datos (nombre, email y teléfono)' }, 400);
@@ -33,13 +35,13 @@ export const POST: APIRoute = async ({ request }) => {
   if (!key) {
     const now = new Date().toISOString();
     const booking = await addBooking(
-      { room, in: inS, out: outS, pax: pax ? Number(pax) : undefined, name, email, phone, source: 'web', ref: 'demo' },
+      { room, in: inS, out: outS, pax: pax ? Number(pax) : undefined, name, email, phone, nif: nif || undefined, address: address || undefined, source: 'web', ref: 'demo' },
       now
     );
     const { base, iva, ivaPct, total } = invoiceAmounts(room, inS, outS);
     const inv = await createInvoice({
       fecha: now, room, in: inS, out: outS, pax: pax ? Number(pax) : undefined,
-      cliente: name, base, ivaPct, iva, total, bookingId: booking.id,
+      cliente: name, nif: nif || undefined, direccion: address || undefined, base, ivaPct, iva, total, bookingId: booking.id,
     });
     // TicketBAI SIMULADO (en real lo declara el garante).
     await setTbaiResult(inv.ref, {
@@ -70,7 +72,7 @@ export const POST: APIRoute = async ({ request }) => {
     ],
     customer_email: email || undefined,
     phone_number_collection: { enabled: true },
-    metadata: { room, in: inS, out: outS, pax: String(pax || ''), name, email, phone },
+    metadata: { room, in: inS, out: outS, pax: String(pax || ''), name, email, phone, nif, address },
     success_url: `${origin}/reserva-ok?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/#habitaciones`,
   });

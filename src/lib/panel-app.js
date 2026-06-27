@@ -137,7 +137,7 @@ function showInvoice(i){
      <div><div class="muted" style="text-transform:uppercase;font-size:10px;letter-spacing:.1em">Emite</div>
        [Razón social] · NIF [—]<br>Barrio San Miguel 27<br>48370 Bermeo (Bizkaia)<br>+34 689 352 391</div>
      <div><div class="muted" style="text-transform:uppercase;font-size:10px;letter-spacing:.1em">Cliente</div>
-       ${i.client}<br>NIF/DNI [—]<br>Canal: ${i.ch}</div>
+       ${i.client}<br>${i.nif?("NIF/CIF: "+i.nif):"NIF/DNI [—]"}<br>Canal: ${i.ch}</div>
    </div>
    <table style="margin-bottom:14px"><thead><tr><th>Concepto</th><th class="right">Base</th></tr></thead>
      <tbody><tr><td>${i.concept}</td><td class="right">${euro2(i.base)}</td></tr></tbody></table>

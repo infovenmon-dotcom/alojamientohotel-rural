@@ -73,6 +73,7 @@ const qrSrc = qrData
               <div class="h"><span>Factura {inv.ref}</span><span>{new Date(inv.fecha).toLocaleDateString('es-ES')}</span></div>
               <div class="b">
                 <div class="row"><span>{inv.room} · {inv.in} → {inv.out}{inv.pax ? ` · ${inv.pax} pers.` : ''}</span></div>
+                {inv.cliente && <div class="row"><span>Facturar a</span><span>{inv.cliente}{inv.nif ? ` · ${inv.nif}` : ''}</span></div>}
                 <div class="row"><span>Base imponible</span><span>{euro(inv.base)}</span></div>
                 <div class="row"><span>IVA {inv.ivaPct}%</span><span>{euro(inv.iva)}</span></div>
                 <div class="row tot"><span>Total</span><span>{euro(inv.total)}</span></div>
