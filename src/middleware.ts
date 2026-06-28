@@ -2,7 +2,7 @@ import { defineMiddleware } from 'astro:middleware';
 import { COOKIE, isValidSession } from '@/lib/auth';
 
 // Endpoints públicos (reservas/disponibilidad/pago): no requieren sesión.
-const PUBLIC_API = ['/api/availability', '/api/ical', '/api/checkout', '/api/sync', '/api/stripe-webhook', '/api/panel/recover'];
+const PUBLIC_API = ['/api/availability', '/api/ical', '/api/checkout', '/api/sync', '/api/stripe-webhook', '/api/panel/recover', '/api/whatsapp'];
 
 // Cabeceras de seguridad para todas las respuestas.
 const SECURITY_HEADERS: Record<string, string> = {

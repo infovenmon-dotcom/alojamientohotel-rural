@@ -484,7 +484,7 @@ function renderResenas(){
     var head='<div class="rv-head"><span><b>'+r.author+'</b> <span class="chtag" style="background:'+col+'1F;color:'+col+'">'+r.platform+'</span></span><span class="rv-stars">'+stars+'</span></div>'
       +'<div class="muted" style="font-size:11px">'+fmt(r.date)+' · '+langName2(r.lang)+'</div>'
       +'<p class="rv-text">'+r.text+'</p>'
-      +(es?'':'<div class="rv-trad"><b>Traducción:</b> '+(r.textES||'')+'</div>');
+      +(es?'':'<div class="rv-trad" id="trad-'+r.id+'"><b>Traducción:</b> '+(r.textES||'')+'</div>');
     var body;
     if(r.replied){
       body='<div class="rv-replied"><b>Respondida ✓</b><p>'+(r.reply||'')+'</p></div>';
@@ -492,7 +492,7 @@ function renderResenas(){
       body='<label class="rv-lbl">Tu respuesta (en español)</label>'
         +'<textarea id="reply-'+r.id+'" class="rv-area" oninput="syncSend(\''+r.id+'\')">'+draftReply(r,'es')+'</textarea>'
         +(es?'':'<div class="rv-send"><b>Se enviará en '+langName2(r.lang)+':</b> <span id="send-'+r.id+'">'+draftReply(r,r.lang)+'</span></div>')
-        +'<div class="rv-actions"><button class="btn ghost sm" onclick="regenReply(\''+r.id+'\')">Regenerar IA</button>'
+        +'<div class="rv-actions"><button class="btn ghost sm" id="gen-'+r.id+'" onclick="regenReply(\''+r.id+'\')">Generar con IA</button>'
         +'<button class="btn ghost sm" onclick="copyReply(\''+r.id+'\')">Copiar</button>'
         +'<button class="btn sm" onclick="sendReply(\''+r.id+'\')">Enviar</button></div>';
     }
@@ -501,7 +501,28 @@ function renderResenas(){
   T('rvList').innerHTML=cards||'<p class="muted">Sin reseñas.</p>';
 }
 function findRv(id){return (PANEL.reviews||[]).find(function(r){return r.id===id;});}
-function regenReply(id){var r=findRv(id);var el=document.getElementById('reply-'+id);if(r&&el){el.value=draftReply(r,'es');var s=document.getElementById('send-'+id);if(s)s.textContent=draftReply(r,r.lang);}}
+// Genera/regenera la respuesta con la API de Claude. Si no hay clave (demo) o
+// falla, usa la plantilla local para no dejar el panel sin respuesta.
+function regenReply(id){
+  var r=findRv(id);var el=document.getElementById('reply-'+id);if(!r||!el)return;
+  var es=(r.lang||'es').slice(0,2)==='es';var s=document.getElementById('send-'+id);var trad=document.getElementById('trad-'+id);
+  var btn=document.getElementById('gen-'+id);var prev=el.value||'';
+  function fallback(){el.value=draftReply(r,'es');if(s)s.textContent=draftReply(r,r.lang);}
+  if(btn){btn.disabled=true;btn.textContent='Generando…';}
+  fetch('/api/panel/review-reply',{method:'POST',headers:{'content-type':'application/json'},
+    body:JSON.stringify({author:r.author,platform:r.platform,rating:r.rating,lang:r.lang,text:r.text,previous:prev})})
+    .then(function(res){return res.json().catch(function(){return {};}).then(function(d){
+      if(!res.ok)throw new Error(d.error||('HTTP '+res.status));
+      if(d.source==='ia'){
+        el.value=d.replyES||'';
+        if(s)s.textContent=d.reply||d.replyES||'';
+        if(trad&&d.textES)trad.innerHTML='<b>Traducción:</b> '+d.textES;
+        r.textES=d.textES||r.textES;
+      }else{ fallback(); } // demo
+    });})
+    .catch(function(e){ fallback(); alert('Usando borrador local. '+(e&&e.message?e.message:'')); })
+    .then(function(){ if(btn){btn.disabled=false;btn.textContent='Regenerar con IA';} });
+}
 function syncSend(id){ /* Demo: el envío usa la plantilla del idioma. Con IA, traduce tu texto en español. */ }
 function copyReply(id){var r=findRv(id);var es=(r&&(r.lang||'es').slice(0,2)==='es');var s=document.getElementById('send-'+id);var el=document.getElementById('reply-'+id);
   var txt=(!es&&s)?s.textContent:(el?el.value:'');
