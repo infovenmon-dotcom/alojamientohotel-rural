@@ -20,6 +20,11 @@ export const POST: APIRoute = async ({ request }) => {
   } catch {
     return json({ error: 'datos inválidos' }, 400);
   }
+  // Anti-bot: campo trampa (honeypot) invisible para humanos. Si viene relleno,
+  // es un bot. Respondemos como si todo fuese bien para no darle pistas.
+  if (body?.website || body?.kbHp) {
+    return json({ url: '/reserva-ok?demo=1' });
+  }
   const { room, in: inS, out: outS, pax } = body || {};
   // Datos del cliente (capturados en el formulario de reserva).
   const name = clean(body?.name, 120);

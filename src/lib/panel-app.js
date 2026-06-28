@@ -512,3 +512,19 @@ function sendReply(id){var r=findRv(id);var el=document.getElementById('reply-'+
   r.replied=true;r.reply=(!es&&s)?s.textContent:el.value;renderResenas();
   alert('(Demo) En real se publicaría automáticamente en '+r.platform+', en '+langName2(r.lang)+'. Con la API de Claude tu texto en español se traduce solo.');
 }
+
+// Cambio de contraseña del panel (mínimo 8 caracteres).
+document.addEventListener('click',function(ev){
+  var a=ev.target.closest&&ev.target.closest('#kChangePass');if(!a)return;
+  ev.preventDefault();
+  var cur=prompt('Contraseña actual:');if(cur===null)return;
+  var nx=prompt('Nueva contraseña (mínimo 8 caracteres):');if(nx===null)return;
+  if((nx||'').length<8){alert('La nueva contraseña debe tener al menos 8 caracteres.');return;}
+  var nx2=prompt('Repite la nueva contraseña:');if(nx2===null)return;
+  if(nx!==nx2){alert('Las contraseñas no coinciden.');return;}
+  fetch('/api/panel/password',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({current:cur,next:nx})})
+    .then(function(r){return r.json().catch(function(){return {};}).then(function(d){
+      if(!r.ok)throw new Error(d.error||('HTTP '+r.status));
+      alert('Contraseña actualizada correctamente.');});})
+    .catch(function(e){alert('No se pudo cambiar: '+(e&&e.message?e.message:'error'));});
+});

@@ -2,22 +2,33 @@
 export const prerender = false;
 import '@/styles/global.css';
 import { COOKIE, checkPassword, sessionToken } from '@/lib/auth';
+import { lockedSeconds, registerFail, registerSuccess } from '@/lib/loginGuard';
 
 let error = '';
 if (Astro.request.method === 'POST') {
-  const form = await Astro.request.formData();
-  const pass = String(form.get('password') ?? '');
-  if (checkPassword(pass)) {
-    Astro.cookies.set(COOKIE, sessionToken(), {
-      httpOnly: true,
-      sameSite: 'lax',
-      path: '/',
-      secure: import.meta.env.PROD,
-      maxAge: 60 * 60 * 8, // 8 h
-    });
-    return Astro.redirect('/panel');
+  const ip = Astro.clientAddress || 'desconocida';
+  const now = Date.now();
+  const locked = await lockedSeconds(ip, now);
+  if (locked > 0) {
+    const min = Math.ceil(locked / 60);
+    error = `Demasiados intentos. Prueba de nuevo en ${min} min.`;
+  } else {
+    const form = await Astro.request.formData();
+    const pass = String(form.get('password') ?? '');
+    if (await checkPassword(pass)) {
+      await registerSuccess(ip, now);
+      Astro.cookies.set(COOKIE, await sessionToken(), {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: import.meta.env.PROD,
+        maxAge: 60 * 60 * 8, // 8 h
+      });
+      return Astro.redirect('/panel');
+    }
+    await registerFail(ip, now);
+    error = 'Contraseña incorrecta.';
   }
-  error = 'Contraseña incorrecta.';
 }
 ---
 
@@ -50,6 +61,19 @@ if (Astro.request.method === 'POST') {
       <button type="submit" class="mt-6 w-full rounded-full bg-pine px-5 py-2.5 text-paper transition-opacity hover:opacity-90">
         Entrar
       </button>
+
+      <button type="button" id="forgot" class="mt-4 block w-full text-center text-xs text-mist underline">
+        ¿Olvidaste la contraseña?
+      </button>
     </form>
+
+    <script is:inline>
+      document.getElementById('forgot')?.addEventListener('click', function () {
+        if (!confirm('Te enviaremos un enlace para restablecer la contraseña al email del administrador. ¿Continuar?')) return;
+        fetch('/api/panel/recover', { method: 'POST' })
+          .then(function () { alert('Si hay un email configurado, recibirás un enlace para restablecer la contraseña.'); })
+          .catch(function () { alert('Si hay un email configurado, recibirás un enlace para restablecer la contraseña.'); });
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,57 @@
+---
+export const prerender = false;
+import '@/styles/global.css';
+import { consumeResetToken } from '@/lib/auth';
+
+let msg = '';
+let done = false;
+const token = String(Astro.url.searchParams.get('token') ?? '');
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const tok = String(form.get('token') ?? '');
+  const next = String(form.get('password') ?? '');
+  const next2 = String(form.get('password2') ?? '');
+  if (next.length < 8) {
+    msg = 'La contraseña debe tener al menos 8 caracteres.';
+  } else if (next !== next2) {
+    msg = 'Las contraseñas no coinciden.';
+  } else if (await consumeResetToken(tok, next)) {
+    done = true;
+  } else {
+    msg = 'El enlace no es válido o ha caducado. Solicita uno nuevo.';
+  }
+}
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Restablecer contraseña · Kirana</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+  </head>
+  <body class="flex min-h-screen items-center justify-center bg-paper px-5">
+    {done ? (
+      <div class="w-full max-w-sm rounded-2xl border border-paper-2 bg-paper p-8 text-center">
+        <p class="font-serif text-3xl text-pine">Kirana</p>
+        <p class="mt-4 text-sm text-ink">Contraseña actualizada. Ya puedes entrar con la nueva.</p>
+        <a href="/panel/login" class="mt-6 inline-block rounded-full bg-pine px-5 py-2.5 text-paper hover:opacity-90">Ir al panel</a>
+      </div>
+    ) : (
+      <form method="POST" class="w-full max-w-sm rounded-2xl border border-paper-2 bg-paper p-8">
+        <p class="font-serif text-3xl text-pine">Kirana</p>
+        <p class="mt-1 text-sm text-mist">Elige una contraseña nueva</p>
+        <input type="hidden" name="token" value={token} />
+        <label class="mt-6 block text-sm text-ink" for="password">Nueva contraseña</label>
+        <input id="password" name="password" type="password" required minlength="8" autofocus class="mt-2 w-full rounded-lg border border-paper-2 bg-paper px-3 py-2 outline-none focus:border-pine" />
+        <label class="mt-4 block text-sm text-ink" for="password2">Repite la contraseña</label>
+        <input id="password2" name="password2" type="password" required minlength="8" class="mt-2 w-full rounded-lg border border-paper-2 bg-paper px-3 py-2 outline-none focus:border-pine" />
+        {msg && <p class="mt-3 text-sm text-[#A6543E]">{msg}</p>}
+        <button type="submit" class="mt-6 w-full rounded-full bg-pine px-5 py-2.5 text-paper hover:opacity-90">Guardar contraseña</button>
+      </form>
+    )}
+  </body>
+</html>

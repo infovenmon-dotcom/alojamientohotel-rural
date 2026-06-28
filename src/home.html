@@ -1106,6 +1106,7 @@
               +'<input id="kbNif" type="text" placeholder="NIF/CIF (opcional, para factura con tus datos)" autocomplete="off">'
               +'<input id="kbAddr" type="text" placeholder="Direcci\u00f3n fiscal (opcional)" autocomplete="off">'
             +'</div>'
+            +'<input id="kbHp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">'
             +'<label class="kb-consent"><input type="checkbox" id="kbConsent"> Quiero recibir ofertas y novedades de Kirana por email.</label>'
             +'<button class="kb-cta" id="kbPay">'+label+'</button>'+
             (AV.demo?'<p style="margin:8px 0 0;text-align:center;font-size:.75rem;color:#A6543E">Demostraci\u00f3n: no se cobra nada real.</p>':'')+
@@ -1121,8 +1122,9 @@
             var addr=(document.getElementById('kbAddr').value||'').trim();
             var lang=(document.documentElement.lang||'es').slice(0,2);
             var consent=!!document.getElementById('kbConsent').checked;
+            var hp=(document.getElementById('kbHp').value||''); // honeypot anti-bot
             pb.disabled=true;pb.textContent='Un momento\u2026';
-            fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({room:ROOM,in:selIn,out:selOut,pax:pax(),name:name,email:email,phone:phone,nif:nif,address:addr,lang:lang,consent:consent})})
+            fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({room:ROOM,in:selIn,out:selOut,pax:pax(),name:name,email:email,phone:phone,nif:nif,address:addr,lang:lang,consent:consent,website:hp})})
               .then(function(r){return r.json();}).then(function(d){if(d&&d.url){location.href=d.url;}else{pb.disabled=false;pb.textContent=label;alert(d&&d.error?d.error:'No se pudo completar.');}})
               .catch(function(){pb.disabled=false;pb.textContent=label;alert('No se pudo completar.');});};
         }else{
