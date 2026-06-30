@@ -1,4 +1,6 @@
 import type { APIRoute } from 'astro';
+import { readJson } from '@/lib/persist';
+import { resolve } from 'node:path';
 
 export const prerender = false;
 
@@ -17,6 +19,7 @@ export const GET: APIRoute = async () => {
     whatsapp_app_secret: !!env.WHATSAPP_APP_SECRET,
     anthropic_api_key: !!env.ANTHROPIC_API_KEY,
     context: env.CONTEXT || null, // 'production' | 'branch-deploy' | ...
+    last_send: await readJson<any>('wadebug', null, resolve(process.cwd(), 'src/data/wadebug.json')),
   };
   return new Response(JSON.stringify(body, null, 2), {
     headers: { 'content-type': 'application/json' },

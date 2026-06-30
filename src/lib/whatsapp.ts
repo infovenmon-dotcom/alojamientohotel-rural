@@ -18,11 +18,17 @@ export function hasWhatsApp(): boolean {
   return !!(process.env.WHATSAPP_TOKEN && process.env.WHATSAPP_PHONE_ID);
 }
 
-/** Envía un mensaje de texto por WhatsApp. Devuelve true si Meta lo aceptó. */
-export async function sendWhatsApp(to: string, body: string): Promise<boolean> {
+export interface SendResult {
+  ok: boolean;
+  status?: number;
+  error?: string;
+}
+
+/** Envía un mensaje de texto por WhatsApp. Devuelve el detalle del resultado. */
+export async function sendWhatsApp(to: string, body: string): Promise<SendResult> {
   const token = process.env.WHATSAPP_TOKEN;
   const phoneId = process.env.WHATSAPP_PHONE_ID;
-  if (!token || !phoneId || !to || !body) return false;
+  if (!token || !phoneId || !to || !body) return { ok: false, error: 'falta token/phoneId/destinatario/cuerpo' };
   try {
     const res = await fetch(`${GRAPH}/${phoneId}/messages`, {
       method: 'POST',
@@ -34,9 +40,11 @@ export async function sendWhatsApp(to: string, body: string): Promise<boolean> {
         text: { preview_url: false, body: body.slice(0, 4000) },
       }),
     });
-    return res.ok;
-  } catch {
-    return false;
+    if (res.ok) return { ok: true, status: res.status };
+    const txt = await res.text().catch(() => '');
+    return { ok: false, status: res.status, error: txt.slice(0, 600) };
+  } catch (e: any) {
+    return { ok: false, error: String(e?.message || e).slice(0, 300) };
   }
 }
 

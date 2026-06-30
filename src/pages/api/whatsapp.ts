@@ -3,6 +3,8 @@ import { hasWhatsApp, sendWhatsApp, verifySignature, hasAppSecret } from '@/lib/
 import { hasClaude, claudeText } from '@/lib/claude';
 import { getActiveRooms } from '@/lib/rooms';
 import { webPrice } from '@/lib/pricing';
+import { writeJson } from '@/lib/persist';
+import { resolve } from 'node:path';
 
 export const prerender = false;
 
@@ -83,7 +85,17 @@ export const POST: APIRoute = async ({ request }) => {
       reply =
         'Gracias por tu mensaje 🌿 En breve te contestamos. También puedes ver disponibilidad y reservar en ' + SITE + '.';
     }
-    await sendWhatsApp(m.from, reply);
+    const result = await sendWhatsApp(m.from, reply);
+    // Guarda el último resultado de envío para diagnóstico (lo lee /api/wa-check).
+    try {
+      await writeJson(
+        'wadebug',
+        { ts: new Date().toISOString(), to: m.from, replyPreview: reply.slice(0, 140), claude: hasClaude(), result },
+        resolve(process.cwd(), 'src/data/wadebug.json')
+      );
+    } catch {
+      /* el diagnóstico no debe romper el flujo */
+    }
   }
   return ok();
 };
