@@ -28,20 +28,26 @@ export const GET: APIRoute = async ({ url }) => {
 
 export const POST: APIRoute = async ({ request }) => {
   const raw = await request.text();
+  // Rastro de diagnóstico: se persiste SIEMPRE al terminar, para ver en
+  // /api/wa-check exactamente hasta dónde llega cada llamada al webhook.
+  const dbg: any = { ts: new Date().toISOString(), step: 'inicio', rawLen: raw.length };
+  const save = async () => {
+    try {
+      await writeJson('wadebug', dbg, resolve(process.cwd(), 'src/data/wadebug.json'));
+    } catch {
+      /* el diagnóstico no debe romper el flujo */
+    }
+  };
 
-  // Verificación de firma de Meta (X-Hub-Signature-256). Si hay secreto de app
-  // y se quiere modo estricto (WHATSAPP_STRICT_SIGNATURE=1), una firma inválida
-  // rechaza la petición. Por defecto, sólo AVISA y deja pasar: así un secreto
-  // mal copiado no deja el asistente mudo. El handshake del webhook ya protege
-  // el endpoint, y el riesgo (spam al bot) es bajo.
+  // Verificación de firma de Meta (no bloquea por defecto; ver más abajo).
   if (hasAppSecret()) {
     const sig = request.headers.get('x-hub-signature-256');
-    const okSig = verifySignature(raw, sig);
-    if (!okSig) {
-      if (process.env.WHATSAPP_STRICT_SIGNATURE === '1') {
-        return new Response('bad signature', { status: 401 });
-      }
-      console.warn('WhatsApp: firma X-Hub-Signature-256 no válida; se procesa igualmente (modo no estricto).');
+    dbg.sigPresent = !!sig;
+    dbg.sigValid = verifySignature(raw, sig);
+    if (!dbg.sigValid && process.env.WHATSAPP_STRICT_SIGNATURE === '1') {
+      dbg.step = 'firma-rechazada';
+      await save();
+      return new Response('bad signature', { status: 401 });
     }
   }
 
@@ -49,7 +55,9 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     payload = JSON.parse(raw);
   } catch {
-    return ok(); // siempre 200 para que Meta no reintente en bucle
+    dbg.step = 'json-invalido';
+    await save();
+    return ok();
   }
 
   // Extrae los mensajes de texto entrantes.
@@ -59,16 +67,29 @@ export const POST: APIRoute = async ({ request }) => {
       for (const ch of entry.changes || []) {
         const v = ch.value || {};
         const name = v.contacts?.[0]?.profile?.name;
+        dbg.field = ch.field;
+        dbg.hasStatuses = !!(v.statuses && v.statuses.length);
         for (const m of v.messages || []) {
           if (m.type === 'text' && m.text?.body) msgs.push({ from: m.from, body: m.text.body, name });
         }
       }
     }
-  } catch {
+  } catch (e: any) {
+    dbg.step = 'error-parseo-mensajes';
+    dbg.error = String(e?.message || e).slice(0, 200);
+    await save();
     return ok();
   }
 
-  if (!msgs.length || !hasWhatsApp()) return ok();
+  dbg.msgCount = msgs.length;
+  dbg.hasWhatsApp = hasWhatsApp();
+  dbg.hasClaude = hasClaude();
+
+  if (!msgs.length || !hasWhatsApp()) {
+    dbg.step = !msgs.length ? 'sin-mensajes-de-texto' : 'whatsapp-no-configurado';
+    await save();
+    return ok();
+  }
 
   const system = await assistantSystemPrompt();
   for (const m of msgs) {
@@ -81,21 +102,17 @@ export const POST: APIRoute = async ({ request }) => {
         'Gracias por escribir a Kirana 🌿 Ahora mismo no puedo responderte automáticamente. Puedes ver disponibilidad y reservar en ' +
           SITE +
           ' y te atenderemos lo antes posible.';
-    } catch {
+    } catch (e: any) {
+      dbg.claudeError = String(e?.message || e).slice(0, 200);
       reply =
         'Gracias por tu mensaje 🌿 En breve te contestamos. También puedes ver disponibilidad y reservar en ' + SITE + '.';
     }
     const result = await sendWhatsApp(m.from, reply);
-    // Guarda el último resultado de envío para diagnóstico (lo lee /api/wa-check).
-    try {
-      await writeJson(
-        'wadebug',
-        { ts: new Date().toISOString(), to: m.from, replyPreview: reply.slice(0, 140), claude: hasClaude(), result },
-        resolve(process.cwd(), 'src/data/wadebug.json')
-      );
-    } catch {
-      /* el diagnóstico no debe romper el flujo */
-    }
+    dbg.step = 'enviado';
+    dbg.to = m.from;
+    dbg.replyPreview = reply.slice(0, 140);
+    dbg.result = result;
+    await save();
   }
   return ok();
 };
