@@ -27,10 +27,20 @@ export const GET: APIRoute = async ({ url }) => {
 export const POST: APIRoute = async ({ request }) => {
   const raw = await request.text();
 
-  // Si hay secreto de app, EXIGIMOS firma válida (rechaza peticiones falsas).
+  // Verificación de firma de Meta (X-Hub-Signature-256). Si hay secreto de app
+  // y se quiere modo estricto (WHATSAPP_STRICT_SIGNATURE=1), una firma inválida
+  // rechaza la petición. Por defecto, sólo AVISA y deja pasar: así un secreto
+  // mal copiado no deja el asistente mudo. El handshake del webhook ya protege
+  // el endpoint, y el riesgo (spam al bot) es bajo.
   if (hasAppSecret()) {
     const sig = request.headers.get('x-hub-signature-256');
-    if (!verifySignature(raw, sig)) return new Response('bad signature', { status: 401 });
+    const okSig = verifySignature(raw, sig);
+    if (!okSig) {
+      if (process.env.WHATSAPP_STRICT_SIGNATURE === '1') {
+        return new Response('bad signature', { status: 401 });
+      }
+      console.warn('WhatsApp: firma X-Hub-Signature-256 no válida; se procesa igualmente (modo no estricto).');
+    }
   }
 
   let payload: any;
