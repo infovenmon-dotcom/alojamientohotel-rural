@@ -1,0 +1,87 @@
+---
+export const prerender = false;
+import '@/styles/global.css';
+
+// Política de privacidad (RGPD) de Kirana. Sirve además como URL de Política
+// de Privacidad para publicar la app de WhatsApp en Meta. Los datos fiscales
+// del responsable (nombre legal, NIF, dirección) están pendientes de completar
+// con los de Fran.
+const EMAIL = 'info.venmon@gmail.com'; // sustituir por el email oficial de Kirana
+const SITIO = 'https://kiranabermeo.netlify.app';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Política de privacidad · Kirana</title>
+    <link rel="icon" type="image/png" href="/logo.png" />
+  </head>
+  <body class="bg-paper text-ink">
+    <main class="mx-auto max-w-3xl px-5 py-12 leading-relaxed">
+      <a href="/" class="text-sm text-pine underline">← Volver a Kirana</a>
+      <h1 class="mt-4 font-serif text-4xl text-pine">Política de privacidad</h1>
+      <p class="mt-2 text-sm text-mist">Última actualización: 2026</p>
+
+      <h2 class="mt-8 text-xl font-semibold text-pine">1. Responsable del tratamiento</h2>
+      <p class="mt-2">
+        [Nombre legal del titular] · NIF/CIF: [pendiente] · Dirección: [dirección fiscal],
+        Bermeo (Bizkaia). Contacto: <a href={`mailto:${EMAIL}`} class="text-pine underline">{EMAIL}</a>.
+      </p>
+      <p class="mt-1 text-sm text-mist">(Datos fiscales pendientes de completar con los del titular del alojamiento.)</p>
+
+      <h2 class="mt-8 text-xl font-semibold text-pine">2. Datos que recogemos</h2>
+      <ul class="mt-2 list-disc pl-6">
+        <li>Datos de reserva: nombre, email, teléfono y, opcionalmente, NIF y dirección para la factura.</li>
+        <li>Fechas de estancia, habitación y número de personas.</li>
+        <li>Comunicaciones que nos envíes (email o WhatsApp).</li>
+        <li>Datos de pago: los gestiona directamente la pasarela de pago; nosotros no almacenamos los datos de tu tarjeta.</li>
+      </ul>
+
+      <h2 class="mt-8 text-xl font-semibold text-pine">3. Para qué los usamos</h2>
+      <ul class="mt-2 list-disc pl-6">
+        <li>Gestionar tu reserva y emitir la factura correspondiente.</li>
+        <li>Comunicarnos contigo sobre tu estancia (confirmaciones, dudas).</li>
+        <li>Atenderte por WhatsApp cuando nos escribes.</li>
+        <li>Enviarte ofertas y novedades solo si has dado tu consentimiento explícito.</li>
+      </ul>
+
+      <h2 class="mt-8 text-xl font-semibold text-pine">4. Base legal</h2>
+      <p class="mt-2">
+        La ejecución del contrato de reserva, el cumplimiento de obligaciones legales (facturación) y,
+        para el envío de comunicaciones comerciales, tu consentimiento (que puedes retirar en cualquier momento).
+      </p>
+
+      <h2 class="mt-8 text-xl font-semibold text-pine">5. Conservación</h2>
+      <p class="mt-2">
+        Conservamos los datos el tiempo necesario para prestar el servicio y cumplir las obligaciones
+        legales (por ejemplo, las fiscales y contables).
+      </p>
+
+      <h2 class="mt-8 text-xl font-semibold text-pine">6. Terceros que intervienen</h2>
+      <ul class="mt-2 list-disc pl-6">
+        <li><b>Pasarela de pago</b> (procesa los cobros de forma segura).</li>
+        <li><b>Proveedor de email</b> (envío de confirmaciones y, si consientes, ofertas).</li>
+        <li><b>WhatsApp / Meta</b> (atención por mensajería).</li>
+        <li><b>Alojamiento web</b> (hosting del sitio y los datos de reserva).</li>
+      </ul>
+      <p class="mt-2">Todos actúan como encargados del tratamiento conforme al RGPD.</p>
+
+      <h2 class="mt-8 text-xl font-semibold text-pine">7. Tus derechos</h2>
+      <p class="mt-2">
+        Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y
+        portabilidad escribiéndonos a <a href={`mailto:${EMAIL}`} class="text-pine underline">{EMAIL}</a>.
+        También puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es).
+      </p>
+
+      <h2 class="mt-8 text-xl font-semibold text-pine">8. Contacto</h2>
+      <p class="mt-2">
+        Para cualquier cuestión sobre esta política, escríbenos a
+        <a href={`mailto:${EMAIL}`} class="text-pine underline">{EMAIL}</a> o visita <a href={SITIO} class="text-pine underline">{SITIO}</a>.
+      </p>
+
+      <p class="mt-10 text-sm text-mist">© {new Date().getFullYear()} Kirana · Bermeo, Urdaibai (Bizkaia)</p>
+    </main>
+  </body>
+</html>
